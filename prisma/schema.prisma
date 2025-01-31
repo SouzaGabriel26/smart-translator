@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        String   @id @default(uuid()) @db.Uuid
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  translations Translations[]
+
+  @@map("users")
+}
+
+model Translations {
+  id             String   @id @default(uuid()) @db.Uuid
+  targetWord     String   @unique @map("target_word")
+  translatedWord String   @map("translated_word")
+  languageFrom   String   @map("language_from")
+  languageTo     String   @map("language_to")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+  usersId        String   @map("users_id") @db.Uuid
+
+  user    Users                @relation(fields: [usersId], references: [id])
+  phrases TranslationPhrases[]
+
+  @@map("translations")
+}
+
+model TranslationPhrases {
+  id                String   @id @default(uuid()) @db.Uuid
+  translationId     String   @map("translation_id") @db.Uuid
+  content           String
+  translatedContent String   @map("translated_content")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  translation Translations @relation(fields: [translationId], references: [id])
+}
