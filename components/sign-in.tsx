@@ -1,5 +1,6 @@
 'use client';
 
+import { signInAction } from '@/app/(auth)/actions';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -10,10 +11,11 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { signInSchema } from '@/types/sign-in';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import type { z } from 'zod';
 import {
   Form,
   FormControl,
@@ -23,19 +25,14 @@ import {
   FormMessage,
 } from './ui/form';
 
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
-});
-
-type FormData = z.infer<typeof schema>;
+type FormData = z.infer<typeof signInSchema>;
 
 export function SignInForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
   const form = useForm<FormData>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: '',
       password: '',
@@ -43,7 +40,7 @@ export function SignInForm({
   });
 
   function onSubmit(data: FormData) {
-    console.log({ data });
+    signInAction(data);
   }
 
   return (
