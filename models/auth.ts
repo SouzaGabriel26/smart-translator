@@ -9,7 +9,7 @@ async function signUp(input: SignUpProps) {
   const { data, error } = signUpSchema.safeParse(input);
 
   if (error) {
-    return { error: error.message };
+    return { error: error.flatten().fieldErrors };
   }
 
   const { email, name, password } = data;
@@ -42,7 +42,7 @@ async function signIn(input: SignInProps) {
   const { data, error } = signInSchema.safeParse(input);
 
   if (error) {
-    return { error: error.message };
+    return { error: error.flatten().fieldErrors };
   }
 
   const { email, password } = data;
