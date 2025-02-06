@@ -2,6 +2,7 @@
   "name": "smart-translator",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "pnpm services:up && next dev --turbopack",
     "build": "next build",
@@ -11,7 +12,9 @@
     "biome:fix": "biome check --vcs-use-ignore-file=true --write .",
     "docker:compose": "docker compose -f ./infra/docker-compose.yaml --env-file=.env",
     "services:up": "pnpm docker:compose up -d",
-    "services:down": "pnpm docker:compose down"
+    "services:down": "pnpm docker:compose down",
+    "test:watch": "vitest",
+    "test": "vitest run"
   },
   "dependencies": {
     "@hookform/resolvers": "3.10.0",
@@ -40,6 +43,8 @@
     "postcss": "8",
     "prisma": "6.3.0",
     "tailwindcss": "3.4.1",
-    "typescript": "5"
+    "typescript": "5",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.0.5"
   }
 }
