@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Project Name
 
-## Getting Started
+Welcome to **Smart Translator**! This is a Next.js project where I integrate **Google Gemini AI** to build a system. I'm also documenting the development process through a series of YouTube videos. 🎥🔥
 
-First, run the development server:
+## 📺 YouTube Video Series
+Follow my progress and learn along with me!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 1️⃣ **[Video 1: Introduction to the project](https://youtu.be/yTt6vir5L7o)**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 2️⃣ **[Video 2: What I am thinking about for the project architecture](https://youtu.be/9ypbZQlKR68)**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 3️⃣ **[Video 3: Initial project setup with NextJS and Biome + Tips for making better commits](https://youtu.be/9ypbZQlKR68)**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 4️⃣ **[Video 4: Database Schema with Prisma and Docker setup](https://youtu.be/-PFFkYy84rc)**
 
-## Learn More
+- 5️⃣ **[Video 5: Authentication layout with Shadcn Blocks + React-hook-form with Zod](https://youtu.be/0E-EcgMouRw)**
 
-To learn more about Next.js, take a look at the following resources:
+🚀 More episodes coming soon! Subscribe to stay updated.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+▶️ **Full Playlist:** [Smart Translator Playlist Link](https://www.youtube.com/watch?v=-PFFkYy84rc&list=PL21OVMBXdJI7-WFSrWEE9VZ67NsVAdIw3&index=1)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
+- **Framework:** Next.js 15
+- **AI Integration:** Google Gemini API
+- **Styling:** Tailwind CSS
+- **Components**: ShadcnUI
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚡ Features
+- 🚧 More features coming soon!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js (`>= 18.x`)
+- A Google API Key for Gemini AI
+
+### Installation
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/SouzaGabriel26/smart-translator.git
+   cd smart-translator
