@@ -1,3 +1,7 @@
-export default function Page() {
-  return <div>Hello World from Smart Translator</div>;
+import { checkUserAction } from "@/actions/auth/check-user";
+
+export default async function Page() {
+  const user = await checkUserAction();
+
+  return <div>Hello, {user.name}</div>;
 }
