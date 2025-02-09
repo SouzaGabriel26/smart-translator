@@ -14,7 +14,9 @@ import { cn } from '@/lib/utils';
 import { signInSchema } from '@/types/sign-in';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import type { z } from 'zod';
 import {
   Form,
@@ -31,6 +33,8 @@ export function SignInForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const route = useRouter();
+
   const form = useForm<FormData>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -39,8 +43,16 @@ export function SignInForm({
     },
   });
 
-  function onSubmit(data: FormData) {
-    signInAction(data);
+  async function onSubmit(data: FormData) {
+    const { error } = await signInAction(data);
+
+    if (error) {
+      toast.error(JSON.parse(JSON.stringify(error)));
+      return;
+    }
+
+    toast.success('User logged in successfully');
+    route.push('/');
   }
 
   return (
