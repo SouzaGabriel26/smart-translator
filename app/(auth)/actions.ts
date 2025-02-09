@@ -1,27 +1,28 @@
 "use server";
 
+import { constants } from "@/config/constants";
 import { auth } from "@/models/auth";
 import type { SignInProps } from "@/types/sign-in";
 import type { SignUpProps } from "@/types/sign-up";
+import { cookies } from "next/headers";
 
 export async function signUpAction(data: SignUpProps) {
   const result = await auth.signUp(data);
-
-  // TODO: handle result
-  // 1. add toast to show error or success message
-  // 2. redirect to sign-in page if success
-  console.log({ result });
-
-  return {};
+  return result;
 }
 
 export async function signInAction(data: SignInProps) {
   const result = await auth.signIn(data);
 
-  // TODO: handle result
-  // 1. add toast to show error or success message
-  // 2. redirect to dashboard page if success
-  console.log({ result });
+  if (result.token) {
+    const sevenDaysInMilliseconds = 60 * 60 * 24 * 7 * 1000;
 
-  return {};
+    const cookieStorage = await cookies();
+    cookieStorage.set(constants.accessToken, result.token, {
+      httpOnly: true,
+      expires: new Date(Date.now() + sevenDaysInMilliseconds),
+    });
+  }
+
+  return result;
 }
