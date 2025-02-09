@@ -14,7 +14,9 @@ import { cn } from '@/lib/utils';
 import { signUpSchema } from '@/types/sign-up';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import type { z } from 'zod';
 import {
   Form,
@@ -31,6 +33,8 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const route = useRouter();
+
   const form = useForm<FormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -40,8 +44,16 @@ export function SignUpForm({
     },
   });
 
-  function onSubmit(data: FormData) {
-    signUpAction(data);
+  async function onSubmit(data: FormData) {
+    const { error, message } = await signUpAction(data);
+
+    if (error) {
+      toast.error(JSON.parse(JSON.stringify(error)));
+      return;
+    }
+
+    toast.success(message);
+    route.push('/sign-in');
   }
 
   return (
@@ -94,7 +106,7 @@ export function SignUpForm({
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="********" {...field} />
+                        <Input type='password' placeholder="********" {...field} />
                       </FormControl>
 
                       <FormMessage />
@@ -108,7 +120,7 @@ export function SignUpForm({
               <div className="mt-4 text-center text-sm">
                 Already have an account?{' '}
                 <Link href="/sign-in" className="underline underline-offset-4">
-                  Sign up
+                  Sign in
                 </Link>
               </div>
             </form>
