@@ -15,6 +15,10 @@ Follow my progress and learn along with me!
 
 - 5️⃣ **[Video 5: Authentication layout with Shadcn Blocks + React-hook-form with Zod](https://youtu.be/0E-EcgMouRw)**
 
+- 5️⃣ **[Video 6: SignIn and SignUp functionalities + tests with vitest](https://youtu.be/nkhHf73sZj8?si=5WPKZfDW8czGp0cP)**
+
+- 5️⃣ **[Video 7: Auth Integration with public and private pages + NextJS Middleware](https://youtu.be/2F9HAm5SVCg?si=7z7GhCYacaz1WOZ9)**
+
 🚀 More episodes coming soon! Subscribe to stay updated.
 
 ▶️ **Full Playlist:** [Smart Translator Playlist Link](https://www.youtube.com/watch?v=-PFFkYy84rc&list=PL21OVMBXdJI7-WFSrWEE9VZ67NsVAdIw3&index=1)
