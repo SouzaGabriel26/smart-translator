@@ -28,9 +28,9 @@ model Translations {
   languageTo     String   @map("language_to")
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
-  usersId        String   @map("users_id") @db.Uuid
+  userId         String   @map("user_id") @db.Uuid
 
-  user    Users                @relation(fields: [usersId], references: [id])
+  user    Users                @relation(fields: [userId], references: [id])
   phrases TranslationPhrases[]
 
   @@map("translations")
