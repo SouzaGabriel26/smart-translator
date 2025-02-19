@@ -1,3 +1,3 @@
 export const constants = {
-  accessToken: "smart-translator:accessToken",
+  accessToken: 'smart-translator:accessToken',
 };

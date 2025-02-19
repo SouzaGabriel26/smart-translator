@@ -1,6 +1,6 @@
 export class ParseZodError extends Error {
   constructor() {
     super();
-    this.name = "ParseZodError";
+    this.name = 'ParseZodError';
   }
 }

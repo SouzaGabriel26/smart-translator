@@ -1,21 +1,21 @@
-"use server";
+'use server';
 
-import { constants } from "@/config/constants";
-import { prismaClient } from "@/lib/prisma-client";
-import { jwtVerify } from "jose";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { constants } from '@/config/constants';
+import { prismaClient } from '@/lib/prisma-client';
+import { jwtVerify } from 'jose';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 export async function checkUserAction() {
   const cookieStorage = await cookies();
   const token = cookieStorage.get(constants.accessToken)?.value;
 
-  if (!token) return redirect("/sign-in?action=logout");
+  if (!token) return redirect('/sign-in?action=logout');
 
   try {
     const { payload } = await jwtVerify(
       token,
-      new TextEncoder().encode(process.env.JWT_SECRET!)
+      new TextEncoder().encode(process.env.JWT_SECRET!),
     );
 
     const user = await prismaClient.users.findUnique({
@@ -24,10 +24,10 @@ export async function checkUserAction() {
       },
     });
 
-    if (!user) return redirect("/sign-in?action=logout");
+    if (!user) return redirect('/sign-in?action=logout');
 
     return user;
   } catch {
-    return redirect("/sign-in?action=logout");
+    return redirect('/sign-in?action=logout');
   }
 }

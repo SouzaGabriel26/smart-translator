@@ -1,80 +1,80 @@
-import { prismaClient } from "@/lib/prisma-client";
-import { auth } from "@/models/auth";
-import { randomUUID } from "node:crypto";
+import { randomUUID } from 'node:crypto';
+import { prismaClient } from '@/lib/prisma-client';
+import { auth } from '@/models/auth';
 
 beforeAll(async () => {
   await prismaClient.users.deleteMany();
 });
 
-describe("models > auth", () => {
+describe('models > auth', () => {
   describe("Invoking 'signUp' method", () => {
-    it("should return an error when providing a invalid email input", async () => {
-      const invalidEmail = "invalid-email";
+    it('should return an error when providing a invalid email input', async () => {
+      const invalidEmail = 'invalid-email';
 
       const result = await auth.signUp({
         email: invalidEmail,
-        name: "John Doe",
+        name: 'John Doe',
         password: randomUUID(),
       });
 
       expect(result).toStrictEqual({
         error: {
-          email: ["Invalid email"],
+          email: ['Invalid email'],
         },
       });
     });
 
-    it("should return a successfull message when creating a new user", async () => {
+    it('should return a successfull message when creating a new user', async () => {
       const result = await auth.signUp({
-        email: "test@mail.com",
-        name: "John Doe",
+        email: 'test@mail.com',
+        name: 'John Doe',
         password: randomUUID(),
       });
 
       expect(result).toStrictEqual({
-        message: "User created successfully!",
+        message: 'User created successfully!',
       });
     });
   });
 
   describe("Invoking 'signIn' method", () => {
-    it("should return an error when providing a non existing email", async () => {
+    it('should return an error when providing a non existing email', async () => {
       const result = await auth.signIn({
-        email: "non-existing-email@mail.com",
+        email: 'non-existing-email@mail.com',
         password: randomUUID(),
       });
 
       expect(result).toStrictEqual({
-        error: "Invalid credentials!",
+        error: 'Invalid credentials!',
       });
     });
 
-    it("should return an error when providing a wrong password", async () => {
-      const email = "testemail@email.com";
+    it('should return an error when providing a wrong password', async () => {
+      const email = 'testemail@email.com';
 
       await auth.signUp({
         email,
-        name: "John Doe",
-        password: "123456",
+        name: 'John Doe',
+        password: '123456',
       });
 
       const result = await auth.signIn({
         email,
-        password: "wrong-password",
+        password: 'wrong-password',
       });
 
       expect(result).toStrictEqual({
-        error: "Invalid credentials!",
+        error: 'Invalid credentials!',
       });
     });
 
-    it("should return a JWT token when providing valid properties", async () => {
-      const email = "successfull@email.com";
-      const password = "123456";
+    it('should return a JWT token when providing valid properties', async () => {
+      const email = 'successfull@email.com';
+      const password = '123456';
 
       await auth.signUp({
         email,
-        name: "John Doe",
+        name: 'John Doe',
         password,
       });
 
@@ -83,7 +83,7 @@ describe("models > auth", () => {
         password,
       });
 
-      expect(result).toHaveProperty("token");
+      expect(result).toHaveProperty('token');
     });
   });
 });
