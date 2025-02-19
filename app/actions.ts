@@ -5,7 +5,7 @@ import { GeminiServiceError } from "@/errors/gemini-service-error";
 import { ParseTextError } from "@/errors/parse-text-error";
 import { ParseZodError } from "@/errors/parse-zod-error";
 import { prismaClient } from "@/lib/prisma-client";
-import { generateTranslation } from "@/models/gemini";
+import { gemini } from "@/models/gemini";
 
 export type TranslationResponse = {
   ok: boolean;
@@ -27,7 +27,7 @@ export async function generateTranslationAction(
 
   try {
     const user = await checkUserAction();
-    const result = await generateTranslation(wordToTranslate);
+    const result = await gemini.generateTranslation(wordToTranslate);
 
     await prismaClient.translations.create({
       data: {

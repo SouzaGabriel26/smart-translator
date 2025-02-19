@@ -15,7 +15,7 @@ const geminiResponseSchema = z.object({
   phrase_3_translated: z.string(),
 });
 
-export async function generateTranslation(wordToTranslate: string) {
+async function generateTranslation(wordToTranslate: string) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
   const model = genAI.getGenerativeModel({
@@ -77,3 +77,7 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
 }
   `;
 }
+
+export const gemini = {
+  generateTranslation,
+};
