@@ -1,9 +1,9 @@
-import { prismaClient } from "@/lib/prisma-client";
-import { type SignInProps, signInSchema } from "@/types/sign-in";
-import { type SignUpProps, signUpSchema } from "@/types/sign-up";
-import bcrypt from "bcrypt";
+import { prismaClient } from '@/lib/prisma-client';
+import { type SignInProps, signInSchema } from '@/types/sign-in';
+import { type SignUpProps, signUpSchema } from '@/types/sign-up';
+import bcrypt from 'bcrypt';
 
-import { SignJWT } from "jose";
+import { SignJWT } from 'jose';
 
 async function signUp(input: SignUpProps) {
   const { data, error } = signUpSchema.safeParse(input);
@@ -19,7 +19,7 @@ async function signUp(input: SignUpProps) {
   });
 
   if (userAlreadyExists) {
-    return { error: "User already exists!" };
+    return { error: 'User already exists!' };
   }
 
   const SALT = 10;
@@ -34,7 +34,7 @@ async function signUp(input: SignUpProps) {
   });
 
   return {
-    message: "User created successfully!",
+    message: 'User created successfully!',
   };
 }
 
@@ -52,23 +52,23 @@ async function signIn(input: SignInProps) {
   });
 
   if (!user) {
-    return { error: "Invalid credentials!" };
+    return { error: 'Invalid credentials!' };
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
 
   if (!passwordMatch) {
-    return { error: "Invalid credentials!" };
+    return { error: 'Invalid credentials!' };
   }
 
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
   const token = await new SignJWT({ sub: user.id })
     .setProtectedHeader({
-      alg: "HS256",
-      typ: "JWT",
+      alg: 'HS256',
+      typ: 'JWT',
     })
-    .setExpirationTime("7d")
+    .setExpirationTime('7d')
     .setIssuedAt()
     .sign(secret);
 

@@ -1,11 +1,11 @@
-"use server";
+'use server';
 
-import { checkUserAction } from "@/actions/auth/check-user";
-import { GeminiServiceError } from "@/errors/gemini-service-error";
-import { ParseTextError } from "@/errors/parse-text-error";
-import { ParseZodError } from "@/errors/parse-zod-error";
-import { prismaClient } from "@/lib/prisma-client";
-import { generateTranslation } from "@/models/gemini";
+import { checkUserAction } from '@/actions/auth/check-user';
+import { GeminiServiceError } from '@/errors/gemini-service-error';
+import { ParseTextError } from '@/errors/parse-text-error';
+import { ParseZodError } from '@/errors/parse-zod-error';
+import { prismaClient } from '@/lib/prisma-client';
+import { gemini } from '@/models/gemini';
 
 export type TranslationResponse = {
   ok: boolean;
@@ -16,24 +16,24 @@ export type TranslationResponse = {
 
 const defaultErrorObject = {
   ok: false,
-  error: "Something went wrong while generating the translation.",
+  error: 'Something went wrong while generating the translation.',
 };
 
 export async function generateTranslationAction(
   _prevState: unknown,
-  formData: FormData
+  formData: FormData,
 ): Promise<TranslationResponse> {
-  const wordToTranslate = formData.get("word_to_translate") as string;
+  const wordToTranslate = formData.get('word_to_translate') as string;
 
   try {
     const user = await checkUserAction();
-    const result = await generateTranslation(wordToTranslate);
+    const result = await gemini.generateTranslation(wordToTranslate);
 
     await prismaClient.translations.create({
       data: {
         userId: user.id,
-        languageFrom: "en",
-        languageTo: "pt",
+        languageFrom: 'en',
+        languageTo: 'pt',
         targetWord: wordToTranslate,
         translatedWord: result.output,
         phrases: {
@@ -64,7 +64,7 @@ export async function generateTranslationAction(
     if (error instanceof GeminiServiceError) {
       return {
         ...defaultErrorObject,
-        module: "gemini",
+        module: 'gemini',
         word_to_translate: wordToTranslate,
       };
     }
@@ -72,7 +72,7 @@ export async function generateTranslationAction(
     if (error instanceof ParseTextError) {
       return {
         ...defaultErrorObject,
-        module: "parse-text",
+        module: 'parse-text',
         word_to_translate: wordToTranslate,
       };
     }
@@ -80,7 +80,7 @@ export async function generateTranslationAction(
     if (error instanceof ParseZodError) {
       return {
         ...defaultErrorObject,
-        module: "parse-zod",
+        module: 'parse-zod',
         word_to_translate: wordToTranslate,
       };
     }

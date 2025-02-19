@@ -1,8 +1,8 @@
-import { GeminiServiceError } from "@/errors/gemini-service-error";
-import { ParseTextError } from "@/errors/parse-text-error";
-import { ParseZodError } from "@/errors/parse-zod-error";
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { z } from "zod";
+import { GeminiServiceError } from '@/errors/gemini-service-error';
+import { ParseTextError } from '@/errors/parse-text-error';
+import { ParseZodError } from '@/errors/parse-zod-error';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import { z } from 'zod';
 
 const geminiResponseSchema = z.object({
   input: z.string(),
@@ -15,14 +15,14 @@ const geminiResponseSchema = z.object({
   phrase_3_translated: z.string(),
 });
 
-export async function generateTranslation(wordToTranslate: string) {
+async function generateTranslation(wordToTranslate: string) {
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
   const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash",
+    model: 'gemini-1.5-flash',
   });
 
-  let responseText = "";
+  let responseText = '';
 
   try {
     const prompt = generateCustomizedPrompt(wordToTranslate);
@@ -30,11 +30,11 @@ export async function generateTranslation(wordToTranslate: string) {
     responseText = response.text();
   } catch (error) {
     // TODO: log to an external service
-    console.log("Gemini Error: ", error);
+    console.log('Gemini Error: ', error);
     throw new GeminiServiceError();
   }
 
-  responseText = responseText.replace(/```json|```/g, "").trim();
+  responseText = responseText.replace(/```json|```/g, '').trim();
 
   try {
     const parsedResponse = JSON.parse(responseText);
@@ -44,8 +44,8 @@ export async function generateTranslation(wordToTranslate: string) {
     if (!validatedOutput.success) {
       // TODO: log to an external service
       console.log(
-        "Zod validation error: ",
-        JSON.stringify(validatedOutput, null, 2)
+        'Zod validation error: ',
+        JSON.stringify(validatedOutput, null, 2),
       );
       throw new ParseZodError();
     }
@@ -53,7 +53,7 @@ export async function generateTranslation(wordToTranslate: string) {
     return validatedOutput.data;
   } catch (error) {
     // TODO: log to an external service
-    console.log("Parse Error: ", error);
+    console.log('Parse Error: ', error);
     throw new ParseTextError();
   }
 }
@@ -77,3 +77,7 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
 }
   `;
 }
+
+export const gemini = {
+  generateTranslation,
+};

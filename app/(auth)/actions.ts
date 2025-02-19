@@ -1,10 +1,10 @@
-"use server";
+'use server';
 
-import { constants } from "@/config/constants";
-import { auth } from "@/models/auth";
-import type { SignInProps } from "@/types/sign-in";
-import type { SignUpProps } from "@/types/sign-up";
-import { cookies } from "next/headers";
+import { constants } from '@/config/constants';
+import { auth } from '@/models/auth';
+import type { SignInProps } from '@/types/sign-in';
+import type { SignUpProps } from '@/types/sign-up';
+import { cookies } from 'next/headers';
 
 export async function signUpAction(data: SignUpProps) {
   const result = await auth.signUp(data);
