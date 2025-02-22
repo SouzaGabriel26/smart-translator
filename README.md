@@ -21,6 +21,8 @@ Follow my progress and learn along with me!
 
 - 8️⃣ **[Video 8: Explaining how I integrated Google Gemini in the project](https://youtu.be/AP5R6K1N4M8?si=JrdWdhn0B0meBclE)**
 
+- 9️⃣ **[Video 9: Creating seed script to populate local database and styling home page layout](https://youtu.be/C8SEexx3Vak?si=wrYTWLJL_e7Qtkgg)**
+
 🚀 More episodes coming soon! Subscribe to stay updated.
 
 ▶️ **Full Playlist:** [Smart Translator Playlist Link](https://www.youtube.com/watch?v=-PFFkYy84rc&list=PL21OVMBXdJI7-WFSrWEE9VZ67NsVAdIw3&index=1)
