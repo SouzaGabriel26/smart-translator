@@ -22,7 +22,7 @@ model Users {
 
 model Translations {
   id             String   @id @default(uuid()) @db.Uuid
-  targetWord     String   @unique @map("target_word")
+  targetWord     String   @map("target_word")
   translatedWord String   @map("translated_word")
   languageFrom   String   @map("language_from")
   languageTo     String   @map("language_to")
