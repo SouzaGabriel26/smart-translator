@@ -1,6 +1,14 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { logout } from '@/actions/auth/logout';
 import { GenerateTranslationForm } from '@/components/generate-translation-form';
+import { MenuIcon } from '@/components/menu-icon';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { prismaClient } from '@/lib/prisma-client';
 
 export default async function Page() {
@@ -25,7 +33,21 @@ export default async function Page() {
       <header className="bg-black text-white h-16 flex justify-between items-center px-4">
         <h1 className="text-2xl font-bold">Smart Translator</h1>
 
-        <span>Hello, {user.name}</span>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button>
+              <MenuIcon />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-fit">
+            <div className="space-y-2">
+              <span>Hello, {user.name}</span>
+              <form action={logout}>
+                <Button className="w-full">Logout</Button>
+              </form>
+            </div>
+          </PopoverContent>
+        </Popover>
       </header>
 
       <main className="h-[calc(100%-64px)] flex flex-col px-6 py-12 space-y-4">
