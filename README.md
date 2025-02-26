@@ -23,6 +23,8 @@ Follow my progress and learn along with me!
 
 - 9️⃣ **[Video 9: Creating seed script to populate local database and styling home page layout](https://youtu.be/C8SEexx3Vak?si=wrYTWLJL_e7Qtkgg)**
 
+- 🔟 **[Video 10: Creating seed script to populate local database and styling home page layout](https://youtu.be/BkmBiYVPQbk?si=Wj92NfCVg6Xih5iG)**
+
 🚀 More episodes coming soon! Subscribe to stay updated.
 
 ▶️ **Full Playlist:** [Smart Translator Playlist Link](https://www.youtube.com/watch?v=-PFFkYy84rc&list=PL21OVMBXdJI7-WFSrWEE9VZ67NsVAdIw3&index=1)
@@ -36,7 +38,17 @@ Follow my progress and learn along with me!
 - **Components**: ShadcnUI
 
 ## ⚡ Features
-- 🚧 More features coming soon!
+#### 🔐 Authentication
+- **Sign-up:** Create a new account securely.
+- **Sign-in:** Access the platform with authentication.
+- **Sign-out:** Log out and terminate the session.
+
+#### 🤖 AI-Powered Translation
+- **Smart Word Translation:** Generate translations for a given word.
+- **Contextual Sentence Generation:** Create three contextually relevant sentences using the translated word.
+- **Translation Cache Optimization:** Efficient caching to improve performance and reduce redundant AI model calls.
+- **AI Model Integration:** Powered by Google Gemini for accurate and natural translations.
+- **Error Handling:** Simple error detection.
 
 ## 🚀 Getting Started
 
