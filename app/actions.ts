@@ -6,6 +6,7 @@ import { ParseTextError } from '@/errors/parse-text-error';
 import { ParseZodError } from '@/errors/parse-zod-error';
 import { prismaClient } from '@/lib/prisma-client';
 import { gemini } from '@/models/gemini';
+import { revalidatePath } from 'next/cache';
 
 export type TranslationResponse = {
   ok: boolean;
@@ -56,6 +57,8 @@ export async function generateTranslationAction(
         },
       },
     });
+
+    revalidatePath('/');
 
     return {
       ok: true,

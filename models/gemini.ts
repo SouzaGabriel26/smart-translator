@@ -1,6 +1,7 @@
 import { GeminiServiceError } from '@/errors/gemini-service-error';
 import { ParseTextError } from '@/errors/parse-text-error';
 import { ParseZodError } from '@/errors/parse-zod-error';
+import { prismaClient } from '@/lib/prisma-client';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { z } from 'zod';
 
@@ -15,7 +16,29 @@ const geminiResponseSchema = z.object({
   phrase_3_translated: z.string(),
 });
 
+type GeminiResponse = z.infer<typeof geminiResponseSchema>;
+
 async function generateTranslation(wordToTranslate: string) {
+  const translationAlreadyExists = await getTranslation();
+
+  if (translationAlreadyExists) {
+    const translationObject: GeminiResponse = {
+      input: wordToTranslate,
+      output: translationAlreadyExists.translatedWord,
+      phrase_1_generated: translationAlreadyExists.phrases[0].content,
+      phrase_1_translated:
+        translationAlreadyExists.phrases[0].translatedContent,
+      phrase_2_generated: translationAlreadyExists.phrases[1].content,
+      phrase_2_translated:
+        translationAlreadyExists.phrases[1].translatedContent,
+      phrase_3_generated: translationAlreadyExists.phrases[2].content,
+      phrase_3_translated:
+        translationAlreadyExists.phrases[2].translatedContent,
+    };
+
+    return translationObject;
+  }
+
   const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
   const model = genAI.getGenerativeModel({
@@ -55,6 +78,19 @@ async function generateTranslation(wordToTranslate: string) {
     // TODO: log to an external service
     console.log('Parse Error: ', error);
     throw new ParseTextError();
+  }
+
+  async function getTranslation() {
+    const translation = await prismaClient.translations.findFirst({
+      where: {
+        targetWord: wordToTranslate,
+      },
+      include: {
+        phrases: true,
+      },
+    });
+
+    return translation;
   }
 }
 

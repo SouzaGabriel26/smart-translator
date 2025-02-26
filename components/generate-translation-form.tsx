@@ -36,9 +36,11 @@ export function GenerateTranslationForm() {
 
   return (
     <form action={action} className="space-y-2 w-full xl:w-1/2 min-w-40">
-      <label htmlFor="word_to_translate" className='text-slate-600 text-sm'>Enter a word in English</label>
+      <label htmlFor="word_to_translate" className="text-slate-600 text-sm">
+        Enter a word in English
+      </label>
       <Input
-        id='word_to_translate'
+        id="word_to_translate"
         required
         placeholder="Word"
         name="word_to_translate"
