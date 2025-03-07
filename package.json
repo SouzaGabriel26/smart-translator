@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "pnpm services:up && pnpm prisma migrate dev && next dev --turbopack",
+    "dev": "pnpm services:up && pnpm wait:services && pnpm prisma migrate dev && next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -13,6 +13,7 @@
     "docker:compose": "docker compose -f ./infra/docker-compose.yaml --env-file=.env",
     "services:up": "pnpm docker:compose up -d",
     "services:down": "pnpm docker:compose down",
+    "wait:services": "node --import tsx ./infra/scripts/wait-services.ts",
     "test:watch": "vitest",
     "test": "vitest run"
   },
