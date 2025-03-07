@@ -44,7 +44,9 @@ export function GenerateTranslationForm() {
         required
         placeholder="Word"
         name="word_to_translate"
-        defaultValue={state?.word_to_translate}
+        defaultValue={
+          state?.module === 'invalid-word' ? '' : state?.word_to_translate
+        }
       />
 
       <Button disabled={isPending}>
