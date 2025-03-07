@@ -1,4 +1,5 @@
 import { GeminiServiceError } from '@/errors/gemini-service-error';
+import { InvalidWordError } from '@/errors/invalid-word-error';
 import { ParseTextError } from '@/errors/parse-text-error';
 import { ParseZodError } from '@/errors/parse-zod-error';
 import { prismaClient } from '@/lib/prisma-client';
@@ -59,6 +60,12 @@ async function generateTranslation(wordToTranslate: string) {
 
   responseText = responseText.replace(/```json|```/g, '').trim();
 
+  if (responseText === '{}') {
+    // TODO: log to an external service
+    console.log('Invalid Word Error');
+    throw new InvalidWordError();
+  }
+
   try {
     const parsedResponse = JSON.parse(responseText);
 
@@ -111,6 +118,8 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
   phrase_3_generated: string,
   phrase_3_translated: string
 }
+
+But, in case of the word is not a valid English word, return an empty object.
   `;
 }
 
