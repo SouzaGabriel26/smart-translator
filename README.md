@@ -1,4 +1,4 @@
-# 🚀 Project Name
+# 🚀 Smart Translator
 
 Welcome to **Smart Translator**! This is a Next.js project where I integrate **Google Gemini AI** to build a system. I'm also documenting the development process through a series of YouTube videos. 🎥🔥
 
