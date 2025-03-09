@@ -13,6 +13,7 @@ import { prismaClient } from '@/lib/prisma-client';
 
 export default async function Page() {
   const user = await checkUserAction();
+  const MAX_TRANSLATIONS_PER_DAY = 25;
 
   const translations = await prismaClient.translations.findMany({
     where: {
@@ -27,6 +28,15 @@ export default async function Page() {
   });
 
   const latestTranslation = translations[0];
+
+  const todayTranslations = translations.filter(
+    (translation) =>
+      sanitizeDate(translation.createdAt) === sanitizeDate(new Date()),
+  );
+
+  function sanitizeDate(date: Date) {
+    return date.toISOString().split('T')[0];
+  }
 
   return (
     <div className="h-full">
@@ -55,7 +65,14 @@ export default async function Page() {
           <div className="rounded w-full xl:w-1/2 flex flex-col">
             <h2 className="mb-3  text-xl font-medium">Translate a word</h2>
 
-            <GenerateTranslationForm />
+            <GenerateTranslationForm
+              disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
+            />
+
+            <div className="flex gap-2 mt-4">
+              <strong>Translations generated today:</strong>
+              <span>{todayTranslations.length}</span>
+            </div>
           </div>
 
           <div className="rounded w-full xl:w-1/2">

@@ -6,7 +6,13 @@ import { toast } from 'sonner';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
-export function GenerateTranslationForm() {
+type GenerateTranslationFormProps = {
+  disabled?: boolean;
+};
+
+export function GenerateTranslationForm({
+  disabled,
+}: GenerateTranslationFormProps) {
   const [state, action, isPending] = useActionState(
     generateTranslationAction,
     null,
@@ -14,7 +20,10 @@ export function GenerateTranslationForm() {
 
   useEffect(() => {
     if (state?.ok) {
-      toast.success('Translation generated successfully!');
+      const message = state.translation_already_exists
+        ? 'Translation already exists in your history.'
+        : 'Translation generated successfully!';
+      toast.success(message);
       return;
     }
 
@@ -40,8 +49,9 @@ export function GenerateTranslationForm() {
         Enter a word in English
       </label>
       <Input
-        id="word_to_translate"
         required
+        id="word_to_translate"
+        disabled={disabled}
         placeholder="Word"
         name="word_to_translate"
         defaultValue={
@@ -49,7 +59,13 @@ export function GenerateTranslationForm() {
         }
       />
 
-      <Button disabled={isPending}>
+      {disabled && (
+        <p className="text-slate-400 text-sm">
+          You have reached the maximum number of translations for today.
+        </p>
+      )}
+
+      <Button disabled={isPending || disabled}>
         {isPending ? 'Generating Translation...' : 'Generate Translation'}
       </Button>
     </form>
