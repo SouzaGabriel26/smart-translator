@@ -12,6 +12,7 @@ import { z } from 'zod';
 
 export type TranslationResponse = {
   ok: boolean;
+  translation_already_exists?: boolean;
   error?: string;
   module?: string;
   word_to_translate?: string;
@@ -46,6 +47,21 @@ export async function generateTranslationAction(
   try {
     const user = await checkUserAction();
     const result = await gemini.generateTranslation(wordToTranslate);
+
+    const userAlreadyHaveTranslation =
+      await prismaClient.translations.findFirst({
+        where: {
+          userId: user.id,
+          targetWord: wordToTranslate,
+        },
+      });
+
+    if (userAlreadyHaveTranslation) {
+      return {
+        ok: true,
+        translation_already_exists: true,
+      };
+    }
 
     await prismaClient.translations.create({
       data: {
