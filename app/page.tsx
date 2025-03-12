@@ -1,21 +1,22 @@
 import { checkUserAction } from '@/actions/auth/check-user';
-import { logout } from '@/actions/auth/logout';
 import { GenerateTranslationForm } from '@/components/generate-translation-form';
-import { MenuIcon } from '@/components/menu-icon';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { Header } from '@/components/header';
+import { TranslationsHistory } from '@/components/translations-history';
+import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { prismaClient } from '@/lib/prisma-client';
+import { Suspense } from 'react';
+
+const tomorrowDate = new Date();
+tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+
+const yesterdayDate = new Date();
+yesterdayDate.setDate(yesterdayDate.getDate() - 1);
 
 export default async function Page() {
   const user = await checkUserAction();
   const MAX_TRANSLATIONS_PER_DAY = 25;
 
-  const translations = await prismaClient.translations.findMany({
+  const latestTranslation = await prismaClient.translations.findFirst({
     where: {
       userId: user.id,
     },
@@ -27,38 +28,19 @@ export default async function Page() {
     },
   });
 
-  const latestTranslation = translations[0];
-
-  const todayTranslations = translations.filter(
-    (translation) =>
-      sanitizeDate(translation.createdAt) === sanitizeDate(new Date()),
-  );
-
-  function sanitizeDate(date: Date) {
-    return date.toISOString().split('T')[0];
-  }
+  const todayTranslations = await prismaClient.translations.findMany({
+    where: {
+      userId: user.id,
+      createdAt: {
+        gte: yesterdayDate,
+        lt: tomorrowDate,
+      }
+    }
+  })
 
   return (
     <div className="h-full">
-      <header className="bg-black text-white h-16 flex justify-between items-center px-4">
-        <h1 className="text-2xl font-bold">Smart Translator</h1>
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button>
-              <MenuIcon />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-fit">
-            <div className="space-y-2">
-              <span>Hello, {user.name}</span>
-              <form action={logout}>
-                <Button className="w-full">Logout</Button>
-              </form>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </header>
+      <Header name={user.name} />
 
       <main className="h-[calc(100%-64px)] flex flex-col px-6 py-12 space-y-4">
         <div className="flex flex-col sm:flex-row gap-4">
@@ -76,10 +58,10 @@ export default async function Page() {
           </div>
 
           <div className="rounded w-full xl:w-1/2">
-            <h2 className="mb-3 text-xl font-medium">Latest translations</h2>
+            <h2 className="mb-3 text-xl font-medium">Latest translation</h2>
 
             <div className="border rounded p-4">
-              {translations.length === 0 ? (
+              {!latestTranslation ? (
                 <p className="text-center text-slate-400">
                   No translations yet. Enter a word to translate.
                 </p>
@@ -122,71 +104,9 @@ export default async function Page() {
           </div>
         </div>
 
-        <div className="h-full space-y-4 pb-4 md:pb-0">
-          <h3 className="mb-3 text-xl font-medium">Translation History</h3>
-
-          <form>
-            <label
-              htmlFor="translation_search"
-              className="text-slate-600 text-sm"
-            >
-              Search translations
-            </label>
-            <Input
-              id="translation_search"
-              type="search"
-              placeholder="Search for a word or a translation..."
-            />
-          </form>
-
-          <div className="border rounded overflow-y-auto h-96 p-4 bg-background">
-            {translations.length === 0 ? (
-              <p className="text-slate-400 text-center py-10">
-                No translations found. Try a different search term or translate
-                a new word.
-              </p>
-            ) : (
-              translations.map((translation) => (
-                <div key={translation.id} className="shadow-md rounded p-4">
-                  <div className="text-xl">
-                    <div className="flex">
-                      <span className="font-bold">
-                        {translation.targetWord} ({translation.languageFrom})
-                      </span>
-                      {' = '}
-                      <span className="font-bold">
-                        {translation.translatedWord} ({translation.languageTo})
-                      </span>
-                    </div>
-
-                    <span className="text-muted-foreground">
-                      {translation.createdAt.toLocaleDateString('en', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: 'numeric',
-                        minute: 'numeric',
-                      })}
-                    </span>
-                  </div>
-
-                  <div>
-                    <ul className="space-y-2 mt-4">
-                      {translation.phrases.map((phrase) => (
-                        <li key={phrase.id} className="flex flex-col">
-                          <span className="font-bold">{phrase.content}</span>
-                          <span className="text-muted-foreground">
-                            {phrase.translatedContent}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+        <Suspense fallback={<TranslationsHistorySkeleton />}>
+          <TranslationsHistory />
+        </Suspense>
       </main>
     </div>
   );
