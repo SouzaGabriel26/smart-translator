@@ -6,11 +6,31 @@ import { TranslationsHistorySkeleton } from '@/components/translations-history-s
 import { prismaClient } from '@/lib/prisma-client';
 import { Suspense } from 'react';
 
-const tomorrowDate = new Date();
-tomorrowDate.setDate(tomorrowDate.getDate() + 1);
+const now = new Date();
 
-const yesterdayDate = new Date();
-yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+const startOfToday = new Date(
+  Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    0,
+    0,
+    0,
+    0,
+  ),
+);
+
+const endOfToday = new Date(
+  Date.UTC(
+    now.getUTCFullYear(),
+    now.getUTCMonth(),
+    now.getUTCDate(),
+    23,
+    59,
+    59,
+    999,
+  ),
+);
 
 export default async function Page() {
   const user = await checkUserAction();
@@ -32,8 +52,8 @@ export default async function Page() {
     where: {
       userId: user.id,
       createdAt: {
-        gte: yesterdayDate,
-        lt: tomorrowDate,
+        gte: startOfToday,
+        lte: endOfToday,
       },
     },
   });
