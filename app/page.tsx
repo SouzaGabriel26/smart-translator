@@ -34,9 +34,9 @@ export default async function Page() {
       createdAt: {
         gte: yesterdayDate,
         lt: tomorrowDate,
-      }
-    }
-  })
+      },
+    },
+  });
 
   return (
     <div className="h-full">

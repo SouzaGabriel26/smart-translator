@@ -1,5 +1,5 @@
-import { Input } from "./ui/input";
-import { Skeleton } from "./ui/skeleton";
+import { Input } from './ui/input';
+import { Skeleton } from './ui/skeleton';
 
 export async function TranslationsHistorySkeleton() {
   return (
@@ -7,10 +7,7 @@ export async function TranslationsHistorySkeleton() {
       <h3 className="mb-3 text-xl font-medium">Translation History</h3>
 
       <form>
-        <label
-          htmlFor="translation_search"
-          className="text-slate-600 text-sm"
-        >
+        <label htmlFor="translation_search" className="text-slate-600 text-sm">
           Search translations
         </label>
         <Input
@@ -26,7 +23,7 @@ export async function TranslationsHistorySkeleton() {
         <TranslationSkeletonCard />
       </div>
     </div>
-  )
+  );
 }
 
 export function TranslationSkeletonCard() {
@@ -67,5 +64,5 @@ export function TranslationSkeletonCard() {
         </ul>
       </div>
     </div>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { logout } from "@/actions/auth/logout";
-import { MenuIcon } from "./menu-icon";
-import { Button } from "./ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { logout } from '@/actions/auth/logout';
+import { MenuIcon } from './menu-icon';
+import { Button } from './ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
 type HeaderProps = {
   name: string;
-}
+};
 
 export function Header({ name }: HeaderProps) {
   return (
@@ -28,5 +28,5 @@ export function Header({ name }: HeaderProps) {
         </PopoverContent>
       </Popover>
     </header>
-  )
+  );
 }

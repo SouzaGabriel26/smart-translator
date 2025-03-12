@@ -1,6 +1,6 @@
-import { checkUserAction } from "@/actions/auth/check-user";
-import { prismaClient } from "@/lib/prisma-client";
-import { Input } from "./ui/input";
+import { checkUserAction } from '@/actions/auth/check-user';
+import { prismaClient } from '@/lib/prisma-client';
+import { Input } from './ui/input';
 
 export async function TranslationsHistory() {
   const user = await checkUserAction();
@@ -19,13 +19,12 @@ export async function TranslationsHistory() {
 
   return (
     <div className="h-full space-y-4 pb-4 md:pb-0">
-      <h3 className="mb-3 text-xl font-medium">Translation History ({translations.length})</h3>
+      <h3 className="mb-3 text-xl font-medium">
+        Translation History ({translations.length})
+      </h3>
 
       <form>
-        <label
-          htmlFor="translation_search"
-          className="text-slate-600 text-sm"
-        >
+        <label htmlFor="translation_search" className="text-slate-600 text-sm">
           Search translations
         </label>
         <Input
@@ -82,5 +81,5 @@ export async function TranslationsHistory() {
         )}
       </div>
     </div>
-  )
+  );
 }
