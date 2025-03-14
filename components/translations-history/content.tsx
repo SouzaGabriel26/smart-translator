@@ -1,21 +1,34 @@
-import { checkUserAction } from '@/actions/auth/check-user';
-import { prismaClient } from '@/lib/prisma-client';
-import { Input } from './ui/input';
+'use client';
 
-export async function TranslationsHistory() {
-  const user = await checkUserAction();
+import { findTranslationsAction } from '@/app/actions';
+import type { TranslationPhrases, Translations } from '@prisma/client';
+import { Loader2Icon } from 'lucide-react';
+import { useState } from 'react';
+import { DebouncedInput } from '../debounced-input';
 
-  const translations = await prismaClient.translations.findMany({
-    where: {
-      userId: user.id,
-    },
-    include: {
-      phrases: true,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+type TranslationsWithPhrases = Array<
+  Translations & {
+    phrases: Array<TranslationPhrases>;
+  }
+>;
+
+type TranslationsHistoryContentProps = {
+  initialTranslations: TranslationsWithPhrases;
+};
+
+export function TranslationsHistoryContent({
+  initialTranslations,
+}: TranslationsHistoryContentProps) {
+  const [translations, setTranslations] =
+    useState<TranslationsWithPhrases>(initialTranslations);
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleSearch(value: string) {
+    setIsLoading(true);
+    const filteredTranslations = await findTranslationsAction(value);
+    setTranslations(filteredTranslations);
+    setIsLoading(false);
+  }
 
   return (
     <div className="h-full space-y-4 pb-4 md:pb-0">
@@ -24,14 +37,21 @@ export async function TranslationsHistory() {
       </h3>
 
       <form>
-        <label htmlFor="translation_search" className="text-slate-600 text-sm">
+        <label htmlFor="search_term" className="text-slate-600 text-sm">
           Search translations
         </label>
-        <Input
-          id="translation_search"
-          type="search"
-          placeholder="Search for a word or a translation..."
-        />
+
+        <div className="relative">
+          <DebouncedInput
+            id="search_term"
+            placeholder="Search for a word or a translation..."
+            action={handleSearch}
+          />
+
+          {isLoading && (
+            <Loader2Icon className="size-4 animate-spin absolute right-3 top-2.5" />
+          )}
+        </div>
       </form>
 
       <div className="border rounded overflow-y-auto h-96 p-4 bg-background">
