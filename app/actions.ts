@@ -24,7 +24,7 @@ const defaultErrorObject = {
 };
 
 const schema = z.object({
-  word_to_translate: z.string().max(20),
+  word_to_translate: z.string().max(20).trim(),
 });
 
 export async function generateTranslationAction(
@@ -46,13 +46,15 @@ export async function generateTranslationAction(
 
   try {
     const user = await checkUserAction();
-    const result = await gemini.generateTranslation(wordToTranslate);
 
     const userAlreadyHaveTranslation =
       await prismaClient.translations.findFirst({
         where: {
           userId: user.id,
-          targetWord: wordToTranslate,
+          targetWord: {
+            equals: parsedData.data.word_to_translate,
+            mode: 'insensitive',
+          },
         },
       });
 
@@ -62,6 +64,8 @@ export async function generateTranslationAction(
         translation_already_exists: true,
       };
     }
+
+    const result = await gemini.generateTranslation(wordToTranslate);
 
     await prismaClient.translations.create({
       data: {

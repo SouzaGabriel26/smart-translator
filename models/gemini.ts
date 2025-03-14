@@ -90,7 +90,10 @@ async function generateTranslation(wordToTranslate: string) {
   async function getTranslation() {
     const translation = await prismaClient.translations.findFirst({
       where: {
-        targetWord: wordToTranslate,
+        targetWord: {
+          equals: wordToTranslate,
+          mode: 'insensitive',
+        },
       },
       include: {
         phrases: true,
