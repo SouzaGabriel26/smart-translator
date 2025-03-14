@@ -6,21 +6,21 @@ import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { DebouncedInput } from '../debounced-input';
 
-type TranslatiosnWithPhrases = Array<
+type TranslationsWithPhrases = Array<
   Translations & {
     phrases: Array<TranslationPhrases>;
   }
 >;
 
 type TranslationsHistoryContentProps = {
-  initialTranslations: TranslatiosnWithPhrases;
+  initialTranslations: TranslationsWithPhrases;
 };
 
 export function TranslationsHistoryContent({
   initialTranslations,
 }: TranslationsHistoryContentProps) {
   const [translations, setTranslations] =
-    useState<TranslatiosnWithPhrases>(initialTranslations);
+    useState<TranslationsWithPhrases>(initialTranslations);
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSearch(value: string) {
