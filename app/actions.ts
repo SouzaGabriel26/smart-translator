@@ -137,3 +137,25 @@ export async function generateTranslationAction(
     return { ...defaultErrorObject };
   }
 }
+
+export async function findTranslationsAction(searchTerm: string) {
+  const user = await checkUserAction();
+
+  const translations = await prismaClient.translations.findMany({
+    where: {
+      userId: user.id,
+      targetWord: {
+        contains: searchTerm,
+        mode: 'insensitive',
+      },
+    },
+    include: {
+      phrases: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  return translations;
+}
