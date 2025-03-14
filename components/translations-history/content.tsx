@@ -41,7 +41,7 @@ export function TranslationsHistoryContent({
           Search translations
         </label>
 
-        <div className='relative'>
+        <div className="relative">
           <DebouncedInput
             id="search_term"
             placeholder="Search for a word or a translation..."
@@ -49,7 +49,7 @@ export function TranslationsHistoryContent({
           />
 
           {isLoading && (
-            <Loader2Icon className='size-4 animate-spin absolute right-3 top-2.5' />
+            <Loader2Icon className="size-4 animate-spin absolute right-3 top-2.5" />
           )}
         </div>
       </form>
