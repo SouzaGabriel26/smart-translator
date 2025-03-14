@@ -44,5 +44,5 @@ model TranslationPhrases {
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
 
-  translation Translations @relation(fields: [translationId], references: [id])
+  translation Translations @relation(fields: [translationId], references: [id], onDelete: Cascade)
 }
