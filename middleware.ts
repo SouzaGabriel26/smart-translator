@@ -5,7 +5,7 @@ import { constants } from './config/constants';
 
 import { jwtVerify } from 'jose';
 
-const publicPaths = ['/sign-in', '/sign-up'];
+const publicPaths = ['/', '/auth/sign-in', '/auth/sign-up'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -16,19 +16,19 @@ export async function middleware(request: NextRequest) {
 
   if (isLogoutAction) {
     cookieStore.delete(constants.accessToken);
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   const token = cookieStore.get(constants.accessToken)?.value;
 
   if (token && publicPaths.includes(pathname)) {
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
   const isPrivatePath = !publicPaths.includes(pathname);
 
   if (!token && isPrivatePath) {
-    return NextResponse.redirect(new URL('/sign-in', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   if (token && isPrivatePath) {
@@ -36,7 +36,7 @@ export async function middleware(request: NextRequest) {
       await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET!));
     } catch {
       cookieStore.delete(constants.accessToken);
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+      return NextResponse.redirect(new URL('/', request.url));
     }
   }
 
