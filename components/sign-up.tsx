@@ -1,6 +1,6 @@
 'use client';
 
-import { signUpAction } from '@/app/(auth)/actions';
+import { signUpAction } from '@/app/(public)/auth/actions';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -53,7 +53,7 @@ export function SignUpForm({
     }
 
     toast.success(message);
-    route.push('/sign-in');
+    route.push('/auth/sign-in');
   }
 
   return (
@@ -123,7 +123,10 @@ export function SignUpForm({
               </div>
               <div className="mt-4 text-center text-sm">
                 Already have an account?{' '}
-                <Link href="/sign-in" className="underline underline-offset-4">
+                <Link
+                  href="/auth/sign-in"
+                  className="underline underline-offset-4"
+                >
                   Sign in
                 </Link>
               </div>
