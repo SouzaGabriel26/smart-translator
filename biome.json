@@ -23,7 +23,8 @@
       "recommended": true,
       "a11y": {
         "noSvgWithoutTitle": "off",
-        "useButtonType": "off"
+        "useButtonType": "off",
+        "useMediaCaption": "off"
       },
       "performance": {
         "noAccumulatingSpread": "off"
