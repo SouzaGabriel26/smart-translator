@@ -8,7 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-screen">
-      <body className="antialiased h-full">
+      <body className="antialiased h-full bg-background">
         {children}
         <Toaster />
       </body>
