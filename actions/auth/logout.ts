@@ -8,5 +8,5 @@ export async function logout() {
   const cookiesStorage = await cookies();
   cookiesStorage.delete(constants.accessToken);
 
-  return redirect('/sign-in');
+  return redirect('/');
 }

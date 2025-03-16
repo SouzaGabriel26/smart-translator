@@ -10,7 +10,7 @@ export async function checkUserAction() {
   const cookieStorage = await cookies();
   const token = cookieStorage.get(constants.accessToken)?.value;
 
-  if (!token) return redirect('/sign-in?action=logout');
+  if (!token) return redirect('/auth/sign-in?action=logout');
 
   try {
     const { payload } = await jwtVerify(
@@ -24,10 +24,10 @@ export async function checkUserAction() {
       },
     });
 
-    if (!user) return redirect('/sign-in?action=logout');
+    if (!user) return redirect('/auth/sign-in?action=logout');
 
     return user;
   } catch {
-    return redirect('/sign-in?action=logout');
+    return redirect('/auth/sign-in?action=logout');
   }
 }
