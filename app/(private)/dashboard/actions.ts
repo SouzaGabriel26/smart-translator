@@ -1,14 +1,14 @@
-"use server";
+'use server';
 
-import { checkUserAction } from "@/actions/auth/check-user";
-import { GeminiServiceError } from "@/errors/gemini-service-error";
-import { InvalidWordError } from "@/errors/invalid-word-error";
-import { ParseTextError } from "@/errors/parse-text-error";
-import { ParseZodError } from "@/errors/parse-zod-error";
-import { prismaClient } from "@/lib/prisma-client";
-import { gemini } from "@/models/gemini";
-import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { checkUserAction } from '@/actions/auth/check-user';
+import { GeminiServiceError } from '@/errors/gemini-service-error';
+import { InvalidWordError } from '@/errors/invalid-word-error';
+import { ParseTextError } from '@/errors/parse-text-error';
+import { ParseZodError } from '@/errors/parse-zod-error';
+import { prismaClient } from '@/lib/prisma-client';
+import { gemini } from '@/models/gemini';
+import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
 
 export type TranslationResponse = {
   ok: boolean;
@@ -20,7 +20,7 @@ export type TranslationResponse = {
 
 const defaultErrorObject = {
   ok: false,
-  error: "Something went wrong while generating the translation.",
+  error: 'Something went wrong while generating the translation.',
 };
 
 const schema = z.object({
@@ -29,9 +29,9 @@ const schema = z.object({
 
 export async function generateTranslationAction(
   _prevState: unknown,
-  formData: FormData
+  formData: FormData,
 ): Promise<TranslationResponse> {
-  const wordToTranslate = formData.get("word_to_translate") as string;
+  const wordToTranslate = formData.get('word_to_translate') as string;
 
   const parsedData = schema.safeParse({ word_to_translate: wordToTranslate });
 
@@ -40,7 +40,7 @@ export async function generateTranslationAction(
       ok: false,
       error: parsedData.error.errors[0].message,
       word_to_translate: wordToTranslate,
-      module: "parse-zod",
+      module: 'parse-zod',
     };
   }
 
@@ -53,7 +53,7 @@ export async function generateTranslationAction(
           userId: user.id,
           targetWord: {
             equals: parsedData.data.word_to_translate,
-            mode: "insensitive",
+            mode: 'insensitive',
           },
         },
       });
@@ -70,8 +70,8 @@ export async function generateTranslationAction(
     await prismaClient.translations.create({
       data: {
         userId: user.id,
-        languageFrom: "en",
-        languageTo: "pt",
+        languageFrom: 'en',
+        languageTo: 'pt',
         targetWord: wordToTranslate,
         translatedWord: result.output,
         phrases: {
@@ -95,7 +95,7 @@ export async function generateTranslationAction(
       },
     });
 
-    revalidatePath("/");
+    revalidatePath('/');
 
     return {
       ok: true,
@@ -104,7 +104,7 @@ export async function generateTranslationAction(
     if (error instanceof GeminiServiceError) {
       return {
         ...defaultErrorObject,
-        module: "gemini",
+        module: 'gemini',
         word_to_translate: wordToTranslate,
       };
     }
@@ -112,16 +112,16 @@ export async function generateTranslationAction(
     if (error instanceof InvalidWordError) {
       return {
         ok: false,
-        error: "The word you entered is invalid. Please try again.",
+        error: 'The word you entered is invalid. Please try again.',
         word_to_translate: wordToTranslate,
-        module: "invalid-word",
+        module: 'invalid-word',
       };
     }
 
     if (error instanceof ParseTextError) {
       return {
         ...defaultErrorObject,
-        module: "parse-text",
+        module: 'parse-text',
         word_to_translate: wordToTranslate,
       };
     }
@@ -129,7 +129,7 @@ export async function generateTranslationAction(
     if (error instanceof ParseZodError) {
       return {
         ...defaultErrorObject,
-        module: "parse-zod",
+        module: 'parse-zod',
         word_to_translate: wordToTranslate,
       };
     }
@@ -146,14 +146,14 @@ export async function findTranslationsAction(searchTerm: string) {
       userId: user.id,
       targetWord: {
         contains: searchTerm,
-        mode: "insensitive",
+        mode: 'insensitive',
       },
     },
     include: {
       phrases: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 
