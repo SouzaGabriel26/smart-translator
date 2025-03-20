@@ -36,6 +36,19 @@ export default async function Page() {
     },
   });
 
+  const randomWordsInEnglishToTranslate = [
+    'Smart Contract',
+    'Decentralized',
+    'Cryptocurrency',
+    'Smart Translator',
+    'Artificial Intelligence',
+    'Machine Learning',
+  ];
+
+  const randomPlaceHolderIndex = Math.floor(
+    Math.random() * randomWordsInEnglishToTranslate.length,
+  );
+
   return (
     <main className="flex flex-col px-6 py-12 gap-4">
       <div className="flex flex-col sm:flex-row gap-4">
@@ -44,6 +57,7 @@ export default async function Page() {
 
           <GenerateTranslationForm
             disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
+            label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
           />
 
           <div className="flex gap-2 mt-4">
