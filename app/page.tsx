@@ -26,7 +26,7 @@ export default function Page() {
               generates related phrases to help you learn languages naturally
             </p>
 
-            <div className="space-x-4">
+            <div className="flex gap-4 flex-col sm:flex-row">
               <Button size="lg" asChild>
                 <Link href="/auth/sign-up">Get Started Free</Link>
               </Button>
