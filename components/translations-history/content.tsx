@@ -1,6 +1,6 @@
 'use client';
 
-import { findTranslationsAction } from '@/app/actions';
+import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
 import type { TranslationPhrases, Translations } from '@prisma/client';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
