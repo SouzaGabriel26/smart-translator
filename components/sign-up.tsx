@@ -15,6 +15,7 @@ import { signUpSchema } from '@/types/sign-up';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
@@ -33,6 +34,7 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const [isLoading, setIsLoading] = useState(false);
   const route = useRouter();
 
   const form = useForm<FormData>({
@@ -45,6 +47,7 @@ export function SignUpForm({
   });
 
   async function onSubmit(data: FormData) {
+    setIsLoading(true);
     const { error, message } = await signUpAction(data);
 
     if (error) {
@@ -53,6 +56,7 @@ export function SignUpForm({
     }
 
     toast.success(message);
+    setIsLoading(false);
     route.push('/auth/sign-in');
   }
 
@@ -117,7 +121,7 @@ export function SignUpForm({
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full">
+                <Button disabled={isLoading} type="submit" className="w-full">
                   Register
                 </Button>
               </div>
