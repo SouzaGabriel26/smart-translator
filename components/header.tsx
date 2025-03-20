@@ -17,7 +17,7 @@ export function Header({ user }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 text-black border-b backdrop-blur h-16 bg-background/60 flex justify-between items-center px-4">
       <Link href={defaultPath} className="flex items-center gap-2">
-        <Globe className="size-6" />
+        <Globe className="size-6 text-primary" />
         <h1 className="text-2xl font-bold">Smart Translator</h1>
       </Link>
 
