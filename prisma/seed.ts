@@ -6,17 +6,44 @@ async function main() {
     prismaClient.translationPhrases.deleteMany(),
     prismaClient.translations.deleteMany(),
     prismaClient.users.deleteMany(),
+    prismaClient.plans.deleteMany(),
   ]);
 
   const SALT = 10;
   const password = '123456';
   const hashedPassword = await bcrypt.hash(password, SALT);
 
+  await prismaClient.$transaction([
+    prismaClient.plans.createMany({
+      data: [
+        {
+          name: 'Free',
+          price: 0,
+          translationsLimit: 25,
+        },
+        {
+          name: 'Premium',
+          price: 9.99,
+          active: false,
+          translationsLimit: 9999,
+        },
+      ],
+    }),
+  ]);
+
+  const freePlan = await prismaClient.plans.findFirst({
+    where: {
+      active: true,
+      name: 'Free',
+    },
+  });
+
   const { id: userId } = await prismaClient.users.create({
     data: {
       email: 'user@email.com',
       name: 'User',
       password: hashedPassword,
+      planId: freePlan?.id!,
     },
   });
 
