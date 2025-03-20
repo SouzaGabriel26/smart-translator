@@ -3,6 +3,7 @@ import { GenerateTranslationForm } from '@/components/generate-translation-form'
 import { TranslationsHistory } from '@/components/translations-history';
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { prismaClient } from '@/lib/prisma-client';
+import { HistoryIcon } from 'lucide-react';
 import { Suspense } from 'react';
 
 const date = new Date().toISOString().split('T')[0];
@@ -50,39 +51,51 @@ export default async function Page() {
   );
 
   return (
-    <main className="flex flex-col px-6 py-12 gap-4">
-      <div className="flex flex-col md:flex-row gap-4">
-        <div className="rounded w-full xl:w-1/2 flex flex-col">
-          <h2 className="mb-3  text-xl font-medium">Translate a word</h2>
+    <main className="flex flex-col md:flex-row px-6 py-12 gap-4">
+      <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
+        <div className='w-full'>
+          <div className="rounded-t-md flex flex-col border p-6">
+            <h2 className="text-xl font-bold">Translate</h2>
 
-          <GenerateTranslationForm
-            disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
-            label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
-          />
+            <GenerateTranslationForm
+              disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
+              label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
+            />
+          </div>
 
-          <div className="flex gap-2 mt-4">
-            <strong>Translations generated today:</strong>
-            <span>{todayTranslations.length}</span>
+          <div className="flex gap-2 px-6 py-3 rounded-b-md border-x border-b bg-muted text-muted-foreground">
+            <span className='flex gap-2 items-center text-sm'>
+              <HistoryIcon className='size-4' />
+              Translations today: {todayTranslations.length}/{MAX_TRANSLATIONS_PER_DAY}
+            </span>
           </div>
         </div>
 
-        <div className="rounded w-full xl:w-1/2">
-          <h2 className="mb-3 text-xl font-medium">Latest translation</h2>
+        <div className="rounded-md w-full border p-4">
+          <h2 className="text-xl font-bold">Latest translation</h2>
+          <p className='text-muted-foreground text-sm'>View your most recent translation with examples</p>
 
-          <div className="border rounded p-4">
+          <div className='mt-5'>
             {!latestTranslation ? (
               <p className="text-center text-slate-400">
                 No translations yet. Enter a word to translate.
               </p>
             ) : (
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-6">
                 <div className="flex flex-col">
-                  <span className="text-lg font-bold">
-                    {latestTranslation.targetWord} (
-                    {latestTranslation.languageFrom}){' = '}
-                    {latestTranslation.translatedWord} (
-                    {latestTranslation.languageTo})
-                  </span>
+                  <div className='flex items-center gap-2'>
+                    <div className='font-bold space-x-1'>
+                      <span className='capitalize'>{latestTranslation.targetWord}</span>
+                      <small>({latestTranslation.languageFrom})</small>
+                    </div>
+
+                    =
+
+                    <div className='font-bold space-x-1'>
+                      <span className='capitalize'>{latestTranslation.translatedWord}</span>
+                      <small>({latestTranslation.languageTo})</small>
+                    </div>
+                  </div>
 
                   <span className="text-sm text-muted-foreground">
                     {latestTranslation.createdAt.toLocaleDateString('en', {
@@ -96,9 +109,11 @@ export default async function Page() {
                 </div>
 
                 <div>
-                  <ul className="space-y-2 mt-4">
+                  <span>Example Usage</span>
+
+                  <ul className="space-y-3 mt-2">
                     {latestTranslation.phrases.map((phrase) => (
-                      <li key={phrase.id} className="flex flex-col">
+                      <li key={phrase.id} className="flex flex-col border rounded-md p-4">
                         <span className="font-bold">{phrase.content}</span>
                         <span className="text-sm text-muted-foreground">
                           {phrase.translatedContent}
