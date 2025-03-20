@@ -51,7 +51,7 @@ export default async function Page() {
 
   return (
     <main className="flex flex-col px-6 py-12 gap-4">
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="rounded w-full xl:w-1/2 flex flex-col">
           <h2 className="mb-3  text-xl font-medium">Translate a word</h2>
 
