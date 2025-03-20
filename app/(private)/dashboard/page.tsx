@@ -5,31 +5,10 @@ import { TranslationsHistorySkeleton } from '@/components/translations-history-s
 import { prismaClient } from '@/lib/prisma-client';
 import { Suspense } from 'react';
 
-const now = new Date();
+const date = new Date().toISOString().split('T')[0];
 
-const startOfToday = new Date(
-  Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    0,
-    0,
-    0,
-    0,
-  ),
-);
-
-const endOfToday = new Date(
-  Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    23,
-    59,
-    59,
-    999,
-  ),
-);
+const startOfToday = new Date(`${date}T00:00:00.000Z`);
+const endOfToday = new Date(`${date}T23:59:59.999Z`);
 
 export default async function Page() {
   const user = await checkUserAction();
