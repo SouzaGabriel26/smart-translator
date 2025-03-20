@@ -47,7 +47,7 @@ export function GenerateTranslationForm({
   }, [state]);
 
   return (
-    <form action={action} className="space-y-2 w-full xl:w-1/2 min-w-40">
+    <form action={action} className="space-y-4 w-full min-w-40">
       <label htmlFor="word_to_translate" className="text-slate-600 text-sm">
         Type an English word/term (20 characters max)
       </label>
@@ -68,7 +68,7 @@ export function GenerateTranslationForm({
         </p>
       )}
 
-      <Button disabled={isPending || disabled}>
+      <Button disabled={isPending || disabled} className='w-full'>
         <Sparkles className="size-4" />
 
         {isPending ? 'Generating Translation...' : 'Generate Translation'}
