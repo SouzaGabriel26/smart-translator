@@ -25,11 +25,19 @@ async function signUp(input: SignUpProps) {
   const SALT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT);
 
+  const availablePlan = await prismaClient.plans.findFirst({
+    where: {
+      active: true,
+      name: 'Free',
+    },
+  });
+
   await prismaClient.users.create({
     data: {
       email,
       name,
       password: hashedPassword,
+      planId: availablePlan!.id,
     },
   });
 

@@ -14,6 +14,9 @@ model Users {
   password  String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+  planId    String   @db.Uuid
+
+  plan Plans @relation(fields: [planId], references: [id], onDelete: Cascade)
 
   translations Translations[]
 
@@ -45,4 +48,18 @@ model TranslationPhrases {
   updatedAt         DateTime @updatedAt @map("updated_at")
 
   translation Translations @relation(fields: [translationId], references: [id], onDelete: Cascade)
+
+  @@map("translation_phrases")
+}
+
+model Plans {
+  id                String  @id @default(uuid()) @db.Uuid
+  name              String  @unique
+  price             Float
+  translationsLimit Int     @map("translations_limit")
+  active            Boolean @default(true)
+
+  user Users[]
+
+  @@map("plans")
 }

@@ -1,4 +1,5 @@
 import { logout } from '@/actions/auth/logout';
+import { prismaClient } from '@/lib/prisma-client';
 import type { Users as User } from '@prisma/client';
 import { Globe, LogOutIcon, User2Icon } from 'lucide-react';
 import Link from 'next/link';
@@ -38,36 +39,49 @@ export function Header({ user }: HeaderProps) {
     );
   }
 
-  function UserOptions() {
+  async function UserOptions() {
     if (!user) return null;
 
+    const userPlan = await prismaClient.plans.findFirst({
+      where: {
+        id: user.planId,
+      },
+    });
+
     return (
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button>
-            <MenuIcon />
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-fit">
-          <div className="space-y-2 flex flex-col">
-            <span>Hello, {user.name}</span>
+      <div className="flex items-center gap-2">
+        <span className="hidden md:block border rounded-full text-xs px-2 py-1 text-muted-foreground">
+          {userPlan?.name} Plan: {userPlan?.translationsLimit} Translations per
+          day
+        </span>
 
-            <Button asChild variant="ghost">
-              <Link href="/profile">
-                <User2Icon />
-                Profile
-              </Link>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button>
+              <MenuIcon />
             </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-fit">
+            <div className="space-y-2 flex flex-col">
+              <span>Hello, {user.name}</span>
 
-            <form action={logout}>
-              <Button className="w-full" variant="destructive">
-                <LogOutIcon />
-                Logout
+              <Button asChild variant="ghost">
+                <Link href="/profile">
+                  <User2Icon />
+                  Profile
+                </Link>
               </Button>
-            </form>
-          </div>
-        </PopoverContent>
-      </Popover>
+
+              <form action={logout}>
+                <Button className="w-full" variant="destructive">
+                  <LogOutIcon />
+                  Logout
+                </Button>
+              </form>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </div>
     );
   }
 }

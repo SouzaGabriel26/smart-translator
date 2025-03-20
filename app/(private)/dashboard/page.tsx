@@ -5,31 +5,10 @@ import { TranslationsHistorySkeleton } from '@/components/translations-history-s
 import { prismaClient } from '@/lib/prisma-client';
 import { Suspense } from 'react';
 
-const now = new Date();
+const date = new Date().toISOString().split('T')[0];
 
-const startOfToday = new Date(
-  Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    0,
-    0,
-    0,
-    0,
-  ),
-);
-
-const endOfToday = new Date(
-  Date.UTC(
-    now.getUTCFullYear(),
-    now.getUTCMonth(),
-    now.getUTCDate(),
-    23,
-    59,
-    59,
-    999,
-  ),
-);
+const startOfToday = new Date(`${date}T00:00:00.000Z`);
+const endOfToday = new Date(`${date}T23:59:59.999Z`);
 
 export default async function Page() {
   const user = await checkUserAction();
@@ -57,14 +36,28 @@ export default async function Page() {
     },
   });
 
+  const randomWordsInEnglishToTranslate = [
+    'Smart Contract',
+    'Decentralized',
+    'Cryptocurrency',
+    'Smart Translator',
+    'Artificial Intelligence',
+    'Machine Learning',
+  ];
+
+  const randomPlaceHolderIndex = Math.floor(
+    Math.random() * randomWordsInEnglishToTranslate.length,
+  );
+
   return (
     <main className="flex flex-col px-6 py-12 gap-4">
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <div className="rounded w-full xl:w-1/2 flex flex-col">
           <h2 className="mb-3  text-xl font-medium">Translate a word</h2>
 
           <GenerateTranslationForm
             disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
+            label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
           />
 
           <div className="flex gap-2 mt-4">

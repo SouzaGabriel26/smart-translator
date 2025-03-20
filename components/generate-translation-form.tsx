@@ -1,6 +1,7 @@
 'use client';
 
-import { generateTranslationAction } from '@/app/actions';
+import { generateTranslationAction } from '@/app/(private)/dashboard/actions';
+import { Sparkles } from 'lucide-react';
 import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { Button } from './ui/button';
@@ -8,10 +9,12 @@ import { Input } from './ui/input';
 
 type GenerateTranslationFormProps = {
   disabled?: boolean;
+  label: string;
 };
 
 export function GenerateTranslationForm({
   disabled,
+  label,
 }: GenerateTranslationFormProps) {
   const [state, action, isPending] = useActionState(
     generateTranslationAction,
@@ -46,13 +49,13 @@ export function GenerateTranslationForm({
   return (
     <form action={action} className="space-y-2 w-full xl:w-1/2 min-w-40">
       <label htmlFor="word_to_translate" className="text-slate-600 text-sm">
-        Enter a word in English
+        Type an English word/term (20 characters max)
       </label>
       <Input
         required
         id="word_to_translate"
         disabled={disabled}
-        placeholder="Word"
+        placeholder={label}
         name="word_to_translate"
         defaultValue={
           state?.module === 'invalid-word' ? '' : state?.word_to_translate
@@ -66,6 +69,8 @@ export function GenerateTranslationForm({
       )}
 
       <Button disabled={isPending || disabled}>
+        <Sparkles className="size-4" />
+
         {isPending ? 'Generating Translation...' : 'Generate Translation'}
       </Button>
     </form>
