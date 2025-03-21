@@ -32,6 +32,8 @@ export async function generateTranslationAction(
   formData: FormData,
 ): Promise<TranslationResponse> {
   const wordToTranslate = formData.get('word_to_translate') as string;
+  const languageFrom = formData.get('language_from') as string;
+  const languageTo = formData.get('language_to') as string;
 
   const parsedData = schema.safeParse({ word_to_translate: wordToTranslate });
 
@@ -65,7 +67,11 @@ export async function generateTranslationAction(
       };
     }
 
-    const result = await gemini.generateTranslation(wordToTranslate);
+    const result = await gemini.generateTranslation({
+      languageFrom,
+      languageTo,
+      wordToTranslate: parsedData.data.word_to_translate,
+    });
 
     await prismaClient.translations.create({
       data: {
