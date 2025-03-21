@@ -88,7 +88,13 @@ const plans: Plan[] = [
   },
 ];
 
+const availableLanguages = ['en', 'pt-br'] as const;
+export type AvailableLanguages = (typeof availableLanguages)[number];
+
 export const projectConstants = Object.freeze({
   features,
   plans,
+  availableLanguages,
+  languageFromKey: 'smart-translator:language-from',
+  languageToKey: 'smart-translator:language-to',
 });

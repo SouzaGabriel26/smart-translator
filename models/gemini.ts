@@ -19,7 +19,17 @@ const geminiResponseSchema = z.object({
 
 type GeminiResponse = z.infer<typeof geminiResponseSchema>;
 
-async function generateTranslation(wordToTranslate: string) {
+type GenerateTranslationProps = {
+  languageFrom: string;
+  languageTo: string;
+  wordToTranslate: string;
+};
+
+async function generateTranslation({
+  languageFrom,
+  languageTo,
+  wordToTranslate,
+}: GenerateTranslationProps) {
   const translationAlreadyExists = await getTranslation();
 
   if (translationAlreadyExists) {
@@ -49,7 +59,11 @@ async function generateTranslation(wordToTranslate: string) {
   let responseText = '';
 
   try {
-    const prompt = generateCustomizedPrompt(wordToTranslate);
+    const prompt = generateCustomizedPrompt({
+      languageFrom,
+      languageTo,
+      wordToTranslate,
+    });
     const { response } = await model.generateContent(prompt);
     responseText = response.text();
   } catch (error) {
@@ -104,10 +118,14 @@ async function generateTranslation(wordToTranslate: string) {
   }
 }
 
-function generateCustomizedPrompt(wordToTranslate: string) {
+function generateCustomizedPrompt({
+  languageFrom,
+  languageTo,
+  wordToTranslate,
+}: GenerateTranslationProps) {
   return `
-Translate the following English word to Portuguese: "${wordToTranslate}".
-Then, generate 3 simple sentences using this word, each with its Portuguese translation.
+Translate the following ${languageFrom} word to ${languageTo}: "${wordToTranslate}".
+Then, generate 3 simple sentences using this word, each with its ${languageTo} translation.
 
 Generate an output **ONLY in valid JSON format**, without any other characters, delimiters or explanations. The JSON must follow the following schema:
 
@@ -122,7 +140,7 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
   phrase_3_translated: string
 }
 
-But, in case of the word is not a valid English word, return an empty object.
+But, in case of the word is not a valid ${languageFrom} word, return an empty object.
   `;
 }
 

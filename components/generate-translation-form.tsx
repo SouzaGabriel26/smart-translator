@@ -10,11 +10,15 @@ import { Input } from './ui/input';
 type GenerateTranslationFormProps = {
   disabled?: boolean;
   label: string;
+  languageFrom: string;
+  languageTo: string;
 };
 
 export function GenerateTranslationForm({
   disabled,
   label,
+  languageFrom,
+  languageTo,
 }: GenerateTranslationFormProps) {
   const [state, action, isPending] = useActionState(
     generateTranslationAction,
@@ -68,7 +72,10 @@ export function GenerateTranslationForm({
         </p>
       )}
 
-      <Button disabled={isPending || disabled} className='w-full'>
+      <input type="hidden" name="language_from" value={languageFrom} />
+      <input type="hidden" name="language_to" value={languageTo} />
+
+      <Button disabled={isPending || disabled} className="w-full">
         <Sparkles className="size-4" />
 
         {isPending ? 'Generating Translation...' : 'Generate Translation'}

@@ -1,10 +1,12 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { getLanguageAction } from '@/app/actions';
 import { GenerateTranslationForm } from '@/components/generate-translation-form';
 import { TranslationsHistory } from '@/components/translations-history';
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { prismaClient } from '@/lib/prisma-client';
 import { HistoryIcon } from 'lucide-react';
 import { Suspense } from 'react';
+import { ToggleLanguage } from './_components/toggle-language';
 
 const date = new Date().toISOString().split('T')[0];
 
@@ -50,32 +52,43 @@ export default async function Page() {
     Math.random() * randomWordsInEnglishToTranslate.length,
   );
 
+  const { languageFrom, languageTo } = await getLanguageAction();
+
   return (
     <main className="flex flex-col md:flex-row px-6 py-12 gap-4">
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
-        <div className='w-full'>
+        <div className="w-full">
           <div className="rounded-t-md flex flex-col border p-6">
-            <h2 className="text-xl font-bold">Translate</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-bold">Translate</h2>
+
+              <ToggleLanguage />
+            </div>
 
             <GenerateTranslationForm
               disabled={todayTranslations.length >= MAX_TRANSLATIONS_PER_DAY}
               label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
+              languageFrom={languageFrom}
+              languageTo={languageTo}
             />
           </div>
 
           <div className="flex gap-2 px-6 py-3 rounded-b-md border-x border-b bg-muted text-muted-foreground">
-            <span className='flex gap-2 items-center text-sm'>
-              <HistoryIcon className='size-4' />
-              Translations today: {todayTranslations.length}/{MAX_TRANSLATIONS_PER_DAY}
+            <span className="flex gap-2 items-center text-sm">
+              <HistoryIcon className="size-4" />
+              Translations today: {todayTranslations.length}/
+              {MAX_TRANSLATIONS_PER_DAY}
             </span>
           </div>
         </div>
 
         <div className="rounded-md w-full border p-4">
           <h2 className="text-xl font-bold">Latest translation</h2>
-          <p className='text-muted-foreground text-sm'>View your most recent translation with examples</p>
+          <p className="text-muted-foreground text-sm">
+            View your most recent translation with examples
+          </p>
 
-          <div className='mt-5'>
+          <div className="mt-5">
             {!latestTranslation ? (
               <p className="text-center text-slate-400">
                 No translations yet. Enter a word to translate.
@@ -83,16 +96,18 @@ export default async function Page() {
             ) : (
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col">
-                  <div className='flex items-center gap-2'>
-                    <div className='font-bold space-x-1'>
-                      <span className='capitalize'>{latestTranslation.targetWord}</span>
+                  <div className="flex items-center gap-2">
+                    <div className="font-bold space-x-1">
+                      <span className="capitalize">
+                        {latestTranslation.targetWord}
+                      </span>
                       <small>({latestTranslation.languageFrom})</small>
                     </div>
-
                     =
-
-                    <div className='font-bold space-x-1'>
-                      <span className='capitalize'>{latestTranslation.translatedWord}</span>
+                    <div className="font-bold space-x-1">
+                      <span className="capitalize">
+                        {latestTranslation.translatedWord}
+                      </span>
                       <small>({latestTranslation.languageTo})</small>
                     </div>
                   </div>
@@ -113,7 +128,10 @@ export default async function Page() {
 
                   <ul className="space-y-3 mt-2">
                     {latestTranslation.phrases.map((phrase) => (
-                      <li key={phrase.id} className="flex flex-col border rounded-md p-4">
+                      <li
+                        key={phrase.id}
+                        className="flex flex-col border rounded-md p-4"
+                      >
                         <span className="font-bold">{phrase.content}</span>
                         <span className="text-sm text-muted-foreground">
                           {phrase.translatedContent}
