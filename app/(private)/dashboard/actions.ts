@@ -76,8 +76,8 @@ export async function generateTranslationAction(
     await prismaClient.translations.create({
       data: {
         userId: user.id,
-        languageFrom: 'en',
-        languageTo: 'pt',
+        languageFrom,
+        languageTo,
         targetWord: wordToTranslate,
         translatedWord: result.output,
         phrases: {
@@ -149,11 +149,22 @@ export async function findTranslationsAction(searchTerm: string) {
 
   const translations = await prismaClient.translations.findMany({
     where: {
-      userId: user.id,
-      targetWord: {
-        contains: searchTerm,
-        mode: 'insensitive',
-      },
+      OR: [
+        {
+          userId: user.id,
+          targetWord: {
+            contains: searchTerm,
+            mode: 'insensitive',
+          },
+        },
+        {
+          userId: user.id,
+          translatedWord: {
+            contains: searchTerm,
+            mode: 'insensitive',
+          },
+        },
+      ],
     },
     include: {
       phrases: true,
