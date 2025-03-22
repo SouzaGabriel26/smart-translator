@@ -1,26 +1,32 @@
 'use client';
 
-import { getLanguageAction, setLanguageAction } from '@/app/actions';
+import { setLanguageAction } from '@/app/actions';
+import type { AvailableLanguages } from '@/app/constants';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowRightLeft } from 'lucide-react';
 import { useState } from 'react';
 
-export function ToggleLanguage() {
+type ToggleLanguageProps = {
+  defaultLanguages: {
+    languageFrom: AvailableLanguages;
+    languageTo: AvailableLanguages;
+  };
+};
+
+export function ToggleLanguage({ defaultLanguages }: ToggleLanguageProps) {
   const [languages, setLanguages] = useState({
-    languageFrom: 'en',
-    languageTo: 'pt-br',
+    languageFrom: defaultLanguages.languageFrom,
+    languageTo: defaultLanguages.languageTo,
   });
 
   async function toggleLanguage() {
-    const { languageFrom, languageTo } = await getLanguageAction();
+    const input = {
+      languageFrom: languages.languageTo,
+      languageTo: languages.languageFrom,
+    };
 
-    if (languageFrom === 'en') {
-      await setLanguageAction('pt-br', 'en');
-      setLanguages({ languageFrom: 'pt-br', languageTo: 'en' });
-    } else {
-      await setLanguageAction('en', 'pt-br');
-      setLanguages({ languageFrom: 'en', languageTo: 'pt-br' });
-    }
+    await setLanguageAction(input.languageFrom, input.languageTo);
+    setLanguages(input);
   }
 
   return (

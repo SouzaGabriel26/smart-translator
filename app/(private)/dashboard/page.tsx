@@ -55,14 +55,17 @@ export default async function Page() {
   const { languageFrom, languageTo } = await getLanguageAction();
 
   return (
-    <main className="flex flex-col md:flex-row px-6 py-12 gap-4">
+    <main
+      key={Date.now()}
+      className="flex flex-col md:flex-row px-6 py-12 gap-4"
+    >
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
         <div className="w-full">
           <div className="rounded-t-md flex flex-col border p-6">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold">Translate</h2>
 
-              <ToggleLanguage />
+              <ToggleLanguage defaultLanguages={{ languageFrom, languageTo }} />
             </div>
 
             <GenerateTranslationForm

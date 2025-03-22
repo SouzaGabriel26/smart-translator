@@ -90,10 +90,8 @@ export function TranslationsHistoryContent({
                 <ul className="space-y-3 mt-4">
                   {translation.phrases.map((phrase) => (
                     <li key={phrase.id} className="flex flex-col text-sm">
-                      <span className="text-muted-foreground">
-                        {phrase.content}
-                      </span>
-                      <span className="font-medium">
+                      <span className="font-bold">{phrase.content}</span>
+                      <span className="text-sm text-muted-foreground">
                         {phrase.translatedContent}
                       </span>
                     </li>
