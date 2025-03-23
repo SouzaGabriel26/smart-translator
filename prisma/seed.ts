@@ -1,6 +1,6 @@
 import { prismaClient } from '@/lib/prisma-client';
 import { orchestrator } from '@/test/orchestrator';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 async function main() {
   await Promise.all([
