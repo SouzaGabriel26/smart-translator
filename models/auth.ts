@@ -1,7 +1,7 @@
 import { prismaClient } from '@/lib/prisma-client';
 import { type SignInProps, signInSchema } from '@/types/sign-in';
 import { type SignUpProps, signUpSchema } from '@/types/sign-up';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 import { SignJWT } from 'jose';
 

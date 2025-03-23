@@ -1,9 +1,10 @@
 import { randomUUID } from 'node:crypto';
-import { prismaClient } from '@/lib/prisma-client';
 import { auth } from '@/models/auth';
+import { orchestrator } from '../orchestrator';
 
 beforeAll(async () => {
-  await prismaClient.users.deleteMany();
+  await orchestrator.resetDatabaseTables();
+  await orchestrator.createDefaultPlans();
 });
 
 describe('models > auth', () => {

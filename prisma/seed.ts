@@ -1,5 +1,6 @@
 import { prismaClient } from '@/lib/prisma-client';
-import bcrypt from 'bcrypt';
+import { orchestrator } from '@/test/orchestrator';
+import bcrypt from 'bcryptjs';
 
 async function main() {
   await Promise.all([
@@ -13,23 +14,7 @@ async function main() {
   const password = '123456';
   const hashedPassword = await bcrypt.hash(password, SALT);
 
-  await prismaClient.$transaction([
-    prismaClient.plans.createMany({
-      data: [
-        {
-          name: 'Free',
-          price: 0,
-          translationsLimit: 25,
-        },
-        {
-          name: 'Premium',
-          price: 9.99,
-          active: false,
-          translationsLimit: 9999,
-        },
-      ],
-    }),
-  ]);
+  await orchestrator.createDefaultPlans();
 
   const freePlan = await prismaClient.plans.findFirst({
     where: {
