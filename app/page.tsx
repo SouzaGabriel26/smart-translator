@@ -1,9 +1,9 @@
 import { Header } from '@/components/header';
 import { PlanCard } from '@/components/plan-card';
 import { Button } from '@/components/ui/button';
+import { projectConstants } from '@/config/constants';
 import { Globe } from 'lucide-react';
 import Link from 'next/link';
-import { projectConstants } from './constants';
 
 export default function Page() {
   return (

@@ -1,3 +1,4 @@
+import { ChangeLanguageButton } from '@/components/change-language-button';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
@@ -11,6 +12,8 @@ export default function RootLayout({
       <body className="antialiased h-full bg-background">
         {children}
         <Toaster />
+
+        <ChangeLanguageButton />
       </body>
     </html>
   );

@@ -1,6 +1,6 @@
 'use server';
 
-import { constants } from '@/config/constants';
+import { projectConstants } from '@/config/constants';
 import { auth } from '@/models/auth';
 import type { SignInProps } from '@/types/sign-in';
 import type { SignUpProps } from '@/types/sign-up';
@@ -18,7 +18,7 @@ export async function signInAction(data: SignInProps) {
     const sevenDaysInMilliseconds = 60 * 60 * 24 * 7 * 1000;
 
     const cookieStorage = await cookies();
-    cookieStorage.set(constants.accessToken, result.token, {
+    cookieStorage.set(projectConstants.accessToken, result.token, {
       httpOnly: true,
       expires: new Date(Date.now() + sevenDaysInMilliseconds),
     });
