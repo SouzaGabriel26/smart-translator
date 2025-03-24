@@ -1,6 +1,6 @@
 'use server';
 
-import { constants } from '@/config/constants';
+import { projectConstants } from '@/config/constants';
 import { prismaClient } from '@/lib/prisma-client';
 import { jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 
 export async function checkUserAction() {
   const cookieStorage = await cookies();
-  const token = cookieStorage.get(constants.accessToken)?.value;
+  const token = cookieStorage.get(projectConstants.accessToken)?.value;
 
   if (!token) return redirect('/auth/sign-in?action=logout');
 
