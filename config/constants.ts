@@ -1,6 +1,6 @@
 import { BrainCircuit, GlobeIcon, History } from 'lucide-react';
 
-const features = [
+const englishFeatures = [
   {
     title: 'Translate words and phrases',
     description:
@@ -10,13 +10,33 @@ const features = [
   {
     title: 'Translations history',
     description:
-      'View your translations history and manage your saved translations',
+      'View your translations history and search your saved translations',
     icon: History,
   },
   {
     title: 'Learn languages naturally',
+    description: 'Our AI generates related phrases to help you learn languages',
+    icon: BrainCircuit,
+  },
+];
+
+const portugueseFeatures = [
+  {
+    title: 'Traduza palavras e frases',
     description:
-      'Our AI generates related phrases to help you learn languages naturally',
+      'Traduza palavras e frases curtas com contexto e exemplos usando IA',
+    icon: GlobeIcon,
+  },
+  {
+    title: 'Histórico de traduções',
+    description:
+      'Veja seu histórico de traduções e pesquise suas traduções salvas',
+    icon: History,
+  },
+  {
+    title: 'Aprenda idiomas naturalmente',
+    description:
+      'Nossa IA gera frases relacionadas para ajudá-lo a aprender idiomas',
     icon: BrainCircuit,
   },
 ];
@@ -24,16 +44,18 @@ const features = [
 export type Plan = {
   type: 'free' | 'paid';
   title: string;
-  usdPrice: number;
+  price: number;
+  currency: 'usd' | 'brl';
   status: { available: boolean; reason?: string };
   features: { title: string; available: boolean }[];
 };
 
-const plans: Plan[] = [
+const englishPlans: Plan[] = [
   {
     type: 'free',
     title: 'Free',
-    usdPrice: 0,
+    price: 0,
+    currency: 'usd',
     status: { available: true },
     features: [
       {
@@ -61,7 +83,8 @@ const plans: Plan[] = [
   {
     type: 'paid',
     title: 'Premium',
-    usdPrice: 9.99,
+    price: 9.99,
+    currency: 'usd',
     status: { available: false, reason: 'Coming Soon' },
     features: [
       {
@@ -88,8 +111,79 @@ const plans: Plan[] = [
   },
 ];
 
+const portuguesePlans: Plan[] = [
+  {
+    type: 'free',
+    title: 'Free',
+    price: 0,
+    currency: 'brl',
+    status: { available: true },
+    features: [
+      {
+        title: 'Até 25 traduções por dia',
+        available: true,
+      },
+      {
+        title: 'Traduções contextuais básicas',
+        available: true,
+      },
+      {
+        title: '3 frases geradas por IA por tradução',
+        available: true,
+      },
+      {
+        title: 'Suporte a outros idiomas',
+        available: false,
+      },
+      {
+        title: 'Guias de pronúncia',
+        available: false,
+      },
+    ],
+  },
+  {
+    type: 'paid',
+    title: 'Premium',
+    price: 57.0,
+    currency: 'brl',
+    status: { available: false, reason: 'Em Breve' },
+    features: [
+      {
+        title: 'Traduções ilimitadas por dia',
+        available: true,
+      },
+      {
+        title: 'Traduções contextuais avançadas',
+        available: true,
+      },
+      {
+        title: 'Até 10 frases geradas por IA por tradução',
+        available: true,
+      },
+      {
+        title: 'Suporte a outros idiomas',
+        available: true,
+      },
+      {
+        title: 'Guias de pronúncia',
+        available: true,
+      },
+    ],
+  },
+];
+
 const availableLanguages = ['en', 'pt-br'] as const;
 export type AvailableLanguages = (typeof availableLanguages)[number];
+
+const features: Record<AvailableLanguages, typeof englishFeatures> = {
+  en: englishFeatures,
+  'pt-br': portugueseFeatures,
+};
+
+const plans: Record<AvailableLanguages, typeof englishPlans> = {
+  en: englishPlans,
+  'pt-br': portuguesePlans,
+};
 
 export const projectConstants = Object.freeze({
   accessToken: 'smart-translator:accessToken',

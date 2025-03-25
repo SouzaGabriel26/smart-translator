@@ -1,4 +1,4 @@
-import type { Plan } from '@/app/constants';
+import type { Plan } from '@/config/constants';
 import { cn } from '@/lib/utils';
 import { Check, X } from 'lucide-react';
 import Link from 'next/link';
@@ -21,8 +21,13 @@ export function PlanCard({ plan }: PlanCardProps) {
         <CardTitle className="text-3xl font-medium">{plan.title}</CardTitle>
 
         <span>
-          <strong className="text-xl">$ {plan.usdPrice}</strong>
-          <span className="text-muted-foreground"> / month</span>
+          <strong className="text-xl">
+            {plan.currency === 'brl' ? 'R$' : '$'} {plan.price}
+          </strong>
+          <span className="text-muted-foreground">
+            {' '}
+            / {plan.currency === 'brl' ? 'mensal' : 'month'}
+          </span>
         </span>
       </CardHeader>
 
@@ -53,7 +58,7 @@ export function PlanCard({ plan }: PlanCardProps) {
           asChild={plan.status.available}
         >
           <Link href="/auth/sign-up" aria-disabled={!plan.status.available}>
-            Get started
+            {plan.currency === 'brl' ? 'Começar' : 'Get Started'}
           </Link>
         </Button>
       </div>
