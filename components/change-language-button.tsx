@@ -18,10 +18,7 @@ export function ChangeLanguageButton({ className }: ChangeLanguageButtonProps) {
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <Button
         title="Change Language"
-        className={cn(
-          'absolute bottom-2 right-2 size-10 rounded-full',
-          className,
-        )}
+        className={cn('fixed bottom-2 right-2 size-10 rounded-full', className)}
         asChild
       >
         <PopoverTrigger>

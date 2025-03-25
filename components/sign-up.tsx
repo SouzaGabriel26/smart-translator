@@ -52,6 +52,7 @@ export function SignUpForm({
 
     if (error) {
       toast.error(JSON.parse(JSON.stringify(error)));
+      setIsLoading(false);
       return;
     }
 
