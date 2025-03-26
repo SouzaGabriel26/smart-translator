@@ -1,12 +1,12 @@
 import { checkUserAction } from '@/actions/auth/check-user';
 import { getLanguageAction } from '@/app/actions';
 import { GenerateTranslationForm } from '@/components/generate-translation-form';
-import { TranslationsHistory } from '@/components/translations-history';
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { prismaClient } from '@/lib/prisma-client';
 import { HistoryIcon } from 'lucide-react';
 import { Suspense } from 'react';
 import { ToggleLanguage } from './_components/toggle-language';
+import { TranslationsHistory } from './_components/translations-history';
 
 const date = new Date().toISOString().split('T')[0];
 

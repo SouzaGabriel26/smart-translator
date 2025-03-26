@@ -1,8 +1,8 @@
 'use client';
 
 import { setLanguageAction } from '@/app/actions';
-import type { AvailableLanguages } from '@/app/constants';
 import { Button } from '@/components/ui/button';
+import type { AvailableLanguages } from '@/config/constants';
 import { ArrowRight, ArrowRightLeft } from 'lucide-react';
 import { useState } from 'react';
 
