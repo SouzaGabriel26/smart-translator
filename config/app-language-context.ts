@@ -50,6 +50,11 @@ const languageContexts = {
         noTranslationsYet:
           'Nenhuma tradução ainda. Digite uma palavra para traduzir.',
       },
+      history: {
+        title: 'Histórico de Traduções',
+        inputLabel: 'Buscar traduções...',
+        noTranslationsFound: 'Nenhuma tradução encontrada.',
+      },
     },
   },
   en: {
@@ -97,6 +102,11 @@ const languageContexts = {
         description: 'View your most recent translation with examples',
         exampleUsage: 'Example usage',
         noTranslationsYet: 'No translations yet. Enter a word to translate.',
+      },
+      history: {
+        title: 'Translation History',
+        inputLabel: 'Search translations...',
+        noTranslationsFound: 'No translations found.',
       },
     },
   },
