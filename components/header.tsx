@@ -55,11 +55,22 @@ export async function Header({ user }: HeaderProps) {
       },
     });
 
+    function buildPlanLabel() {
+      if (!userPlan) return '';
+
+      if (language === 'pt-br') {
+        return `Plano ${userPlan.name}: ${userPlan.translationsLimit} traduções por dia`;
+      }
+
+      return `${userPlan.name} Plan: ${userPlan.translationsLimit} translations per day`;
+    }
+
+    const formattedPlanLabel = buildPlanLabel();
+
     return (
       <div className="flex items-center gap-2">
         <span className="hidden md:block border rounded-full text-xs px-2 py-1 text-muted-foreground">
-          {userPlan?.name} Plan: {userPlan?.translationsLimit} Translations per
-          day
+          {formattedPlanLabel}
         </span>
 
         <Popover>
@@ -70,19 +81,21 @@ export async function Header({ user }: HeaderProps) {
           </PopoverTrigger>
           <PopoverContent className="w-fit">
             <div className="space-y-2 flex flex-col">
-              <span>Hello, {user.name}</span>
+              <span>
+                {appLanguageContext.userOptions.hello}, {user.name}
+              </span>
 
               <Button asChild variant="ghost">
                 <Link href="/profile">
                   <User2Icon />
-                  Profile
+                  {appLanguageContext.userOptions.profile}
                 </Link>
               </Button>
 
               <form action={logout}>
                 <Button className="w-full" variant="destructive">
                   <LogOutIcon />
-                  Logout
+                  {appLanguageContext.userOptions.signOut}
                 </Button>
               </form>
             </div>
