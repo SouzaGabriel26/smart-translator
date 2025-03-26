@@ -95,15 +95,17 @@ export default async function Page() {
         </div>
 
         <div className="rounded-md w-full border p-4">
-          <h2 className="text-xl font-bold">Latest translation</h2>
+          <h2 className="text-xl font-bold">
+            {dashboardLanguage.latest.title}
+          </h2>
           <p className="text-muted-foreground text-sm">
-            View your most recent translation with examples
+            {dashboardLanguage.latest.description}
           </p>
 
           <div className="mt-5">
             {!latestTranslation ? (
               <p className="text-center text-slate-400">
-                No translations yet. Enter a word to translate.
+                {dashboardLanguage.latest.noTranslationsYet}
               </p>
             ) : (
               <div className="flex flex-col gap-6">
@@ -125,7 +127,7 @@ export default async function Page() {
                   </div>
 
                   <span className="text-sm text-muted-foreground">
-                    {latestTranslation.createdAt.toLocaleDateString('en', {
+                    {latestTranslation.createdAt.toLocaleDateString(language, {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
@@ -136,7 +138,7 @@ export default async function Page() {
                 </div>
 
                 <div>
-                  <span>Example Usage</span>
+                  <span>{dashboardLanguage.latest.exampleUsage}</span>
 
                   <ul className="space-y-3 mt-2">
                     {latestTranslation.phrases.map((phrase) => (
