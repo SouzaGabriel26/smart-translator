@@ -2,6 +2,8 @@
 
 import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
 import { DebouncedInput } from '@/components/debounced-input';
+import type { AppLanguageContext } from '@/config/app-language-context';
+import type { AvailableLanguages } from '@/config/constants';
 import type { TranslationPhrases, Translations } from '@prisma/client';
 import { HistoryIcon, Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
@@ -14,10 +16,14 @@ type TranslationsWithPhrases = Array<
 
 type TranslationsHistoryContentProps = {
   initialTranslations: TranslationsWithPhrases;
+  historyLanguage: AppLanguageContext['dashboard']['history'];
+  language: AvailableLanguages;
 };
 
 export function TranslationsHistoryContent({
   initialTranslations,
+  historyLanguage,
+  language,
 }: TranslationsHistoryContentProps) {
   const [translations, setTranslations] =
     useState<TranslationsWithPhrases>(initialTranslations);
@@ -34,7 +40,7 @@ export function TranslationsHistoryContent({
     <div className="space-y-4 pb-4 md:pb-0 border rounded-md p-4 w-full md:h-[750px] flex flex-col">
       <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
         <HistoryIcon className="size-6" />
-        Translation History ({translations.length})
+        {historyLanguage.title} ({translations.length})
       </h3>
 
       <form>
@@ -42,7 +48,7 @@ export function TranslationsHistoryContent({
           <DebouncedInput
             id="search_term"
             className="text-sm"
-            placeholder="Search translations..."
+            placeholder={historyLanguage.inputLabel}
             action={handleSearch}
           />
 
@@ -55,7 +61,7 @@ export function TranslationsHistoryContent({
       <div className="flex-1 overflow-y-auto bg-background">
         {translations.length === 0 ? (
           <p className="text-slate-400 text-center py-10">
-            No translations found.
+            {historyLanguage.noTranslationsFound}
           </p>
         ) : (
           translations.map((translation) => (
@@ -76,7 +82,7 @@ export function TranslationsHistoryContent({
                 </div>
 
                 <span className="h-fit text-xs border rounded-full px-2 py-1">
-                  {translation.createdAt.toLocaleDateString('en', {
+                  {translation.createdAt.toLocaleDateString(language, {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
