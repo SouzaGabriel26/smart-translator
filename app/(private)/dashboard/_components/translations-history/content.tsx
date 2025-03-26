@@ -1,10 +1,10 @@
 'use client';
 
 import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
+import { DebouncedInput } from '@/components/debounced-input';
 import type { TranslationPhrases, Translations } from '@prisma/client';
 import { HistoryIcon, Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
-import { DebouncedInput } from '../debounced-input';
 
 type TranslationsWithPhrases = Array<
   Translations & {
