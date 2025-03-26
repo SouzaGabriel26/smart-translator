@@ -1,7 +1,8 @@
 import { checkUserAction } from '@/actions/auth/check-user';
-import { getLanguageAction } from '@/app/actions';
+import { getAppLanguageAction, getLanguageAction } from '@/app/actions';
 import { GenerateTranslationForm } from '@/components/generate-translation-form';
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
+import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import { HistoryIcon } from 'lucide-react';
 import { Suspense } from 'react';
@@ -15,6 +16,8 @@ const endOfToday = new Date(`${date}T23:59:59.999Z`);
 
 export default async function Page() {
   const user = await checkUserAction();
+  const language = await getAppLanguageAction();
+  const { dashboard: dashboardLanguage } = getLanguageContext(language);
   const MAX_TRANSLATIONS_PER_DAY = 25;
 
   const latestTranslation = await prismaClient.translations.findFirst({
@@ -63,9 +66,14 @@ export default async function Page() {
         <div className="w-full">
           <div className="rounded-t-md flex flex-col border p-6">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-bold">Translate</h2>
+              <h2 className="text-xl font-bold">
+                {dashboardLanguage.form.title}
+              </h2>
 
-              <ToggleLanguage defaultLanguages={{ languageFrom, languageTo }} />
+              <ToggleLanguage
+                defaultLanguages={{ languageFrom, languageTo }}
+                dashboardLanguage={dashboardLanguage}
+              />
             </div>
 
             <GenerateTranslationForm
@@ -73,14 +81,15 @@ export default async function Page() {
               label={randomWordsInEnglishToTranslate[randomPlaceHolderIndex]}
               languageFrom={languageFrom}
               languageTo={languageTo}
+              dashboardLanguage={dashboardLanguage}
             />
           </div>
 
           <div className="flex gap-2 px-6 py-3 rounded-b-md border-x border-b bg-muted text-muted-foreground">
             <span className="flex gap-2 items-center text-sm">
               <HistoryIcon className="size-4" />
-              Translations today: {todayTranslations.length}/
-              {MAX_TRANSLATIONS_PER_DAY}
+              {dashboardLanguage.form.translationsLimitCounter}{' '}
+              {todayTranslations.length}/{MAX_TRANSLATIONS_PER_DAY}
             </span>
           </div>
         </div>
