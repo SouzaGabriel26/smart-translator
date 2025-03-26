@@ -2,6 +2,7 @@
 
 import { setLanguageAction } from '@/app/actions';
 import { Button } from '@/components/ui/button';
+import type { AppLanguageContext } from '@/config/app-language-context';
 import type { AvailableLanguages } from '@/config/constants';
 import { ArrowRight, ArrowRightLeft } from 'lucide-react';
 import { useState } from 'react';
@@ -11,13 +12,18 @@ type ToggleLanguageProps = {
     languageFrom: AvailableLanguages;
     languageTo: AvailableLanguages;
   };
+  dashboardLanguage: AppLanguageContext['dashboard'];
 };
 
-export function ToggleLanguage({ defaultLanguages }: ToggleLanguageProps) {
+export function ToggleLanguage({
+  defaultLanguages,
+  dashboardLanguage,
+}: ToggleLanguageProps) {
   const [languages, setLanguages] = useState({
     languageFrom: defaultLanguages.languageFrom,
     languageTo: defaultLanguages.languageTo,
   });
+  const { englishLabel, portugueseLabel } = dashboardLanguage.form;
 
   async function toggleLanguage() {
     const input = {
@@ -33,10 +39,12 @@ export function ToggleLanguage({ defaultLanguages }: ToggleLanguageProps) {
     <div className="flex gap-2">
       <div className="text-sm flex items-center gap-2">
         <span>
-          {languages.languageFrom === 'en' ? 'English' : 'Portuguese'}
+          {languages.languageFrom === 'en' ? englishLabel : portugueseLabel}
         </span>
         <ArrowRight className="size-4" />
-        <span>{languages.languageTo === 'en' ? 'English' : 'Portuguese'}</span>
+        <span>
+          {languages.languageTo === 'en' ? englishLabel : portugueseLabel}
+        </span>
       </div>
 
       <Button onClick={toggleLanguage} variant="ghost" title="Switch languages">

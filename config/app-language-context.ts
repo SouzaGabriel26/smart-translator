@@ -1,6 +1,6 @@
 import type { AvailableLanguages } from './constants';
 
-export const languageContexts = {
+const languageContexts = {
   'pt-br': {
     title: 'Tradutor Inteligente',
     signInLabel: 'Entrar',
@@ -27,6 +27,34 @@ export const languageContexts = {
       serviceTerms: 'Termos de Serviço',
       privacyPolicy: 'Política de Privacidade',
       contact: 'Contato',
+    },
+    dashboard: {
+      form: {
+        title: 'Traduzir',
+        description:
+          'Digite uma palavra/termo em inglês (20 caracteres no máximo)',
+        englishLabel: 'Inglês',
+        portugueseLabel: 'Português',
+        translateButton: 'Gerar Tradução',
+        translateButtonLoading: 'Gerando Tradução...',
+        translationsLimitCounter: 'Traduções hoje:',
+        alreadyExists: 'Tradução já existe em seu histórico.',
+        generatedSuccessfully: 'Tradução gerada com sucesso!',
+        contactSupportDescription: 'Avise o suporte para mais informações.',
+        contactSupportLabel: 'Avisar suporte',
+      },
+      latest: {
+        title: 'Última Tradução',
+        description: 'Veja sua tradução mais recente com exemplos',
+        exampleUsage: 'Exemplos de uso',
+        noTranslationsYet:
+          'Nenhuma tradução ainda. Digite uma palavra para traduzir.',
+      },
+      history: {
+        title: 'Histórico de Traduções',
+        inputLabel: 'Buscar traduções...',
+        noTranslationsFound: 'Nenhuma tradução encontrada.',
+      },
     },
   },
   en: {
@@ -55,8 +83,36 @@ export const languageContexts = {
       privacyPolicy: 'Privacy Policy',
       contact: 'Contact',
     },
+    dashboard: {
+      form: {
+        title: 'Translate',
+        description: 'Type an English word/term (20 characters max)',
+        englishLabel: 'English',
+        portugueseLabel: 'Portuguese',
+        translateButton: 'Generate Translation',
+        translateButtonLoading: 'Generating Translation...',
+        translationsLimitCounter: 'Translations today:',
+        alreadyExists: 'Translation already exists in your history.',
+        generatedSuccessfully: 'Translation generated successfully!',
+        contactSupportDescription: 'Notify support for more information.',
+        contactSupportLabel: 'Notify support',
+      },
+      latest: {
+        title: 'Latest Translation',
+        description: 'View your most recent translation with examples',
+        exampleUsage: 'Example usage',
+        noTranslationsYet: 'No translations yet. Enter a word to translate.',
+      },
+      history: {
+        title: 'Translation History',
+        inputLabel: 'Search translations...',
+        noTranslationsFound: 'No translations found.',
+      },
+    },
   },
 };
+
+export type AppLanguageContext = (typeof languageContexts)['en'];
 
 export function getLanguageContext(language: AvailableLanguages) {
   return languageContexts[language] ?? languageContexts['en'];
