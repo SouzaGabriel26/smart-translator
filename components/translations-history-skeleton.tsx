@@ -3,7 +3,7 @@ import { Skeleton } from './ui/skeleton';
 
 export async function TranslationsHistorySkeleton() {
   return (
-    <div className="space-y-4 pb-4 md:pb-0 border rounded-md p-4 w-full md:h-[750px] flex flex-col">
+    <div className="space-y-4 p-4 pb-0 border rounded-md w-full md:h-[750px] flex flex-col">
       <h3 className="mb-3 text-xl font-medium">Translation History</h3>
 
       <form>
@@ -17,7 +17,7 @@ export async function TranslationsHistorySkeleton() {
         />
       </form>
 
-      <div className="overflow-y-auto h-full p-4 bg-background">
+      <div className="overflow-y-auto h-full bg-background">
         <TranslationSkeletonCard />
         <TranslationSkeletonCard />
         <TranslationSkeletonCard />
