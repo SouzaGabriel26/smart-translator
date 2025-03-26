@@ -4,8 +4,8 @@ import { GenerateTranslationForm } from '@/components/generate-translation-form'
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { prismaClient } from '@/lib/prisma-client';
 import { HistoryIcon } from 'lucide-react';
-import { ToggleLanguage } from './_components/toggle-language';
 import { Suspense } from 'react';
+import { ToggleLanguage } from './_components/toggle-language';
 import { TranslationsHistory } from './_components/translations-history';
 
 const date = new Date().toISOString().split('T')[0];
