@@ -43,6 +43,13 @@ const languageContexts = {
         contactSupportDescription: 'Avise o suporte para mais informações.',
         contactSupportLabel: 'Avisar suporte',
       },
+      latest: {
+        title: 'Última Tradução',
+        description: 'Veja sua tradução mais recente com exemplos',
+        exampleUsage: 'Exemplos de uso',
+        noTranslationsYet:
+          'Nenhuma tradução ainda. Digite uma palavra para traduzir.',
+      },
     },
   },
   en: {
@@ -84,6 +91,12 @@ const languageContexts = {
         generatedSuccessfully: 'Translation generated successfully!',
         contactSupportDescription: 'Notify support for more information.',
         contactSupportLabel: 'Notify support',
+      },
+      latest: {
+        title: 'Latest Translation',
+        description: 'View your most recent translation with examples',
+        exampleUsage: 'Example usage',
+        noTranslationsYet: 'No translations yet. Enter a word to translate.',
       },
     },
   },
