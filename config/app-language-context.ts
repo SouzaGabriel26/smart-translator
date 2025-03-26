@@ -5,6 +5,11 @@ const languageContexts = {
     title: 'Tradutor Inteligente',
     signInLabel: 'Entrar',
     signUpLabel: 'Registrar',
+    userOptions: {
+      hello: 'Olá',
+      signOut: 'Sair',
+      profile: 'Perfil',
+    },
     heroSection: {
       title: 'Tradutor Inteligente com IA',
       description:
@@ -27,6 +32,13 @@ const languageContexts = {
       serviceTerms: 'Termos de Serviço',
       privacyPolicy: 'Política de Privacidade',
       contact: 'Contato',
+    },
+    auth: {
+      signInDescription: 'Digite seu e-mail abaixo para entrar na sua conta',
+      doNotHaveAccount: 'Não tem uma conta?',
+      signedInSuccessfully: 'Logado com sucesso!',
+      signUpDescription: 'Digite seu e-mail abaixo para registrar sua conta',
+      alreadyHaveAccount: 'Já tem uma conta?',
     },
     dashboard: {
       form: {
@@ -61,6 +73,11 @@ const languageContexts = {
     title: 'Smart Translator',
     signInLabel: 'Sign In',
     signUpLabel: 'Sign Up',
+    userOptions: {
+      hello: 'Hello',
+      signOut: 'Sign Out',
+      profile: 'Profile',
+    },
     heroSection: {
       title: 'AI-Powered Smart Translator',
       description:
@@ -82,6 +99,13 @@ const languageContexts = {
       serviceTerms: 'Terms of Service',
       privacyPolicy: 'Privacy Policy',
       contact: 'Contact',
+    },
+    auth: {
+      signInDescription: 'Enter your email below to login to your account',
+      doNotHaveAccount: "Don't have an account?",
+      signedInSuccessfully: 'Signed in successfully!',
+      signUpDescription: 'Enter your email below to register to your account',
+      alreadyHaveAccount: 'Already have an account?',
     },
     dashboard: {
       form: {
