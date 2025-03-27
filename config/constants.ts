@@ -44,8 +44,7 @@ const portugueseFeatures = [
 export type Plan = {
   type: 'free' | 'paid';
   title: string;
-  price: number;
-  currency: 'usd' | 'brl';
+  usdPrice: number;
   status: { available: boolean; reason?: string };
   features: { title: string; available: boolean }[];
 };
@@ -54,8 +53,7 @@ const englishPlans: Plan[] = [
   {
     type: 'free',
     title: 'Free',
-    price: 0,
-    currency: 'usd',
+    usdPrice: 0,
     status: { available: true },
     features: [
       {
@@ -83,8 +81,7 @@ const englishPlans: Plan[] = [
   {
     type: 'paid',
     title: 'Premium',
-    price: 9.99,
-    currency: 'usd',
+    usdPrice: 9.99,
     status: { available: false, reason: 'Coming Soon' },
     features: [
       {
@@ -115,8 +112,7 @@ const portuguesePlans: Plan[] = [
   {
     type: 'free',
     title: 'Free',
-    price: 0,
-    currency: 'brl',
+    usdPrice: 0,
     status: { available: true },
     features: [
       {
@@ -144,8 +140,7 @@ const portuguesePlans: Plan[] = [
   {
     type: 'paid',
     title: 'Premium',
-    price: 57.0,
-    currency: 'brl',
+    usdPrice: 9.99,
     status: { available: false, reason: 'Em Breve' },
     features: [
       {

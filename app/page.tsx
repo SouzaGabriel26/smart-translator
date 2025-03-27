@@ -101,7 +101,7 @@ export default async function Page() {
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-10">
             {projectConstants.plans[language].map((plan) => (
-              <PlanCard key={plan.title} plan={plan} />
+              <PlanCard key={plan.title} plan={plan} language={language} />
             ))}
           </div>
         </section>

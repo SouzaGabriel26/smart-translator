@@ -10,12 +10,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import type { AppLanguageContext } from '@/config/app-language-context';
+import type { AvailableLanguages } from '@/config/constants';
 import { cn } from '@/lib/utils';
 import { signUpSchema } from '@/types/sign-up';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { type ComponentPropsWithRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
@@ -30,10 +32,17 @@ import {
 
 type FormData = z.infer<typeof signUpSchema>;
 
+type SigUpFormProps = ComponentPropsWithRef<'div'> & {
+  appLanguageContext: AppLanguageContext;
+  language: AvailableLanguages;
+};
+
 export function SignUpForm({
+  appLanguageContext,
+  language,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+}: SigUpFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const route = useRouter();
 
@@ -65,9 +74,11 @@ export function SignUpForm({
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Sign-Up</CardTitle>
+          <CardTitle className="text-2xl">
+            {appLanguageContext.signUpLabel}
+          </CardTitle>
           <CardDescription>
-            Enter your email below to register to your account
+            {appLanguageContext.auth.signUpDescription}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -79,7 +90,9 @@ export function SignUpForm({
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Username</FormLabel>
+                      <FormLabel>
+                        {language === 'en' ? 'Username' : 'Nome de usuário'}
+                      </FormLabel>
                       <FormControl>
                         <Input required placeholder="Jonh Doe" {...field} />
                       </FormControl>
@@ -109,7 +122,9 @@ export function SignUpForm({
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>
+                        {language === 'en' ? 'Password' : 'Senha'}
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -123,16 +138,16 @@ export function SignUpForm({
                   )}
                 />
                 <Button disabled={isLoading} type="submit" className="w-full">
-                  Register
+                  {appLanguageContext.signUpLabel}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{' '}
+                {appLanguageContext.auth.alreadyHaveAccount}{' '}
                 <Link
                   href="/auth/sign-in"
                   className="underline underline-offset-4"
                 >
-                  Sign in
+                  {appLanguageContext.signInLabel}
                 </Link>
               </div>
             </form>

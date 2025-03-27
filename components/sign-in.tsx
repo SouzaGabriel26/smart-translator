@@ -10,12 +10,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import type { AppLanguageContext } from '@/config/app-language-context';
+import type { AvailableLanguages } from '@/config/constants';
 import { cn } from '@/lib/utils';
 import { signInSchema } from '@/types/sign-in';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { type ComponentPropsWithRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
@@ -30,10 +32,17 @@ import {
 
 type FormData = z.infer<typeof signInSchema>;
 
+type SignInFormProps = ComponentPropsWithRef<'div'> & {
+  appLanguageContext: AppLanguageContext;
+  language: AvailableLanguages;
+};
+
 export function SignInForm({
+  appLanguageContext,
+  language,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<'div'>) {
+}: SignInFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const route = useRouter();
 
@@ -55,7 +64,7 @@ export function SignInForm({
       return;
     }
 
-    toast.success('User logged in successfully');
+    toast.success(appLanguageContext.auth.signedInSuccessfully);
     setIsLoading(false);
     route.push('/dashboard');
   }
@@ -64,9 +73,11 @@ export function SignInForm({
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Sign-In</CardTitle>
+          <CardTitle className="text-2xl">
+            {appLanguageContext.signInLabel}
+          </CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            {appLanguageContext.auth.signInDescription}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -97,7 +108,9 @@ export function SignInForm({
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>
+                        {language === 'en' ? 'Password' : 'Senha'}
+                      </FormLabel>
                       <FormControl>
                         <Input
                           type="password"
@@ -111,16 +124,16 @@ export function SignInForm({
                   )}
                 />
                 <Button disabled={isLoading} type="submit" className="w-full">
-                  Login
+                  {appLanguageContext.signInLabel}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{' '}
+                {appLanguageContext.auth.doNotHaveAccount}{' '}
                 <Link
                   href="/auth/sign-up"
                   className="underline underline-offset-4"
                 >
-                  Sign up
+                  {appLanguageContext.signUpLabel}
                 </Link>
               </div>
             </form>

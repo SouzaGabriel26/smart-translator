@@ -3,7 +3,7 @@
 import { setAppLanguageAction } from '@/app/actions';
 import { cn } from '@/lib/utils';
 import { LanguagesIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
@@ -13,12 +13,25 @@ type ChangeLanguageButtonProps = {
 
 export function ChangeLanguageButton({ className }: ChangeLanguageButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isPulsing, setIsPulsing] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsPulsing(false);
+    }, 4000);
+
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <Button
         title="Change Language"
-        className={cn('fixed bottom-2 right-2 size-10 rounded-full', className)}
+        className={cn(
+          'fixed bottom-2 right-2 size-10 rounded-full backdrop-blur ease-in-out',
+          isPulsing && 'animate-pulse',
+          className,
+        )}
         asChild
       >
         <PopoverTrigger>
