@@ -7,8 +7,9 @@ import type { AvailableLanguages } from '@/config/constants';
 import type { TranslationPhrases, Translations } from '@prisma/client';
 import { HistoryIcon, Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
+import { DeleteConfirmationModal } from './delete-confirmation-modal';
 
-type TranslationsWithPhrases = Array<
+export type TranslationsWithPhrases = Array<
   Translations & {
     phrases: Array<TranslationPhrases>;
   }
@@ -65,7 +66,12 @@ export function TranslationsHistoryContent({
           </p>
         ) : (
           translations.map((translation) => (
-            <div key={translation.id} className="border-b rounded p-4">
+            <div key={translation.id} className="border-b rounded p-4 relative">
+              <DeleteConfirmationModal
+                translationToDelete={translation}
+                language={language}
+              />
+
               <div>
                 <div className="flex font-medium items-center gap-2 text-md">
                   <div className="space-x-1">
