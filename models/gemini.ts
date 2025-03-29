@@ -140,7 +140,7 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
   phrase_3_translated: string
 }
 
-But, in case of the word is not a valid ${languageFrom} word, return an empty object.
+But, in case of the word is not a valid ${languageFrom} word, ignore the command to **ONLY in valid JSON format** and return an empty object.
   `;
 }
 
