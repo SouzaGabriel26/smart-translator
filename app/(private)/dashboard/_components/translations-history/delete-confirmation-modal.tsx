@@ -4,13 +4,15 @@ import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
 import type { AvailableLanguages } from '@/config/constants';
-import { TrashIcon } from 'lucide-react';
+import { ArrowRight, TrashIcon } from 'lucide-react';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import { discardTranslationAction } from '../../actions';
 import type { TranslationsWithPhrases } from './content';
 
 const englishDescription =
@@ -28,17 +30,32 @@ export function DeleteConfirmationModal({
   language,
   translationToDelete,
 }: DeleteConfirmationModalProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const buttonTitle = language === 'en' ? 'Delete' : 'Deletar';
   const dialogTitle =
     language === 'en' ? 'Delete translation' : 'Deletar tradução';
+  const cancelButtonTitle = language === 'en' ? 'Cancel' : 'Cancelar';
 
   const dialogDescription =
     language === 'en' ? englishDescription : portugueseDescription;
 
   const translationLabel = language === 'en' ? 'Translation' : 'Tradução';
+  const languageLabel = language === 'en' ? 'Language' : 'Idioma';
+
+  async function handleDiscard() {
+    const message =
+      language === 'en'
+        ? 'Translation deleted successfully'
+        : 'Tradução deletada com sucesso';
+
+    await discardTranslationAction(translationToDelete.id);
+    toast.success(message);
+    setIsOpen(false);
+  }
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button
           variant="destructive"
@@ -54,20 +71,52 @@ export function DeleteConfirmationModal({
           <DialogTitle>{dialogTitle}</DialogTitle>
         </DialogHeader>
 
-        <DialogDescription>
-          <div>
-            <p className="mb-4">{dialogDescription}</p>
-            <div className="text-sm font-semibold flex flex-col">
-              <span className="text-sm text-muted-foreground">
-                {translationLabel}
-              </span>
-              <p>
-                {translationToDelete.targetWord} -{' '}
-                {translationToDelete.translatedWord}
-              </p>
+        <div>
+          <p className="mb-4">{dialogDescription}</p>
+          <div className="text-sm font-semibold flex flex-col">
+            <div className="flex gap-4">
+              <div>
+                <span className="text-sm text-muted-foreground">
+                  {languageLabel}
+                </span>
+                <div className="flex gap-2 items-center border-r-2 pr-4">
+                  <span>{translationToDelete.languageFrom}</span>
+                  <span className="text-muted-foreground">
+                    <ArrowRight className="size-4" />
+                  </span>
+                  <span>{translationToDelete.languageTo}</span>
+                </div>
+              </div>
+
+              <div>
+                <span className="text-sm text-muted-foreground">
+                  {translationLabel}
+                </span>
+                <div className="flex gap-2 items-center">
+                  <span>{translationToDelete.targetWord}</span>
+                  <span className="text-muted-foreground">
+                    <ArrowRight className="size-4" />
+                  </span>
+                  <span>{translationToDelete.translatedWord}</span>
+                </div>
+              </div>
             </div>
           </div>
-        </DialogDescription>
+
+          <fieldset className="flex gap-2 justify-end">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            >
+              {cancelButtonTitle}
+            </Button>
+            <Button variant="destructive" onClick={() => handleDiscard()}>
+              {buttonTitle}
+            </Button>
+          </fieldset>
+        </div>
       </DialogContent>
     </Dialog>
   );
