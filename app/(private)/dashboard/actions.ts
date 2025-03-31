@@ -186,7 +186,7 @@ export async function discardTranslationAction(translationId: string) {
       userId: user.id,
     },
     data: {
-      discarted: true,
+      discarded: true,
     },
   });
 

@@ -23,7 +23,7 @@ export default async function Page() {
   const latestTranslation = await prismaClient.translations.findFirst({
     where: {
       userId: user.id,
-      discarted: false,
+      discarded: false,
     },
     include: {
       phrases: true,

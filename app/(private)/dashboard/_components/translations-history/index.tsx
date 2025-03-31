@@ -12,7 +12,7 @@ export async function TranslationsHistory() {
   const translations = await prismaClient.translations.findMany({
     where: {
       userId: user.id,
-      discarted: false,
+      discarded: false,
     },
     include: {
       phrases: true,
