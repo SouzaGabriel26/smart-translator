@@ -176,3 +176,19 @@ export async function findTranslationsAction(searchTerm: string) {
 
   return translations;
 }
+
+export async function discardTranslationAction(translationId: string) {
+  const user = await checkUserAction();
+
+  await prismaClient.translations.update({
+    where: {
+      id: translationId,
+      userId: user.id,
+    },
+    data: {
+      discarded: true,
+    },
+  });
+
+  revalidatePath('/dashboard');
+}

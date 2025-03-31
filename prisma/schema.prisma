@@ -32,6 +32,7 @@ model Translations {
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
   userId         String   @map("user_id") @db.Uuid
+  discarded      Boolean  @default(false)
 
   user    Users                @relation(fields: [userId], references: [id])
   phrases TranslationPhrases[]
