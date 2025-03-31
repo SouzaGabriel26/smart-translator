@@ -23,6 +23,7 @@ export default async function Page() {
   const latestTranslation = await prismaClient.translations.findFirst({
     where: {
       userId: user.id,
+      discarted: false,
     },
     include: {
       phrases: true,
@@ -65,7 +66,7 @@ export default async function Page() {
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
         <div className="w-full">
           <div className="rounded-t-md flex flex-col border p-6">
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center flex-col sm:flex-row">
               <h2 className="text-xl font-bold">
                 {dashboardLanguage.form.title}
               </h2>
