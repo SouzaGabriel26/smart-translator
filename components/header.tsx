@@ -86,7 +86,7 @@ export async function Header({ user }: HeaderProps) {
               </span>
 
               <Button asChild variant="ghost">
-                <Link href="/profile">
+                <Link href="/dashboard/profile">
                   <User2Icon />
                   {appLanguageContext.userOptions.profile}
                 </Link>
