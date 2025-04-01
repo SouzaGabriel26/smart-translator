@@ -66,7 +66,10 @@ export function TranslationsHistoryContent({
           </p>
         ) : (
           translations.map((translation) => (
-            <div key={translation.id} className="border-b rounded p-4 relative">
+            <div
+              key={translation.id}
+              className="border-b rounded py-4 px-2 relative"
+            >
               <DeleteConfirmationModal
                 translationToDelete={translation}
                 language={language}
