@@ -48,13 +48,22 @@ export default async function Page() {
             <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted/50 px-4 py-2 md:pb-5">
               <video
                 className="w-full h-full rounded-lg hidden md:block"
-                controls
+                autoPlay
+                loop
+                muted
+                playsInline
               >
                 <source src="/demo_desktop.webm" type="video/webm" />
                 Your browser does not support the video tag.
               </video>
 
-              <video className="w-full h-full rounded-lg md:hidden" controls>
+              <video
+                className="w-full h-full rounded-lg md:hidden"
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
                 <source src="/demo_mobile.webm" type="video/webm" />
                 Your browser does not support the video tag.
               </video>

@@ -68,6 +68,14 @@ const languageContexts = {
         noTranslationsFound: 'Nenhuma tradução encontrada.',
       },
     },
+    profile: {
+      plan: 'Plano',
+      createdAt: 'Criado em',
+      updatedAt: 'Atualizado em',
+      translationsCount: 'Total de Traduções',
+      translationsDirection: 'Traduções por Direção',
+      upgradePlan: 'Atualizar Plano',
+    },
   },
   en: {
     title: 'Smart Translator',
@@ -132,6 +140,14 @@ const languageContexts = {
         inputLabel: 'Search translations...',
         noTranslationsFound: 'No translations found.',
       },
+    },
+    profile: {
+      plan: 'Plan',
+      createdAt: 'Created At',
+      updatedAt: 'Updated At',
+      translationsCount: 'Total Translations',
+      translationsDirection: 'Translations by Direction',
+      upgradePlan: 'Upgrade Plan',
     },
   },
 };

@@ -59,20 +59,22 @@ export function DeleteConfirmationModal({
       <DialogTrigger asChild>
         <Button
           variant="destructive"
-          className="absolute right-2 top-2"
+          className="absolute right-0 top-2 size-6 md:size-8"
           title={buttonTitle}
+          size="sm"
         >
           <TrashIcon className="size-4" />
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="flex flex-col gap-4">
         <DialogHeader>
           <DialogTitle>{dialogTitle}</DialogTitle>
         </DialogHeader>
 
-        <div>
+        <div className="flex flex-col gap-4">
           <p className="mb-4">{dialogDescription}</p>
+
           <div className="text-sm font-semibold flex flex-col">
             <div className="flex gap-4">
               <div>
