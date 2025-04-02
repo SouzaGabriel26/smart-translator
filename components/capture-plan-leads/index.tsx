@@ -1,7 +1,6 @@
 import { getAppLanguageAction } from '@/app/actions';
 import { getLanguageContext } from '@/config/app-language-context';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+import { CaptureLeadsForm } from './capture-leads-form';
 
 export async function CapturePlanLeads() {
   const language = await getAppLanguageAction();
@@ -14,14 +13,7 @@ export async function CapturePlanLeads() {
         {plansSection.getPremiumAccessDescription}
       </p>
 
-      <form className="space-y-4 flex flex-col">
-        <Input
-          name="email"
-          type="email"
-          placeholder={plansSection.enterEmailAddress}
-        />
-        <Button className="self-end">{plansSection.joinWaitlist}</Button>
-      </form>
+      <CaptureLeadsForm plansSection={plansSection} />
     </div>
   );
 }

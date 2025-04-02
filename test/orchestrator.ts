@@ -16,13 +16,13 @@ async function createDefaultPlans() {
         {
           name: 'Free',
           price: 0,
-          translationsLimit: 25,
+          translationsLimit: 15,
         },
         {
           name: 'Premium',
-          price: 9.99,
+          price: 6.99,
           active: false,
-          translationsLimit: 9999,
+          translationsLimit: 250,
         },
       ],
     }),
