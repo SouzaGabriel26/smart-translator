@@ -26,6 +26,11 @@ const languageContexts = {
       title: 'Escolha seu Plano',
       description:
         'Selecione o plano que se encaixa nas suas necessidades de tradução',
+      getPremiumAccess: 'Obtenha Acesso Premium',
+      getPremiumAccessDescription:
+        'Seja o primeiro a saber quando nosso plano Premium estiver disponível.',
+      joinWaitlist: 'Entrar na lista de espera Premium',
+      enterEmailAddress: 'Digite seu endereço de e-mail',
     },
     footer: {
       reserved: 'Tradutor Inteligente. Todos os direitos reservados.',
@@ -101,6 +106,11 @@ const languageContexts = {
     plansSection: {
       title: 'Choose your Plan',
       description: 'Select the plan that fits your translation needs',
+      getPremiumAccess: 'Get Premium Access',
+      getPremiumAccessDescription:
+        'Be the first to know when our Premium plan becomes available.',
+      joinWaitlist: 'Join Premium Waitlist',
+      enterEmailAddress: 'Enter your email address',
     },
     footer: {
       reserved: 'Smart Translator. All rights reserved.',
