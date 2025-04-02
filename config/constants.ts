@@ -57,7 +57,7 @@ const englishPlans: Plan[] = [
     status: { available: true },
     features: [
       {
-        title: 'Up to 25 translations per day',
+        title: 'Up to 15 translations per day',
         available: true,
       },
       {
@@ -81,11 +81,11 @@ const englishPlans: Plan[] = [
   {
     type: 'paid',
     title: 'Premium',
-    usdPrice: 9.99,
+    usdPrice: 6.99,
     status: { available: false, reason: 'Coming Soon' },
     features: [
       {
-        title: 'Unlimited translations per day',
+        title: 'Up to 250 translations per day',
         available: true,
       },
       {
@@ -116,7 +116,7 @@ const portuguesePlans: Plan[] = [
     status: { available: true },
     features: [
       {
-        title: 'Até 25 traduções por dia',
+        title: 'Até 15 traduções por dia',
         available: true,
       },
       {
@@ -140,11 +140,11 @@ const portuguesePlans: Plan[] = [
   {
     type: 'paid',
     title: 'Premium',
-    usdPrice: 9.99,
+    usdPrice: 6.99,
     status: { available: false, reason: 'Em Breve' },
     features: [
       {
-        title: 'Traduções ilimitadas por dia',
+        title: 'Até 250 traduções por dia',
         available: true,
       },
       {
