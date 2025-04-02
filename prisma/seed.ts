@@ -32,6 +32,16 @@ async function main() {
     },
   });
 
+  await prismaClient.users.create({
+    data: {
+      email: 'admin@email.com',
+      name: 'Admin',
+      password: hashedPassword,
+      planId: freePlan?.id!,
+      role: 'ADMIN',
+    },
+  });
+
   await prismaClient.$transaction([
     prismaClient.translations.create({
       data: {

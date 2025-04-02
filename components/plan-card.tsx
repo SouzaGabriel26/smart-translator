@@ -2,6 +2,7 @@ import type { AvailableLanguages, Plan } from '@/config/constants';
 import { cn } from '@/lib/utils';
 import { Check, X } from 'lucide-react';
 import Link from 'next/link';
+import { CapturePlanLeads } from './capture-plan-leads';
 import { Button } from './ui/button';
 import { Card, CardHeader, CardTitle } from './ui/card';
 
@@ -14,8 +15,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
   return (
     <Card
       className={cn(
-        'max-w-[420px] min-h-[450px] w-full p-6 flex flex-col relative space-y-4',
-        !plan.status.available && 'opacity-60',
+        'max-w-[420px] h-[582px] w-full p-6 flex flex-col relative space-y-4 hover:shadow-xl transition-shadow',
       )}
     >
       <CardHeader className="pt-0">
@@ -30,7 +30,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
         </span>
       </CardHeader>
 
-      <div className="flex flex-col justify-between flex-grow">
+      <div className="flex flex-col justify-between flex-grow gap-6">
         <ul className="space-y-2 mt-4">
           {plan.features.map((feature) => (
             <li
@@ -51,15 +51,19 @@ export function PlanCard({ plan, language }: PlanCardProps) {
           ))}
         </ul>
 
-        <Button
-          className="w-full"
-          disabled={!plan.status.available}
-          asChild={plan.status.available}
-        >
-          <Link href="/auth/sign-up" aria-disabled={!plan.status.available}>
-            {language === 'pt-br' ? 'Começar' : 'Get Started'}
-          </Link>
-        </Button>
+        {plan.status.available ? (
+          <Button
+            className="w-full"
+            disabled={!plan.status.available}
+            asChild={plan.status.available}
+          >
+            <Link href="/auth/sign-up" aria-disabled={!plan.status.available}>
+              {language === 'pt-br' ? 'Começar' : 'Get Started'}
+            </Link>
+          </Button>
+        ) : (
+          <CapturePlanLeads />
+        )}
       </div>
 
       {!plan.status.available && plan.status.reason && (

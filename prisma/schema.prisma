@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Roles {
+  USER
+  ADMIN
+}
+
 model Users {
   id        String   @id @default(uuid()) @db.Uuid
   name      String
@@ -15,6 +20,7 @@ model Users {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   planId    String   @db.Uuid
+  role      Roles    @default(USER)
 
   plan Plans @relation(fields: [planId], references: [id], onDelete: Cascade)
 
@@ -60,7 +66,18 @@ model Plans {
   translationsLimit Int     @map("translations_limit")
   active            Boolean @default(true)
 
-  user Users[]
+  user          Users[]
+  PlansWaitList PlansWaitList[]
 
   @@map("plans")
+}
+
+model PlansWaitList {
+  email  String @unique
+  planId String @map("plan_id") @db.Uuid
+
+  plan Plans @relation(fields: [planId], references: [id], onDelete: Cascade)
+
+  @@unique([email, planId])
+  @@map("plans_wait_list")
 }

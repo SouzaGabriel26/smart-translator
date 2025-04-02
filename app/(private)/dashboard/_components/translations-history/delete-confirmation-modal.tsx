@@ -59,7 +59,7 @@ export function DeleteConfirmationModal({
       <DialogTrigger asChild>
         <Button
           variant="destructive"
-          className="absolute right-0 top-2 size-6 md:size-8"
+          className="absolute right-0 md:right-2 top-2 size-6 md:size-8"
           title={buttonTitle}
           size="sm"
         >
