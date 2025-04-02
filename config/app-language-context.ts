@@ -31,6 +31,10 @@ const languageContexts = {
         'Seja o primeiro a saber quando nosso plano Premium estiver disponível.',
       joinWaitlist: 'Entrar na lista de espera Premium',
       enterEmailAddress: 'Digite seu endereço de e-mail',
+      invalidEmail: 'Endereço de e-mail inválido.',
+      alreadyOnWaitlist: 'Você já está na lista de espera.',
+      success: 'Sucesso! Você agora está na lista de espera.',
+      planDoesntExists: 'Plano não existe.',
     },
     footer: {
       reserved: 'Tradutor Inteligente. Todos os direitos reservados.',
@@ -111,6 +115,10 @@ const languageContexts = {
         'Be the first to know when our Premium plan becomes available.',
       joinWaitlist: 'Join Premium Waitlist',
       enterEmailAddress: 'Enter your email address',
+      invalidEmail: 'Invalid email address.',
+      alreadyOnWaitlist: 'You are already on the waitlist.',
+      success: 'Success! You are now on the waitlist.',
+      planDoesntExists: "Plan doesn't exist.",
     },
     footer: {
       reserved: 'Smart Translator. All rights reserved.',
