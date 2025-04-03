@@ -6,6 +6,7 @@ import type { Users as User } from '@prisma/client';
 import { Globe, LogOutIcon, User2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { MenuIcon } from './menu-icon';
+import { ToggleTheme } from './toggle-theme';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 
@@ -20,15 +21,16 @@ export async function Header({ user }: HeaderProps) {
   const defaultPath = user ? '/dashboard' : '/';
 
   return (
-    <header className="sticky top-0 z-50 text-black border-b backdrop-blur h-16 bg-background/60 flex justify-between items-center px-4">
+    <header className="sticky top-0 z-50 border-b backdrop-blur h-16 bg-background/60 flex justify-between items-center px-4">
       <Link href={defaultPath} className="flex items-center gap-2">
         <Globe className="size-6 text-primary" />
-        <h1 className="text-lg md:text-2xl font-bold">
-          {appLanguageContext.title}
-        </h1>
+        <h1 className="md:text-2xl font-bold">{appLanguageContext.title}</h1>
       </Link>
 
-      {user ? <UserOptions /> : <AuthOptions />}
+      <div className="flex items-center gap-2">
+        {user ? <UserOptions /> : <AuthOptions />}
+        <ToggleTheme />
+      </div>
     </header>
   );
 
@@ -39,7 +41,7 @@ export async function Header({ user }: HeaderProps) {
           <Link href="/auth/sign-in">{appLanguageContext.signInLabel}</Link>
         </Button>
 
-        <Button asChild>
+        <Button asChild className="hidden md:block text-white">
           <Link href="/auth/sign-up">{appLanguageContext.signUpLabel}</Link>
         </Button>
       </div>
@@ -75,7 +77,7 @@ export async function Header({ user }: HeaderProps) {
 
         <Popover>
           <PopoverTrigger asChild>
-            <Button>
+            <Button className="text-white">
               <MenuIcon />
             </Button>
           </PopoverTrigger>
