@@ -44,7 +44,7 @@ export function CaptureLeadsForm({ plansSection }: CaptureLeadsFormProps) {
         placeholder={plansSection.enterEmailAddress}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Button disabled={isLoading} className="self-end">
+      <Button disabled={isLoading} className="self-end text-white">
         {plansSection.joinWaitlist}
       </Button>
     </form>

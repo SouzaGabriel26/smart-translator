@@ -28,7 +28,7 @@ export function ChangeLanguageButton({ className }: ChangeLanguageButtonProps) {
       <Button
         title="Change Language"
         className={cn(
-          'fixed bottom-2 right-2 size-10 rounded-full backdrop-blur ease-in-out',
+          'fixed bottom-2 text-white right-2 size-10 rounded-full backdrop-blur ease-in-out',
           isPulsing && 'animate-pulse',
           className,
         )}

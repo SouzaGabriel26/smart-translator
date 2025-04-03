@@ -38,7 +38,7 @@ export function TranslationsHistoryContent({
   }
 
   return (
-    <div className="space-y-4 pb-4 md:pb-0 border rounded-md p-4 w-full md:h-[750px] flex flex-col">
+    <div className="space-y-4 pb-4 md:pb-0 border dark:border-muted rounded-md p-4 w-full md:h-[750px] flex flex-col">
       <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
         <HistoryIcon className="size-6" />
         {historyLanguage.title} ({translations.length})
@@ -68,7 +68,7 @@ export function TranslationsHistoryContent({
           translations.map((translation) => (
             <div
               key={translation.id}
-              className="border-b rounded py-4 px-2 relative"
+              className="border-b dark:border-muted rounded py-4 px-2 relative"
             >
               <DeleteConfirmationModal
                 translationToDelete={translation}

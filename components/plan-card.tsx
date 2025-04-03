@@ -53,7 +53,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
 
         {plan.status.available ? (
           <Button
-            className="w-full"
+            className="w-full text-white"
             disabled={!plan.status.available}
             asChild={plan.status.available}
           >

@@ -61,11 +61,11 @@ export default async function Page() {
   return (
     <main
       key={Date.now()}
-      className="flex flex-col md:flex-row px-6 py-12 gap-4"
+      className="flex flex-col md:flex-row px-6 py-12 gap-4 bg-background"
     >
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
         <div className="w-full">
-          <div className="rounded-t-md flex flex-col border p-6">
+          <div className="rounded-t-md flex flex-col border p-6 dark:border-muted">
             <div className="flex justify-between items-center flex-col sm:flex-row">
               <h2 className="text-xl font-bold">
                 {dashboardLanguage.form.title}
@@ -86,7 +86,7 @@ export default async function Page() {
             />
           </div>
 
-          <div className="flex gap-2 px-6 py-3 rounded-b-md border-x border-b bg-muted text-muted-foreground">
+          <div className="flex gap-2 px-6 py-3 rounded-b-md border-x border-b dark:border-muted bg-muted text-muted-foreground">
             <span className="flex gap-2 items-center text-sm">
               <HistoryIcon className="size-4" />
               {dashboardLanguage.form.translationsLimitCounter}{' '}
@@ -95,7 +95,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <div className="rounded-md w-full border p-4">
+        <div className="rounded-md w-full border p-4 dark:border-muted">
           <h2 className="text-xl font-bold">
             {dashboardLanguage.latest.title}
           </h2>
@@ -145,7 +145,7 @@ export default async function Page() {
                     {latestTranslation.phrases.map((phrase) => (
                       <li
                         key={phrase.id}
-                        className="flex flex-col border rounded-md p-4"
+                        className="flex flex-col border dark:border-muted rounded-md p-4"
                       >
                         <span className="font-bold">{phrase.content}</span>
                         <span className="text-sm text-muted-foreground">

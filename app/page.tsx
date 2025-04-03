@@ -31,7 +31,7 @@ export default async function Page() {
             </p>
 
             <div className="flex gap-4 flex-col sm:flex-row">
-              <Button size="lg" asChild>
+              <Button size="lg" asChild className="text-white">
                 <Link href="/auth/sign-up">
                   {appLanguageContext.heroSection.getStartedLabel}
                 </Link>
@@ -72,7 +72,7 @@ export default async function Page() {
         </section>
 
         {/* Features */}
-        <section className="bg-muted/30 py-12 md:py-32 px-10">
+        <section className="bg-muted/40 dark:bg-muted py-12 md:py-32 px-10">
           <div className="text-center space-y-4">
             <h2 className="w-full text-4xl md:text-6xl font-bold">
               {appLanguageContext.featuresSection.title}
@@ -97,7 +97,10 @@ export default async function Page() {
         </section>
 
         {/* Plans */}
-        <section id="plans" className="py-12 md:py-32 px-10 space-y-6">
+        <section
+          id="plans"
+          className="py-12 md:py-32 px-10 space-y-6 bg-background"
+        >
           <div className="text-center space-y-4">
             <h3 className="w-full text-4xl md:text-6xl font-bold">
               {appLanguageContext.plansSection.title}
@@ -116,7 +119,7 @@ export default async function Page() {
         </section>
       </main>
 
-      <footer className="border-t bg-muted/40 py-6 md:py-8 px-10 flex flex-col md:flex-row gap-4 items-center justify-between">
+      <footer className="border-t bg-muted/40 dark:bg-muted py-6 md:py-8 px-10 flex flex-col md:flex-row gap-4 items-center justify-between">
         <span className="flex gap-2 text-2xl items-center font-medium">
           <Globe />
           {appLanguageContext.title}

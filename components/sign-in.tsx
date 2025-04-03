@@ -123,7 +123,11 @@ export function SignInForm({
                     </FormItem>
                   )}
                 />
-                <Button disabled={isLoading} type="submit" className="w-full">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  className="w-full text-white"
+                >
                   {appLanguageContext.signInLabel}
                 </Button>
               </div>
