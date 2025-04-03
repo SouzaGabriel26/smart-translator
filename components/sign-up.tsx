@@ -137,7 +137,11 @@ export function SignUpForm({
                     </FormItem>
                   )}
                 />
-                <Button disabled={isLoading} type="submit" className="w-full">
+                <Button
+                  disabled={isLoading}
+                  type="submit"
+                  className="w-full text-white"
+                >
                   {appLanguageContext.signUpLabel}
                 </Button>
               </div>

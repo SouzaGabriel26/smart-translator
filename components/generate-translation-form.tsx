@@ -56,7 +56,10 @@ export function GenerateTranslationForm({
 
   return (
     <form action={action} className="space-y-4 w-full min-w-40">
-      <label htmlFor="word_to_translate" className="text-slate-600 text-sm">
+      <label
+        htmlFor="word_to_translate"
+        className="text-muted-foreground text-sm"
+      >
         {dashboardLanguage.form.description}
       </label>
       <Input
@@ -79,7 +82,7 @@ export function GenerateTranslationForm({
       <input type="hidden" name="language_from" value={languageFrom} />
       <input type="hidden" name="language_to" value={languageTo} />
 
-      <Button disabled={isPending || disabled} className="w-full">
+      <Button disabled={isPending || disabled} className="w-full text-white">
         <Sparkles className="size-4" />
 
         {isPending

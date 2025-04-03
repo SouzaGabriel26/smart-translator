@@ -76,31 +76,33 @@ export default async function Page() {
           </Avatar>
           <div>
             <CardTitle>{user?.name}</CardTitle>
-            <p className="text-sm text-gray-500">{user?.email}</p>
+            <p className="text-sm text-muted-foreground">{user?.email}</p>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex justify-between items-center">
             <div>
               <p className="text-sm font-medium">{profileLanguage.plan}</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-muted-foreground">
                 {userPlan?.name || 'Free'}
               </p>
             </div>
 
-            <Button>{profileLanguage.upgradePlan}</Button>
+            <Button className="text-white">
+              {profileLanguage.upgradePlan}
+            </Button>
           </div>
           <Separator />
           <div className="flex justify-between">
             <div>
               <p className="text-sm font-medium">{profileLanguage.createdAt}</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-muted-foreground">
                 {new Date(user?.createdAt).toLocaleDateString()}
               </p>
             </div>
             <div>
               <p className="text-sm font-medium">{profileLanguage.updatedAt}</p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-muted-foreground">
                 {new Date(user?.updatedAt).toLocaleDateString()}
               </p>
             </div>
@@ -111,7 +113,7 @@ export default async function Page() {
               <p className="text-sm font-medium">
                 {profileLanguage.translationsCount}
               </p>
-              <p className="text-lg font-semibold text-gray-900">
+              <p className="text-lg font-semibold text-muted-foreground">
                 {translationsCount}
               </p>
             </div>
@@ -127,7 +129,7 @@ export default async function Page() {
                 key={translation.directionLabel}
                 className="flex gap-2 items-center"
               >
-                <p className="text-md px-2 rounded bg-slate-100 capitalize font-semibold text-gray-900">
+                <p className="text-md px-2 rounded bg-slate-100 capitalize font-semibold text-muted-foreground">
                   {translation.directionLabel}:
                 </p>
                 {translation.count}
