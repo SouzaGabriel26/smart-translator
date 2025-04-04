@@ -2,11 +2,16 @@
 
 import { projectConstants } from '@/config/constants';
 import { prismaClient } from '@/lib/prisma-client';
+import type { Roles } from '@prisma/client';
 import { jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-export async function checkUserAction() {
+type CheckUserActionProps = {
+  role?: Roles | null;
+};
+
+export async function checkUserAction({ role }: CheckUserActionProps = {}) {
   const cookieStorage = await cookies();
   const token = cookieStorage.get(projectConstants.accessToken)?.value;
 
@@ -25,6 +30,10 @@ export async function checkUserAction() {
     });
 
     if (!user) return redirect('/auth/sign-in?action=logout');
+
+    if (role && user.role !== role) {
+      return redirect('/auth/sign-in?action=unauthorized');
+    }
 
     return user;
   } catch {
