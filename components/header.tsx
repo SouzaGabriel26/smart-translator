@@ -3,7 +3,7 @@ import { getAppLanguageAction } from '@/app/actions';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import type { Users as User } from '@prisma/client';
-import { Globe, LogOutIcon, User2Icon } from 'lucide-react';
+import { ChartLine, Globe, LogOutIcon, User2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { MenuIcon } from './menu-icon';
 import { ToggleTheme } from './toggle-theme';
@@ -93,6 +93,15 @@ export async function Header({ user }: HeaderProps) {
                   {appLanguageContext.userOptions.profile}
                 </Link>
               </Button>
+
+              {user.role === 'ADMIN' && (
+                <Button asChild variant="ghost">
+                  <Link href="/dashboard/leads">
+                    <ChartLine />
+                    {appLanguageContext.userOptions.leads}
+                  </Link>
+                </Button>
+              )}
 
               <form action={logout}>
                 <Button className="w-full" variant="destructive">

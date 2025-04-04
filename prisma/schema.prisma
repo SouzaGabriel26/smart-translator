@@ -73,8 +73,10 @@ model Plans {
 }
 
 model PlansWaitList {
-  email  String @unique
-  planId String @map("plan_id") @db.Uuid
+  email     String   @unique
+  planId    String   @map("plan_id") @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   plan Plans @relation(fields: [planId], references: [id], onDelete: Cascade)
 
