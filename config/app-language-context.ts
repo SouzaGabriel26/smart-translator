@@ -9,6 +9,7 @@ const languageContexts = {
       hello: 'Olá',
       signOut: 'Sair',
       profile: 'Perfil',
+      leads: 'Ver Leads',
     },
     heroSection: {
       title: 'Tradutor Inteligente com IA',
@@ -94,6 +95,7 @@ const languageContexts = {
       hello: 'Hello',
       signOut: 'Sign Out',
       profile: 'Profile',
+      leads: 'See Leads',
     },
     heroSection: {
       title: 'AI-Powered Smart Translator',
