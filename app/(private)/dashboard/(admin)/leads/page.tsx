@@ -1,8 +1,12 @@
 import { checkUserAction } from '@/actions/auth/check-user';
 import { prismaClient } from '@/lib/prisma-client';
+import { redirect } from 'next/navigation';
 
 export default async function Page() {
-  const user = await checkUserAction({ role: 'ADMIN' });
+  const user = await checkUserAction();
+  if (user.role !== 'ADMIN') {
+    return redirect('/dashboard');
+  }
 
   const leads = await prismaClient.plansWaitList.findMany();
 
