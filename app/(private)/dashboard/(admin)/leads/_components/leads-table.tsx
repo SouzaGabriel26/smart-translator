@@ -83,13 +83,13 @@ const columns: ColumnDef<Lead>[] = [
   {
     id: "actions",
     header: ({ table }) => {
-      const amount = table.getRowModel().rows.length;
+      const amountSelected = table.getSelectedRowModel().rows.length;
 
-      const text = `Inform about plan (${amount} leads)`;
+      const text = `Inform about plan (${amountSelected} leads)`;
 
       return (
         <div>
-          <InformAboutPlan enabled={table.getIsAllRowsSelected()} customText={text} />
+          <InformAboutPlan enabled={amountSelected > 1} customText={text} />
         </div>
       )
     },
