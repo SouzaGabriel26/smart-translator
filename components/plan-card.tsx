@@ -15,7 +15,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
   return (
     <Card
       className={cn(
-        'max-w-[420px] h-[600px] w-full p-6 flex flex-col relative space-y-4 hover:shadow-xl transition-shadow',
+        'max-w-[420px] h-[550px] w-full p-6 flex flex-col relative space-y-4 hover:shadow-xl transition-shadow',
       )}
     >
       <CardHeader className="pt-0">
@@ -35,9 +35,8 @@ export function PlanCard({ plan, language }: PlanCardProps) {
           {plan.features.map((feature) => (
             <li
               key={feature.title}
-              className={`flex items-center space-x-2 ${
-                feature.available ? 'text-primary' : 'text-muted-foreground'
-              }`}
+              className={`flex items-center space-x-2 ${feature.available ? 'text-primary' : 'text-muted-foreground'
+                }`}
             >
               <span>
                 {feature.available ? (

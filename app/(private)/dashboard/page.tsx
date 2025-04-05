@@ -18,7 +18,7 @@ export default async function Page() {
   const user = await checkUserAction();
   const language = await getAppLanguageAction();
   const { dashboard: dashboardLanguage } = getLanguageContext(language);
-  const MAX_TRANSLATIONS_PER_DAY = 25;
+  const MAX_TRANSLATIONS_PER_DAY = 15;
 
   const latestTranslation = await prismaClient.translations.findFirst({
     where: {
@@ -95,7 +95,7 @@ export default async function Page() {
           </div>
         </div>
 
-        <div className="rounded-md w-full border p-4 dark:border-muted">
+        <div className="rounded-md flex-1 w-full border p-4 dark:border-muted">
           <h2 className="text-xl font-bold">
             {dashboardLanguage.latest.title}
           </h2>
@@ -103,9 +103,9 @@ export default async function Page() {
             {dashboardLanguage.latest.description}
           </p>
 
-          <div className="mt-5">
+          <div className="mt-5 h-full">
             {!latestTranslation ? (
-              <p className="text-center text-slate-400">
+              <p className="text-slate-400 flex h-full items-center justify-center">
                 {dashboardLanguage.latest.noTranslationsYet}
               </p>
             ) : (
