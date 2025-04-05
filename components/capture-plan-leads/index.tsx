@@ -7,7 +7,7 @@ export async function CapturePlanLeads() {
   const { plansSection } = getLanguageContext(language);
 
   return (
-    <div className="border rounded-xl p-5 shadow-sm flex flex-col gap-4">
+    <div className="border rounded-xl px-4 py-2 shadow-sm flex flex-col gap-2">
       <h2 className="text-xl font-bold">{plansSection.getPremiumAccess}</h2>
       <p className="text-muted-foreground text-sm tracking-tighter">
         {plansSection.getPremiumAccessDescription}

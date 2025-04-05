@@ -71,7 +71,7 @@ export async function Header({ user }: HeaderProps) {
 
     return (
       <div className="flex items-center gap-2">
-        <span className="hidden md:block border rounded-full text-xs px-2 py-1 text-muted-foreground">
+        <span className="hidden md:block border rounded-full text-xs px-2 py-1 text-muted-foreground dark:border-muted">
           {formattedPlanLabel}
         </span>
 

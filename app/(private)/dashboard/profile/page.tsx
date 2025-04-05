@@ -88,7 +88,7 @@ export default async function Page() {
               </p>
             </div>
 
-            <Button className="text-white">
+            <Button className="text-white" disabled>
               {profileLanguage.upgradePlan}
             </Button>
           </div>
