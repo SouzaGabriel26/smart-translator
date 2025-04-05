@@ -19,7 +19,7 @@ export default async function Page() {
         {/* Hero */}
         <section
           id="hero"
-          className="flex flex-col xl:flex-row py-12 md:py-32 px-10 gap-6"
+          className="flex flex-col xl:flex-row py-12 md:py-32 px-10 gap-6 bg-background"
         >
           <div className="flex-1 flex flex-col justify-center gap-4">
             <h1 className="text-4xl md:text-7xl font-bold">
@@ -45,26 +45,26 @@ export default async function Page() {
           </div>
 
           <div className="flex-1">
-            <div className="relative aspect-video w-full overflow-hidden rounded-lg border bg-muted/50 px-4 py-2 md:pb-5">
+            <div className="relative aspect-auto  w-full overflow-hidden rounded-lg border bg-muted/50 p-4">
               <video
-                className="w-full h-full rounded-lg hidden md:block"
+                className="w-full h-full rounded-lg hidden sm:block"
                 autoPlay
                 loop
                 muted
                 playsInline
               >
-                <source src="/demo_desktop.webm" type="video/webm" />
+                <source src="/demo_desktop.webm" />
                 Your browser does not support the video tag.
               </video>
 
               <video
-                className="w-full h-full rounded-lg md:hidden"
+                className="w-full h-full rounded-lg sm:hidden"
                 autoPlay
                 loop
                 muted
                 playsInline
               >
-                <source src="/demo_mobile.webm" type="video/webm" />
+                <source src="/demo_mobile.webm" />
                 Your browser does not support the video tag.
               </video>
             </div>
