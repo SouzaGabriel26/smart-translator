@@ -1,7 +1,14 @@
 'use client';
 
 import { Checkbox } from '@/components/ui/checkbox';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { cn } from '@/lib/utils';
 import {
   type ColumnDef,
@@ -55,12 +62,8 @@ const columns: ColumnDef<Lead>[] = [
         day: '2-digit',
       });
 
-      return (
-        <span className="text-muted-foreground">
-          {date}
-        </span>
-      )
-    }
+      return <span className="text-muted-foreground">{date}</span>;
+    },
   },
   {
     accessorKey: 'name',
@@ -74,14 +77,21 @@ const columns: ColumnDef<Lead>[] = [
       const label = value === true ? 'Active' : 'Inactive';
 
       return (
-        <span className={cn('px-2 py-1 rounded-full border dark:border-muted', value ? 'bg-green-500/10 text-green-500' : 'bg-red-500/10 text-red-500')}>
+        <span
+          className={cn(
+            'px-2 py-1 rounded-full border dark:border-muted',
+            value
+              ? 'bg-green-500/10 text-green-500'
+              : 'bg-red-500/10 text-red-500',
+          )}
+        >
           {label}
         </span>
-      )
-    }
+      );
+    },
   },
   {
-    id: "actions",
+    id: 'actions',
     header: ({ table }) => {
       const amountSelected = table.getSelectedRowModel().rows.length;
 
@@ -91,9 +101,9 @@ const columns: ColumnDef<Lead>[] = [
         <div>
           <InformAboutPlan enabled={amountSelected > 1} customText={text} />
         </div>
-      )
+      );
     },
-    cell: () => <InformAboutPlan enabled />
+    cell: () => <InformAboutPlan enabled />,
   },
 ];
 
@@ -110,9 +120,9 @@ export function LeadsTable({ data }: LeadsTableProps) {
   });
 
   return (
-    <div className='flex-1 flex'>
-      <Table className='relative flex-1'>
-        <TableHeader className='sticky top-0 z-10 bg-background shadow-md'>
+    <div className="flex-1 flex">
+      <Table className="relative flex-1">
+        <TableHeader className="sticky top-0 z-10 bg-background shadow-md">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
@@ -120,20 +130,20 @@ export function LeadsTable({ data }: LeadsTableProps) {
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                 </TableHead>
               ))}
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody className='overflow-y-auto'>
+        <TableBody className="overflow-y-auto">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
-                data-state={row.getIsSelected() && "selected"}
+                data-state={row.getIsSelected() && 'selected'}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

@@ -35,8 +35,9 @@ export function PlanCard({ plan, language }: PlanCardProps) {
           {plan.features.map((feature) => (
             <li
               key={feature.title}
-              className={`flex items-center space-x-2 ${feature.available ? 'text-primary' : 'text-muted-foreground'
-                }`}
+              className={`flex items-center space-x-2 ${
+                feature.available ? 'text-primary' : 'text-muted-foreground'
+              }`}
             >
               <span>
                 {feature.available ? (

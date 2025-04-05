@@ -28,7 +28,7 @@ export default async function Page() {
 
   return (
     <main className="p-4 flex flex-col bg-background h-[calc(100%-64px)] overflow-hidden md:mx-36  gap-8">
-      <h1 className='font-bold text-2xl'>Leads</h1>
+      <h1 className="font-bold text-2xl">Leads</h1>
       <LeadsTable data={leads} />
     </main>
   );
