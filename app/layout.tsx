@@ -11,7 +11,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-screen" suppressHydrationWarning>
       <body className="antialiased h-full">
-        <ThemeProvider attribute="class" disableTransitionOnChange>
+        <ThemeProvider enableSystem attribute="class" disableTransitionOnChange>
           <div className="bg-background h-full">
             {children}
             <Toaster />

@@ -25,7 +25,7 @@ export function TranslationForm({
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const { startOfToday, endOfToday } = getUserDayRange(userTimeZone);
 
-    console.log({ startOfToday, endOfToday });
+    console.log({ startOfToday, endOfToday }); // TODO: remove this
 
     async function getTodayTranslations() {
       const translations = await getTodayTranslationsAction({
