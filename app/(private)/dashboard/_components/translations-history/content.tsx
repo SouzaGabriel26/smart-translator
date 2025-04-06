@@ -38,7 +38,7 @@ export function TranslationsHistoryContent({
   }
 
   return (
-    <div className="space-y-4 pb-4 md:pb-0 border dark:border-muted rounded-md p-4 w-full md:h-[750px] flex flex-col">
+    <div className="space-y-4 pb-4 md:pb-0 border dark:border-muted rounded-md p-4 w-full h-[750px] flex flex-col">
       <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
         <HistoryIcon className="size-6" />
         {historyLanguage.title} ({translations.length})
@@ -59,7 +59,7 @@ export function TranslationsHistoryContent({
         </div>
       </form>
 
-      <div className="flex-1 overflow-y-auto bg-background">
+      <div className="flex-1 overflow-y-auto px-1 bg-background">
         {translations.length === 0 ? (
           <p className="text-slate-400 text-center py-10">
             {historyLanguage.noTranslationsFound}
