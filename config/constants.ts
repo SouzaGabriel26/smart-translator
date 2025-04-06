@@ -180,6 +180,9 @@ const plans: Record<AvailableLanguages, typeof englishPlans> = {
   'pt-br': portuguesePlans,
 };
 
+const availableModes = ['hard', 'easy'] as const;
+export type AvailableModes = (typeof availableModes)[number];
+
 export const projectConstants = Object.freeze({
   accessToken: 'smart-translator:accessToken',
   features,
@@ -188,4 +191,6 @@ export const projectConstants = Object.freeze({
   languageFromKey: 'smart-translator:language-from',
   languageToKey: 'smart-translator:language-to',
   appLanguageKey: 'smart-translator:app-language',
+  modeKey: 'smart-translator:mode',
+  availableModes,
 });

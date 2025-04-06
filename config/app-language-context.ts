@@ -86,6 +86,11 @@ const languageContexts = {
       translationsDirection: 'Traduções por Direção',
       upgradePlan: 'Atualizar Plano',
     },
+    hardMode: {
+      title: 'Modo Difícil',
+      description:
+        'Com o modo difícil ativado, você verá apenas conteúdos na língua de origem atual ($languageFrom). Ao traduzir uma palavra ou expressão, será exibida apenas uma breve explicação e frases de exemplo em "$languageFrom" — sem tradução direta para "$languageTo". A ideia é desafiar você a entender e aprender pelo contexto, como se estivesse imerso no idioma. Você pode ativar ou desativar esse modo a qualquer momento nas configurações.',
+    },
   },
   en: {
     title: 'Smart Translator',
@@ -168,6 +173,11 @@ const languageContexts = {
       translationsCount: 'Total Translations',
       translationsDirection: 'Translations by Direction',
       upgradePlan: 'Upgrade Plan',
+    },
+    hardMode: {
+      title: 'Hard Mode',
+      description: `When Hard Mode is on, you’ll only see content in the current source language ($languageFrom). Instead of a direct translation to "$languageTo", you'll get a brief explanation and example sentences in "$languageFrom" only.
+      The goal is to challenge you to understand the meaning through context — just like real immersion. You can turn Hard Mode on or off at any time in the settings.`,
     },
   },
 };
