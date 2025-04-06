@@ -2,7 +2,7 @@
 
 import { generateTranslationAction } from '@/app/(private)/dashboard/actions';
 import type { AppLanguageContext } from '@/config/app-language-context';
-import { useToggleLanguage } from '@/hooks/use-toggle-language';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { Sparkles } from 'lucide-react';
 import { useActionState, useEffect } from 'react';
 import { toast } from 'sonner';
@@ -20,7 +20,7 @@ export function GenerateTranslationForm({
   label,
   dashboardLanguage,
 }: GenerateTranslationFormProps) {
-  const { languageFrom, languageTo } = useToggleLanguage();
+  const { languageFrom, languageTo } = useLanguage();
   const [state, action, isPending] = useActionState(
     generateTranslationAction,
     null,
