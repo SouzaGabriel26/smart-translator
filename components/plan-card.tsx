@@ -15,7 +15,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
   return (
     <Card
       className={cn(
-        'max-w-[420px] h-[550px] w-full p-6 flex flex-col relative space-y-4 hover:shadow-xl transition-shadow',
+        'max-w-[420px] min-h-[550px] w-full p-6 flex flex-col relative space-y-4 hover:shadow-xl transition-shadow',
       )}
     >
       <CardHeader className="pt-0">
