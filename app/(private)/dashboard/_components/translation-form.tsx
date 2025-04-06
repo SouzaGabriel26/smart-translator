@@ -9,16 +9,12 @@ import { getTodayTranslationsAction } from '../actions';
 import { ToggleLanguage } from './toggle-language';
 
 type TranslationFormProps = {
-  languageFrom: 'en' | 'pt-br';
-  languageTo: 'pt-br' | 'en';
   dashboardLanguage: AppLanguageContext['dashboard'];
   translationsLimitPerDay: number;
   randomLabel: string;
 };
 
 export function TranslationForm({
-  languageFrom,
-  languageTo,
   dashboardLanguage,
   translationsLimitPerDay,
   randomLabel,
@@ -49,17 +45,12 @@ export function TranslationForm({
         <div className="flex justify-between items-center flex-col sm:flex-row">
           <h2 className="text-xl font-bold">{dashboardLanguage.form.title}</h2>
 
-          <ToggleLanguage
-            defaultLanguages={{ languageFrom, languageTo }}
-            dashboardLanguage={dashboardLanguage}
-          />
+          <ToggleLanguage dashboardLanguage={dashboardLanguage} />
         </div>
 
         <GenerateTranslationForm
           disabled={translationsToday >= translationsLimitPerDay}
           label={randomLabel}
-          languageFrom={languageFrom}
-          languageTo={languageTo}
           dashboardLanguage={dashboardLanguage}
         />
       </div>

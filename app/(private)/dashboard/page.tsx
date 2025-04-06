@@ -1,5 +1,5 @@
 import { checkUserAction } from '@/actions/auth/check-user';
-import { getAppLanguageAction, getLanguageAction } from '@/app/actions';
+import { getAppLanguageAction } from '@/app/actions';
 import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
@@ -31,8 +31,6 @@ export default async function Page() {
     },
   });
 
-  const { languageFrom, languageTo } = await getLanguageAction();
-
   const randomWordsInEnglishToTranslate = [
     'Smart Contract',
     'Decentralized',
@@ -54,8 +52,6 @@ export default async function Page() {
     >
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
         <TranslationForm
-          languageFrom={languageFrom}
-          languageTo={languageTo}
           dashboardLanguage={dashboardLanguage}
           translationsLimitPerDay={MAX_TRANSLATIONS_PER_DAY}
           randomLabel={randomLabel}
