@@ -4,6 +4,15 @@ on:
   pull_request:
     branches: ["main", "development"]
 
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  PR_NUMBER: ${{ github.event.pull_request.number }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+permissions:
+  issues: write
+  pull-requests: write
+
 jobs:
   lint-styles:
     name: Lint Styles
@@ -71,4 +80,30 @@ jobs:
       - name: Cleanup copied .env file
         if: always()
         run: rm .env
+
+  preview-deployment:
+    name: Preview Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Node.js Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run deployment:preview script
+        run: pnpm deployment:preview
+
 
