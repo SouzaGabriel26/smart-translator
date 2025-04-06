@@ -192,3 +192,28 @@ export async function discardTranslationAction(translationId: string) {
 
   revalidatePath('/dashboard');
 }
+
+type GetTodayTranslationsProps = {
+  startOfToday: Date;
+  endOfToday: Date;
+};
+
+export async function getTodayTranslationsAction({
+  startOfToday,
+  endOfToday,
+}: GetTodayTranslationsProps) {
+  const user = await checkUserAction();
+
+  const todayTranslations = await prismaClient.translations.findMany({
+    where: {
+      userId: user.id,
+      createdAt: {
+        gte: startOfToday,
+        lte: endOfToday,
+      },
+    },
+    select: { id: true },
+  });
+
+  return todayTranslations ?? [];
+}
