@@ -30,7 +30,7 @@ const languageContexts = {
       getPremiumAccess: 'Obtenha Acesso Premium',
       getPremiumAccessDescription:
         'Seja o primeiro a saber quando nosso plano Premium estiver disponível.',
-      joinWaitlist: 'Entrar na lista de espera Premium',
+      joinWaitlist: 'Entrar na lista de espera',
       enterEmailAddress: 'Digite seu endereço de e-mail',
       invalidEmail: 'Endereço de e-mail inválido.',
       alreadyOnWaitlist: 'Você já está na lista de espera.',
