@@ -1,6 +1,6 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { TranslationsHistorySkeleton } from '@/app/(private)/dashboard/_components/translations-history/translations-history-skeleton';
 import { getAppLanguageAction } from '@/app/actions';
-import { TranslationsHistorySkeleton } from '@/components/translations-history-skeleton';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import { Suspense } from 'react';
@@ -48,7 +48,7 @@ export default async function Page() {
   return (
     <main
       key={Date.now()}
-      className="flex flex-col md:flex-row px-6 py-12 gap-4 bg-background"
+      className="flex flex-col md:flex-row gap-4 bg-background"
     >
       <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
         <TranslationForm
