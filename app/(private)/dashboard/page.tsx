@@ -53,16 +53,16 @@ export default async function Page() {
   return (
     <main
       key={Date.now()}
-      className="flex flex-col md:flex-row gap-4 bg-background"
+      className="flex flex-col xl:flex-row gap-4 bg-background"
     >
-      <div className="flex flex-col justify-between gap-4 w-full md:h-[750px]">
+      <div className="flex flex-col justify-between gap-4 w-full xl:h-[750px]">
         <TranslationForm
           dashboardLanguage={dashboardLanguage}
           translationsLimitPerDay={MAX_TRANSLATIONS_PER_DAY}
           randomLabel={randomLabel}
         />
 
-        <div className="relative rounded-md flex-1 w-full border p-4 dark:border-muted">
+        <div className="relative rounded-md flex-1 bg-background w-full border p-4 dark:border-muted">
           <h2 className="text-xl font-bold">
             {dashboardLanguage.latest.title}
           </h2>
