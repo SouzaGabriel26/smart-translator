@@ -1,8 +1,9 @@
 import { checkUserAction } from '@/actions/auth/check-user';
 import { TranslationsHistorySkeleton } from '@/app/(private)/dashboard/_components/translations-history/translations-history-skeleton';
-import { getAppLanguageAction } from '@/app/actions';
+import { getAppLanguageAction, getModeAction } from '@/app/actions';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
+import { cn } from '@/lib/utils';
 import { Suspense } from 'react';
 import { TranslationForm } from './_components/translation-form';
 import { TranslationsHistory } from './_components/translations-history';
@@ -11,6 +12,7 @@ export default async function Page() {
   const user = await checkUserAction();
   const language = await getAppLanguageAction();
   const { dashboard: dashboardLanguage } = getLanguageContext(language);
+  const mode = await getModeAction();
 
   const userPlan = await prismaClient.plans.findFirst({
     where: { id: user.planId },
@@ -45,6 +47,9 @@ export default async function Page() {
   );
   const randomLabel = randomWordsInEnglishToTranslate[randomIndex];
 
+  const isHardModeAvailable =
+    mode === 'hard' && Boolean(latestTranslation?.wordOverview);
+
   return (
     <main
       key={Date.now()}
@@ -57,7 +62,7 @@ export default async function Page() {
           randomLabel={randomLabel}
         />
 
-        <div className="rounded-md flex-1 w-full border p-4 dark:border-muted">
+        <div className="relative rounded-md flex-1 w-full border p-4 dark:border-muted">
           <h2 className="text-xl font-bold">
             {dashboardLanguage.latest.title}
           </h2>
@@ -72,20 +77,32 @@ export default async function Page() {
               </p>
             ) : (
               <div className="flex flex-col gap-6">
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-2">
+                  <div
+                    className={cn(
+                      'flex items-center gap-1',
+                      isHardModeAvailable && 'flex-col items-start',
+                    )}
+                  >
                     <div className="font-bold space-x-1">
                       <span className="capitalize">
                         {latestTranslation.targetWord}
                       </span>
                       <small>({latestTranslation.languageFrom})</small>
                     </div>
-                    =
-                    <div className="font-bold space-x-1">
-                      <span className="capitalize">
-                        {latestTranslation.translatedWord}
-                      </span>
-                      <small>({latestTranslation.languageTo})</small>
+                    <div className="space-x-1">
+                      {isHardModeAvailable ? (
+                        <span className="text-muted-foreground text-sm">
+                          {latestTranslation.wordOverview}
+                        </span>
+                      ) : (
+                        <div className="font-bold">
+                          <span className="capitalize">
+                            {'= '} {latestTranslation.translatedWord}
+                          </span>
+                          <small>({latestTranslation.languageTo})</small>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -110,7 +127,12 @@ export default async function Page() {
                         className="flex flex-col border dark:border-muted rounded-md p-4"
                       >
                         <span className="font-bold">{phrase.content}</span>
-                        <span className="text-sm text-muted-foreground">
+                        <span
+                          className={cn(
+                            'text-sm text-muted-foreground',
+                            isHardModeAvailable && 'hidden',
+                          )}
+                        >
                           {phrase.translatedContent}
                         </span>
                       </li>
