@@ -15,6 +15,7 @@ const geminiResponseSchema = z.object({
   phrase_2_translated: z.string(),
   phrase_3_generated: z.string(),
   phrase_3_translated: z.string(),
+  input_brief_overview_in_language_from: z.string(),
 });
 
 type GeminiResponse = z.infer<typeof geminiResponseSchema>;
@@ -45,6 +46,8 @@ async function generateTranslation({
       phrase_3_generated: translationAlreadyExists.phrases[2].content,
       phrase_3_translated:
         translationAlreadyExists.phrases[2].translatedContent,
+      input_brief_overview_in_language_from:
+        translationAlreadyExists.wordOverview ?? '',
     };
 
     return translationObject;
@@ -108,6 +111,7 @@ async function generateTranslation({
           equals: wordToTranslate,
           mode: 'insensitive',
         },
+        discarded: false,
       },
       include: {
         phrases: true,
@@ -123,9 +127,20 @@ function generateCustomizedPrompt({
   languageTo,
   wordToTranslate,
 }: GenerateTranslationProps) {
+  const languagesMap = {
+    en: 'English',
+    'pt-br': 'Portuguese (Brazil)',
+  };
+
+  const formattedLanguageFrom =
+    languagesMap[languageFrom as keyof typeof languagesMap] || languageFrom;
+
+  const formattedLanguageTo =
+    languagesMap[languageTo as keyof typeof languagesMap] || languageTo;
+
   return `
-Translate the following ${languageFrom} word to ${languageTo}: "${wordToTranslate}".
-Then, generate 3 simple sentences using this word, each with its ${languageTo} translation.
+Translate the following ${formattedLanguageFrom} word to ${formattedLanguageTo}: "${wordToTranslate}".
+Then, generate 3 simple sentences using this word, each with its ${formattedLanguageTo} translation.
 
 Generate an output **ONLY in valid JSON format**, without any other characters, delimiters or explanations. The JSON must follow the following schema:
 
@@ -137,10 +152,13 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
   phrase_2_generated: string,
   phrase_2_translated: string,
   phrase_3_generated: string,
-  phrase_3_translated: string
+  phrase_3_translated: string,
+  input_brief_overview_in_language_from: string
 }
 
-But, in case of the word is not a valid ${languageFrom} word, ignore the command to **ONLY in valid JSON format** and return an empty object.
+Please generate "input_brief_overview_in_language_from" in this language ${formattedLanguageFrom}.
+
+But, in case of the word is not a valid ${formattedLanguageFrom} word, ignore the command to **ONLY in valid JSON format** and return an empty object.
   `;
 }
 

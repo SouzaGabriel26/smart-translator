@@ -1,5 +1,5 @@
 import { checkUserAction } from '@/actions/auth/check-user';
-import { getAppLanguageAction } from '@/app/actions';
+import { getAppLanguageAction, getModeAction } from '@/app/actions';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import { TranslationsHistoryContent } from './content';
@@ -8,6 +8,8 @@ export async function TranslationsHistory() {
   const language = await getAppLanguageAction();
   const { dashboard } = getLanguageContext(language);
   const user = await checkUserAction();
+  const mode = await getModeAction();
+  const isHardMode = mode === 'hard';
 
   const translations = await prismaClient.translations.findMany({
     where: {
@@ -24,6 +26,7 @@ export async function TranslationsHistory() {
 
   return (
     <TranslationsHistoryContent
+      isHardMode={isHardMode}
       language={language}
       historyLanguage={dashboard.history}
       initialTranslations={translations}

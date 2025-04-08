@@ -25,10 +25,6 @@ export function ToggleHardMode({ language }: ToggleHardModeProps) {
 
   const { hardMode } = getLanguageContext(language);
 
-  const formattedHardModeDescription = hardMode.description
-    .replaceAll('$languageFrom', languageFrom)
-    .replaceAll('$languageTo', languageTo);
-
   useEffect(() => {
     setIsLoading(true);
     fetchMode();
@@ -59,17 +55,25 @@ export function ToggleHardMode({ language }: ToggleHardModeProps) {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <HardModeInfoModal />
+    <div>
+      <div className="flex items-center gap-2">
+        <HardModeInfoModal />
 
-      <Label htmlFor="hard-mode">Hard mode</Label>
-      <Switch
-        checked={isHardMode}
-        onCheckedChange={handleToggleHardMode}
-        disabled={isLoading}
-        id="hard-mode"
-        name="hard_mode"
-      />
+        <Label htmlFor="hard-mode">Hard mode</Label>
+        <Switch
+          checked={isHardMode}
+          onCheckedChange={handleToggleHardMode}
+          disabled={isLoading}
+          id="hard-mode"
+          name="hard_mode"
+        />
+      </div>
+
+      {isHardMode && (
+        <span className="text-muted-foreground text-sm inline-block">
+          {hardMode.note}
+        </span>
+      )}
     </div>
   );
 
@@ -84,7 +88,7 @@ export function ToggleHardMode({ language }: ToggleHardModeProps) {
 
         <DialogContent>
           <DialogTitle>{hardMode.title} 😎</DialogTitle>
-          <p>{formattedHardModeDescription}</p>
+          <p>{hardMode.description}</p>
         </DialogContent>
       </Dialog>
     );
