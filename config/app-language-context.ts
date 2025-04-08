@@ -77,6 +77,7 @@ const languageContexts = {
         inputLabel: 'Buscar traduções...',
         noTranslationsFound: 'Nenhuma tradução encontrada.',
       },
+      wordOverview: 'Visão geral',
     },
     profile: {
       plan: 'Plano',
@@ -85,6 +86,12 @@ const languageContexts = {
       translationsCount: 'Total de Traduções',
       translationsDirection: 'Traduções por Direção',
       upgradePlan: 'Atualizar Plano',
+    },
+    hardMode: {
+      title: 'Modo Difícil',
+      description: `O Modo Difícil mostra o conteúdo apenas no seu idioma de origem selecionado (por exemplo, inglês).
+Em vez de traduções diretas, você receberá uma breve explicação e frases de exemplo no mesmo idioma - ajudando você a aprender através do contexto, como uma verdadeira imersão. Você pode ativá-lo ou desativá-lo a qualquer momento nas configurações.`,
+      note: 'Nota: O modo difícil pode não estar disponível para todas as traduções, tendo em vista que é uma funcionalidade nova.',
     },
   },
   en: {
@@ -160,6 +167,7 @@ const languageContexts = {
         inputLabel: 'Search translations...',
         noTranslationsFound: 'No translations found.',
       },
+      wordOverview: 'Brief overview',
     },
     profile: {
       plan: 'Plan',
@@ -168,6 +176,13 @@ const languageContexts = {
       translationsCount: 'Total Translations',
       translationsDirection: 'Translations by Direction',
       upgradePlan: 'Upgrade Plan',
+    },
+    hardMode: {
+      title: 'Hard Mode',
+      description: `Hard Mode shows content only in your selected source language (e.g. English).
+Instead of direct translations, you'll get a brief explanation and example sentences in the same language — helping you learn through context, like real immersion.
+You can toggle it on or off anytime in settings.`,
+      note: "Note: Hard Mode may not be available for all translations, as it's a new feature.",
     },
   },
 };

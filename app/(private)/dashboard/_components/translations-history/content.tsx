@@ -4,6 +4,7 @@ import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
 import { DebouncedInput } from '@/components/debounced-input';
 import type { AppLanguageContext } from '@/config/app-language-context';
 import type { AvailableLanguages } from '@/config/constants';
+import { cn } from '@/lib/utils';
 import type { TranslationPhrases, Translations } from '@prisma/client';
 import { HistoryIcon, Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
@@ -19,12 +20,14 @@ type TranslationsHistoryContentProps = {
   initialTranslations: TranslationsWithPhrases;
   historyLanguage: AppLanguageContext['dashboard']['history'];
   language: AvailableLanguages;
+  isHardMode: boolean;
 };
 
 export function TranslationsHistoryContent({
   initialTranslations,
   historyLanguage,
   language,
+  isHardMode,
 }: TranslationsHistoryContentProps) {
   const [translations, setTranslations] =
     useState<TranslationsWithPhrases>(initialTranslations);
@@ -65,56 +68,81 @@ export function TranslationsHistoryContent({
             {historyLanguage.noTranslationsFound}
           </p>
         ) : (
-          translations.map((translation) => (
-            <div
-              key={translation.id}
-              className="border-b dark:border-muted rounded py-4 px-2 relative"
-            >
-              <DeleteConfirmationModal
-                translationToDelete={translation}
-                language={language}
-              />
+          translations.map((translation) => {
+            const isHardModeAvailable =
+              isHardMode && Boolean(translation.wordOverview);
 
-              <div>
-                <div className="flex font-medium items-center gap-2 text-md">
-                  <div className="space-x-1">
-                    <span className="capitalize">{translation.targetWord}</span>
-                    <small>({translation.languageFrom})</small>
+            return (
+              <div
+                key={translation.id}
+                className="border-b dark:border-muted rounded py-4 px-2 relative"
+              >
+                <DeleteConfirmationModal
+                  translationToDelete={translation}
+                  language={language}
+                />
+
+                <div className="flex flex-col gap-3">
+                  <div
+                    className={cn(
+                      'flex font-bold items-center gap text-md',
+                      isHardModeAvailable && 'flex-col items-start',
+                    )}
+                  >
+                    <div className="space-x-1">
+                      <span className="capitalize">
+                        {translation.targetWord}
+                      </span>
+                      <small>({translation.languageFrom})</small>
+                    </div>
+
+                    <div className="space-x-1">
+                      {isHardModeAvailable ? (
+                        <span className="text-sm font-normal text-muted-foreground">
+                          {translation.wordOverview}
+                        </span>
+                      ) : (
+                        <div>
+                          <span className="capitalize">
+                            {'='} {translation.translatedWord}
+                          </span>
+                          <small>({translation.languageTo})</small>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                  =
-                  <div className="space-x-1">
-                    <span className="capitalize">
-                      {translation.translatedWord}
-                    </span>
-                    <small>({translation.languageTo})</small>
-                  </div>
+
+                  <span className="h-fit text-xs border rounded-full px-2 py-1 w-fit">
+                    {translation.createdAt.toLocaleDateString(language, {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                    })}
+                  </span>
                 </div>
 
-                <span className="h-fit text-xs border rounded-full px-2 py-1">
-                  {translation.createdAt.toLocaleDateString(language, {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                    hour: 'numeric',
-                    minute: 'numeric',
-                  })}
-                </span>
+                <div>
+                  <ul className="space-y-3 mt-4">
+                    {translation.phrases.map((phrase) => (
+                      <li key={phrase.id} className="flex flex-col text-sm">
+                        <span className="font-bold">{phrase.content}</span>
+                        <span
+                          className={cn(
+                            'text-sm text-muted-foreground',
+                            isHardModeAvailable && 'hidden',
+                          )}
+                        >
+                          {phrase.translatedContent}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-
-              <div>
-                <ul className="space-y-3 mt-4">
-                  {translation.phrases.map((phrase) => (
-                    <li key={phrase.id} className="flex flex-col text-sm">
-                      <span className="font-bold">{phrase.content}</span>
-                      <span className="text-sm text-muted-foreground">
-                        {phrase.translatedContent}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>

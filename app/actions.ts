@@ -1,6 +1,10 @@
 'use server';
 
-import { type AvailableLanguages, projectConstants } from '@/config/constants';
+import {
+  type AvailableLanguages,
+  type AvailableModes,
+  projectConstants,
+} from '@/config/constants';
 import { cookies } from 'next/headers';
 
 export async function setAppLanguageAction(language: AvailableLanguages) {
@@ -26,4 +30,27 @@ export async function getAppLanguageAction() {
   }
 
   return appLanguage;
+}
+
+export async function setModeAction(mode: AvailableModes) {
+  const cookieStorage = await cookies();
+
+  const { modeKey } = projectConstants;
+
+  cookieStorage.set(modeKey, mode, {
+    httpOnly: true,
+  });
+}
+
+export async function getModeAction() {
+  const cookieStorage = await cookies();
+
+  const { modeKey } = projectConstants;
+  const mode = cookieStorage.get(modeKey)?.value as AvailableModes;
+
+  if (!projectConstants.availableModes.includes(mode)) {
+    return 'easy';
+  }
+
+  return mode;
 }

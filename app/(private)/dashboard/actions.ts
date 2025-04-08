@@ -53,6 +53,7 @@ export async function generateTranslationAction(
       await prismaClient.translations.findFirst({
         where: {
           userId: user.id,
+          discarded: false,
           targetWord: {
             equals: parsedData.data.word_to_translate,
             mode: 'insensitive',
@@ -80,6 +81,7 @@ export async function generateTranslationAction(
         languageTo,
         targetWord: wordToTranslate,
         translatedWord: result.output,
+        wordOverview: result?.input_brief_overview_in_language_from ?? '',
         phrases: {
           createMany: {
             data: [

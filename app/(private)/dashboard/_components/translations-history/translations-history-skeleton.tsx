@@ -1,15 +1,16 @@
-import { Input } from './ui/input';
-import { Skeleton } from './ui/skeleton';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { HistoryIcon } from 'lucide-react';
 
 export async function TranslationsHistorySkeleton() {
   return (
     <div className="space-y-4 p-4 pb-0 border dark:border-muted rounded-md w-full md:h-[750px] flex flex-col">
-      <h3 className="mb-3 text-xl font-medium">Translation History</h3>
+      <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
+        <HistoryIcon className="size-6" />
+        Translation History
+      </h3>
 
       <form>
-        <label htmlFor="translation_search" className="text-slate-600 text-sm">
-          Search translations
-        </label>
         <Input
           id="translation_search"
           type="search"
