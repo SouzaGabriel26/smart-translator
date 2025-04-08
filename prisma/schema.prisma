@@ -33,6 +33,7 @@ model Translations {
   id             String   @id @default(uuid()) @db.Uuid
   targetWord     String   @map("target_word")
   translatedWord String   @map("translated_word")
+  wordOverview   String?  @map("word_overview")
   languageFrom   String   @map("language_from")
   languageTo     String   @map("language_to")
   createdAt      DateTime @default(now()) @map("created_at")
