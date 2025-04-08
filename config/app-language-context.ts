@@ -77,6 +77,7 @@ const languageContexts = {
         inputLabel: 'Buscar traduções...',
         noTranslationsFound: 'Nenhuma tradução encontrada.',
       },
+      wordOverview: 'Visão geral',
     },
     profile: {
       plan: 'Plano',
@@ -88,8 +89,9 @@ const languageContexts = {
     },
     hardMode: {
       title: 'Modo Difícil',
-      description:
-        'Com o modo difícil ativado, você verá apenas conteúdos na língua de origem atual ($languageFrom). Ao traduzir uma palavra ou expressão, será exibida apenas uma breve explicação e frases de exemplo em "$languageFrom" — sem tradução direta para "$languageTo". A ideia é desafiar você a entender e aprender pelo contexto, como se estivesse imerso no idioma. Você pode ativar ou desativar esse modo a qualquer momento nas configurações.',
+      description: `O Modo Difícil mostra o conteúdo apenas no seu idioma de origem selecionado (por exemplo, inglês).
+Em vez de traduções diretas, você receberá uma breve explicação e frases de exemplo no mesmo idioma - ajudando você a aprender através do contexto, como uma verdadeira imersão. Você pode ativá-lo ou desativá-lo a qualquer momento nas configurações.`,
+      note: 'Nota: O modo difícil pode não estar disponível para todas as traduções, tendo em vista que é uma funcionalidade nova.',
     },
   },
   en: {
@@ -165,6 +167,7 @@ const languageContexts = {
         inputLabel: 'Search translations...',
         noTranslationsFound: 'No translations found.',
       },
+      wordOverview: 'Brief overview',
     },
     profile: {
       plan: 'Plan',
@@ -176,8 +179,10 @@ const languageContexts = {
     },
     hardMode: {
       title: 'Hard Mode',
-      description: `When Hard Mode is on, you’ll only see content in the current source language ($languageFrom). Instead of a direct translation to "$languageTo", you'll get a brief explanation and example sentences in "$languageFrom" only.
-      The goal is to challenge you to understand the meaning through context — just like real immersion. You can turn Hard Mode on or off at any time in the settings.`,
+      description: `Hard Mode shows content only in your selected source language (e.g. English).
+Instead of direct translations, you'll get a brief explanation and example sentences in the same language — helping you learn through context, like real immersion.
+You can toggle it on or off anytime in settings.`,
+      note: "Note: Hard Mode may not be available for all translations, as it's a new feature.",
     },
   },
 };
