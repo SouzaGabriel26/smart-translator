@@ -10,6 +10,7 @@ export function ToggleTheme() {
   return (
     <Button
       onClick={() => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))}
+      className="dark:border-muted"
       variant="outline"
     >
       {!resolvedTheme ? (

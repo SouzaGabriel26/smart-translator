@@ -28,8 +28,9 @@ export async function Notification() {
         <Button
           variant="outline"
           className={cn(
-            'relative',
-            notificationsCount > 0 && 'border-muted-foreground',
+            'relative dark:border-muted',
+            notificationsCount > 0 &&
+              'border-muted-foreground dark:border-muted-foreground',
           )}
         >
           <Bell className="size-4" />

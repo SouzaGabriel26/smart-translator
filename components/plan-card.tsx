@@ -30,20 +30,20 @@ export function PlanCard({ plan, language }: PlanCardProps) {
         </span>
       </CardHeader>
 
-      <div className="flex flex-col justify-between flex-grow gap-6">
+      <div className="flex flex-col justify-between grow gap-6">
         <ul className="space-y-2 mt-4">
           {plan.features.map((feature) => (
             <li
               key={feature.title}
-              className={`flex items-center space-x-2 ${
+              className={`flex items-start gap-2 ${
                 feature.available ? 'text-primary' : 'text-muted-foreground'
               }`}
             >
-              <span>
+              <span className="h-[1lh]">
                 {feature.available ? (
-                  <Check className="text-green-500" />
+                  <Check className="text-green-500 width-4 height-6" />
                 ) : (
-                  <X className="text-red-500" />
+                  <X className="text-red-500 width-4 height-6" />
                 )}
               </span>
               <span>{feature.title}</span>
@@ -67,7 +67,7 @@ export function PlanCard({ plan, language }: PlanCardProps) {
       </div>
 
       {!plan.status.available && plan.status.reason && (
-        <span className="rounded-full bg-primary text-white text-sm px-2 py-0.5 font-medium absolute right-3 -top-7">
+        <span className="rounded-full bg-primary text-white text-sm px-2 py-0.5 font-medium absolute right-3 -top-3">
           {plan.status.reason}
         </span>
       )}
