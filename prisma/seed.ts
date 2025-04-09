@@ -8,6 +8,7 @@ async function main() {
     prismaClient.translations.deleteMany(),
     prismaClient.users.deleteMany(),
     prismaClient.plans.deleteMany(),
+    prismaClient.notifications.deleteMany(),
   ]);
 
   const SALT = 10;
@@ -95,6 +96,28 @@ async function main() {
             ],
           },
         },
+      },
+    }),
+  ]);
+
+  const nextWeek = new Date();
+  nextWeek.setDate(nextWeek.getDate() + 7);
+
+  await prismaClient.$transaction([
+    prismaClient.notifications.create({
+      data: {
+        name: 'Notification 1',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        slug: 'notification-1',
+        expirationAdsTime: nextWeek,
+      },
+    }),
+    prismaClient.notifications.create({
+      data: {
+        name: 'Notification 2',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        slug: 'notification-2',
+        expirationAdsTime: nextWeek,
       },
     }),
   ]);
