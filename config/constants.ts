@@ -193,4 +193,5 @@ export const projectConstants = Object.freeze({
   appLanguageKey: 'smart-translator:app-language',
   modeKey: 'smart-translator:mode',
   availableModes,
+  notificationKey: 'smart-translator:notification',
 });

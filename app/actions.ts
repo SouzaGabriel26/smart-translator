@@ -54,3 +54,35 @@ export async function getModeAction() {
 
   return mode;
 }
+
+export async function markNotificationAsReadAction(notificationId: string) {
+  const cookieStorage = await cookies();
+
+  const { notificationKey } = projectConstants;
+
+  const notifications = await getNotificationsAction();
+
+  notifications.push(notificationId);
+  cookieStorage.set(notificationKey, JSON.stringify(notifications), {
+    httpOnly: true,
+  });
+}
+
+export async function getNotificationsAction() {
+  const cookieStorage = await cookies();
+
+  const { notificationKey } = projectConstants;
+  const notification = cookieStorage.get(notificationKey)?.value as string;
+
+  try {
+    const sanitizedArray = JSON.parse(notification) as string[];
+
+    if (!Array.isArray(sanitizedArray)) {
+      return [] as string[];
+    }
+
+    return sanitizedArray;
+  } catch {
+    return [] as string[];
+  }
+}

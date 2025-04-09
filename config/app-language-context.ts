@@ -93,6 +93,10 @@ const languageContexts = {
 Em vez de traduções diretas, você receberá uma breve explicação e frases de exemplo no mesmo idioma - ajudando você a aprender através do contexto, como uma verdadeira imersão. Você pode ativá-lo ou desativá-lo a qualquer momento nas configurações.`,
       note: 'Nota: O modo difícil pode não estar disponível para todas as traduções, tendo em vista que é uma funcionalidade nova.',
     },
+    notification: {
+      empty: 'Sem notificações',
+      markAsRead: 'Marcar como lido',
+    },
   },
   en: {
     title: 'Smart Translator',
@@ -183,6 +187,10 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
 Instead of direct translations, you'll get a brief explanation and example sentences in the same language — helping you learn through context, like real immersion.
 You can toggle it on or off anytime in settings.`,
       note: "Note: Hard Mode may not be available for all translations, as it's a new feature.",
+    },
+    notification: {
+      empty: 'No notifications',
+      markAsRead: 'Mark as read',
     },
   },
 };

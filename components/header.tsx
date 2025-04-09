@@ -5,7 +5,9 @@ import { prismaClient } from '@/lib/prisma-client';
 import type { Users as User } from '@prisma/client';
 import { ChartLine, Globe, LogOutIcon, User2Icon } from 'lucide-react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import { MenuIcon } from './menu-icon';
+import { Notification, NotificationSkeleton } from './notification';
 import { ToggleTheme } from './toggle-theme';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
@@ -29,6 +31,11 @@ export async function Header({ user }: HeaderProps) {
 
       <div className="flex items-center gap-2">
         {user ? <UserOptions /> : <AuthOptions />}
+        {user && (
+          <Suspense fallback={<NotificationSkeleton />}>
+            <Notification />
+          </Suspense>
+        )}
         <ToggleTheme />
       </div>
     </header>
