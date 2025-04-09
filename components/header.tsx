@@ -23,7 +23,7 @@ export async function Header({ user }: HeaderProps) {
   const defaultPath = user ? '/dashboard' : '/';
 
   return (
-    <header className="sticky top-0 z-50 border-b backdrop-blur h-16 bg-background/60 flex justify-between items-center px-4">
+    <header className="sticky top-0 z-50 border-b backdrop-blur-sm h-16 bg-background/60 flex justify-between items-center px-4">
       <Link href={defaultPath} className="flex items-center gap-2">
         <Globe className="size-6 text-primary" />
         <h1 className="md:text-2xl font-bold">{appLanguageContext.title}</h1>

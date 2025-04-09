@@ -70,7 +70,7 @@ export default async function Page() {
         {language === 'pt-br' ? 'Voltar para o início' : 'Back to home'}
       </Link>
       <Card className="max-w-3xl w-full">
-        <CardHeader className="flex items-center space-x-4">
+        <CardHeader className="flex space-x-4">
           <Avatar>
             <AvatarFallback>{nameInitials}</AvatarFallback>
           </Avatar>
