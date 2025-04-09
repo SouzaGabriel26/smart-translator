@@ -70,7 +70,7 @@ export async function Notification() {
                   </span>
 
                   <p className="text-md max-w-52 h-14 text-ellipsis overflow-hidden">
-                    {notification.description} aslmkndjisabdhsajndkjas
+                    {notification.description}
                   </p>
 
                   <span className="absolute inset-0 w-full bg-gradient-to-t from-white dark:from-background from-10% to-50%" />
