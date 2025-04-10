@@ -101,6 +101,13 @@ export async function Header({ user }: HeaderProps) {
                 </Link>
               </Button>
 
+              <Button asChild variant="ghost">
+                <Link href="/dashboard/releases">
+                  <User2Icon />
+                  {appLanguageContext.userOptions.release}
+                </Link>
+              </Button>
+
               {user.role === 'ADMIN' && (
                 <Button asChild variant="ghost">
                   <Link href="/dashboard/leads">

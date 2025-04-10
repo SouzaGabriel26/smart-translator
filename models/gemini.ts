@@ -156,7 +156,10 @@ Generate an output **ONLY in valid JSON format**, without any other characters, 
   input_brief_overview_in_language_from: string
 }
 
-Please generate "input_brief_overview_in_language_from" in this language ${formattedLanguageFrom}.
+Provide a very short and direct description of the word to “input_brief_overview_in_language_from” in ${formattedLanguageFrom}:
+  - Do not translate the word.
+  - Use no more than 10 words for the description.
+  - Make it concise, without unnecessary context.
 
 But, in case of the word is not a valid ${formattedLanguageFrom} word, ignore the command to **ONLY in valid JSON format** and return an empty object.
   `;

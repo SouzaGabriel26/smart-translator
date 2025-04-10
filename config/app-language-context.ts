@@ -9,6 +9,7 @@ const languageContexts = {
       hello: 'Olá',
       signOut: 'Sair',
       profile: 'Perfil',
+      release: 'Notas de Lançamento',
       leads: 'Ver Leads',
     },
     heroSection: {
@@ -106,6 +107,7 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       hello: 'Hello',
       signOut: 'Sign Out',
       profile: 'Profile',
+      release: 'Release Notes',
       leads: 'See Leads',
     },
     heroSection: {
