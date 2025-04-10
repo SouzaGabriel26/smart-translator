@@ -87,19 +87,19 @@ export default async function Page() {
                         isHardModeAvailable && 'flex-col items-start',
                       )}
                     >
-                      <div className="font-bold space-x-1">
+                      <div className="font-bold flex gap-1 items-center">
                         <span className="capitalize">
                           {latestTranslation.targetWord}
                         </span>
                         <small>({latestTranslation.languageFrom})</small>
                       </div>
-                      <div className="space-x-1">
+                      <div className="flex gap-1">
                         {isHardModeAvailable ? (
                           <span className="text-muted-foreground text-sm">
                             {latestTranslation.wordOverview}
                           </span>
                         ) : (
-                          <div className="font-bold">
+                          <div className="font-bold flex gap-1 items-center">
                             <span className="capitalize">
                               {'= '} {latestTranslation.translatedWord}
                             </span>
