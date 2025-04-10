@@ -85,24 +85,24 @@ export function TranslationsHistoryContent({
                 <div className="flex flex-col gap-3">
                   <div
                     className={cn(
-                      'flex font-bold items-center gap text-md',
+                      'flex font-bold items-center gap-1 text-md',
                       isHardModeAvailable && 'flex-col items-start',
                     )}
                   >
-                    <div className="space-x-1">
+                    <div className="flex gap-1 items-center">
                       <span className="capitalize">
                         {translation.targetWord}
                       </span>
                       <small>({translation.languageFrom})</small>
                     </div>
 
-                    <div className="space-x-1">
+                    <div className="flex gap-1">
                       {isHardModeAvailable ? (
                         <span className="text-sm font-normal text-muted-foreground">
                           {translation.wordOverview}
                         </span>
                       ) : (
-                        <div>
+                        <div className="flex gap-1 items-center">
                           <span className="capitalize">
                             {'='} {translation.translatedWord}
                           </span>

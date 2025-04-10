@@ -52,7 +52,10 @@ export async function Notification() {
             availableNotifications.map((notification) => (
               <div key={notification.id}>
                 <div className="relative isolate w-full hover:bg-muted transition-all p-2 rounded-md cursor-pointer flex flex-col">
-                  <Link href="#" className="font-bold">
+                  <Link
+                    href={`/dashboard/releases#${notification.slug}`}
+                    className="font-bold"
+                  >
                     {notification.name}
                     <span className="absolute inset-0 z-30" />
                   </Link>
