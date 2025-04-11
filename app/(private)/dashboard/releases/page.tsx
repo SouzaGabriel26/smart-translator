@@ -4,7 +4,7 @@ export default async function Page() {
   const notifications = await prismaClient.notifications.findMany();
 
   return (
-    <div className="p-6 flex flex-col gap-4">
+    <div className="p-6 flex flex-col gap-4 bg-background">
       <h2 className="text-3xl font-bold">Releases</h2>
 
       <ul className="relative flex-1 pr-4 h-full">
