@@ -21,6 +21,7 @@ import { type ComponentPropsWithRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
+import { PasswordInput } from './password-input';
 import {
   Form,
   FormControl,
@@ -126,11 +127,7 @@ export function SignUpForm({
                         {language === 'en' ? 'Password' : 'Senha'}
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="password"
-                          placeholder="********"
-                          {...field}
-                        />
+                        <PasswordInput placeholder="********" {...field} />
                       </FormControl>
 
                       <FormMessage />
