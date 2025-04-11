@@ -14,15 +14,20 @@ export function PasswordInput({ ...props }: PasswordInputProps) {
   }
 
   return (
-    <fieldset className='relative w-full'>
-      <Input
-        type={showPassword ? 'text' : 'password'}
-        {...props}
-      />
+    <fieldset className="relative w-full">
+      <Input type={showPassword ? 'text' : 'password'} {...props} />
 
-      <button type='button' onClick={toggleShowPassword} className='absolute right-3 top-1/2 -translate-y-1/2'>
-        {showPassword ? <EyeOffIcon className='size-4' /> : <EyeIcon className='size-4' />}
+      <button
+        type="button"
+        onClick={toggleShowPassword}
+        className="absolute right-3 top-1/2 -translate-y-1/2"
+      >
+        {showPassword ? (
+          <EyeOffIcon className="size-4" />
+        ) : (
+          <EyeIcon className="size-4" />
+        )}
       </button>
     </fieldset>
-  )
+  );
 }

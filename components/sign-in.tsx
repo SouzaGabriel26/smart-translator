@@ -113,10 +113,7 @@ export function SignInForm({
                         {language === 'en' ? 'Password' : 'Senha'}
                       </FormLabel>
                       <FormControl>
-                        <PasswordInput
-                          placeholder="********"
-                          {...field}
-                        />
+                        <PasswordInput placeholder="********" {...field} />
                       </FormControl>
 
                       <FormMessage />
