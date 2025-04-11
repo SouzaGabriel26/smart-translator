@@ -11,6 +11,7 @@ const languageContexts = {
       profile: 'Perfil',
       release: 'Notas de Lançamento',
       leads: 'Ver Leads',
+      createNotification: 'Criar Notificação',
     },
     heroSection: {
       title: 'Tradutor Inteligente com IA',
@@ -109,6 +110,7 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       profile: 'Profile',
       release: 'Release Notes',
       leads: 'See Leads',
+      createNotification: 'Create Notification',
     },
     heroSection: {
       title: 'AI-Powered Smart Translator',

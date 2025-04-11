@@ -3,14 +3,22 @@ import { getAppLanguageAction } from '@/app/actions';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import type { Users as User } from '@prisma/client';
-import { ChartLine, Globe, LogOutIcon, User2Icon } from 'lucide-react';
+import {
+  BellIcon,
+  ChartLine,
+  Globe,
+  LogOutIcon,
+  User2Icon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { CreateNotificationButton } from './create-notification-button';
 import { MenuIcon } from './menu-icon';
 import { Notification, NotificationSkeleton } from './notification';
 import { ToggleTheme } from './toggle-theme';
 import { Button } from './ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
+import { Separator } from './ui/separator';
 
 type HeaderProps = {
   user?: User;
@@ -95,26 +103,36 @@ export async function Header({ user }: HeaderProps) {
               </span>
 
               <Button asChild variant="ghost">
-                <Link href="/dashboard/profile">
+                <Link href="/dashboard/profile" className="justify-start">
                   <User2Icon />
                   {appLanguageContext.userOptions.profile}
                 </Link>
               </Button>
 
               <Button asChild variant="ghost">
-                <Link href="/dashboard/releases">
+                <Link href="/dashboard/releases" className="justify-start">
                   <User2Icon />
                   {appLanguageContext.userOptions.release}
                 </Link>
               </Button>
 
               {user.role === 'ADMIN' && (
-                <Button asChild variant="ghost">
-                  <Link href="/dashboard/leads">
-                    <ChartLine />
-                    {appLanguageContext.userOptions.leads}
-                  </Link>
-                </Button>
+                <>
+                  <Separator />
+                  <Button asChild variant="ghost">
+                    <Link href="/dashboard/leads" className="justify-start">
+                      <ChartLine />
+                      {appLanguageContext.userOptions.leads}
+                    </Link>
+                  </Button>
+
+                  <CreateNotificationButton modalTitle="Create Notification">
+                    <Button variant="ghost">
+                      <BellIcon />
+                      {appLanguageContext.userOptions.createNotification}
+                    </Button>
+                  </CreateNotificationButton>
+                </>
               )}
 
               <form action={logout}>
