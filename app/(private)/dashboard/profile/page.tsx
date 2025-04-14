@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
-import Link from 'next/link';
 
 export default async function Page() {
   const user = await checkUserAction();
@@ -63,12 +62,6 @@ export default async function Page() {
 
   return (
     <div className="w-full mx-auto p-6 space-y-6 grid place-items-center h-[calc(100%-64px)] relative">
-      <Link
-        href="/"
-        className="hover:underline transition-all absolute top-6 left-6"
-      >
-        {language === 'pt-br' ? 'Voltar para o início' : 'Back to home'}
-      </Link>
       <Card className="max-w-3xl w-full">
         <CardHeader className="flex space-x-4">
           <Avatar>
