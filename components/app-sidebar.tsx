@@ -29,6 +29,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { CreateNotificationButton } from './create-notification-button';
+import { LinkLoaderIndicator } from './link-loader-indicator';
 
 type SidebarLanguage = keyof AppLanguageContext['sidebar'];
 
@@ -171,6 +172,7 @@ export function AppSidebar({
                           <Link href={url} aria-disabled={!isEnabled}>
                             {icon}
                             {sidebarLanguage[title]}
+                            <LinkLoaderIndicator />
                           </Link>
                         </SidebarMenuButton>
                       )}
