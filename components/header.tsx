@@ -39,17 +39,10 @@ export async function Header({ user }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 border-b backdrop-blur-sm h-16 bg-background/60 flex justify-between items-center px-4">
       {user ? (
-        <SidebarTrigger />
-      ) : (
-        <Link href="/" className="flex items-center gap-2">
-          <Globe className="size-6 text-primary" />
-          <h1 className="md:text-xl font-bold">{appLanguageContext.title}</h1>
-        </Link>
-      )}
-      <div className="flex items-center gap-2">
-        {!user && <AuthOptions />}
-        {user && (
-          <>
+        <>
+          <SidebarTrigger />
+
+          <div className="flex items-center gap-2">
             <span className="hidden md:block border rounded-full text-xs px-2 py-1 text-muted-foreground dark:border-muted">
               {formattedPlanLabel}
             </span>
@@ -57,10 +50,22 @@ export async function Header({ user }: HeaderProps) {
             <Suspense fallback={<NotificationSkeleton />}>
               <Notification />
             </Suspense>
-          </>
-        )}
-        <ToggleTheme />
-      </div>
+            <ToggleTheme />
+          </div>
+        </>
+      ) : (
+        <>
+          <Link href="/" className="flex items-center gap-2">
+            <Globe className="size-6 text-primary" />
+            <h1 className="md:text-xl font-bold">{appLanguageContext.title}</h1>
+          </Link>
+
+          <div className="flex items-center gap-2">
+            <AuthOptions />
+            <ToggleTheme />
+          </div>
+        </>
+      )}
     </header>
   );
 
