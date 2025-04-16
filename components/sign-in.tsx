@@ -156,7 +156,7 @@ export function SignInForm({
             className="w-full flex items-center gap-2"
           >
             <GoogleLogo className="size-6" />
-            Entrar com o google
+            {appLanguageContext.oauth.google}
           </Button>
         </CardContent>
       </Card>
