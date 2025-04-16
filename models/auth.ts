@@ -56,22 +56,33 @@ async function signIn(input: SignInProps) {
   const { email, password } = data;
 
   const user = await prismaClient.users.findUnique({
-    where: { email },
+    where: {
+      email,
+      password: {
+        not: null,
+      },
+    },
   });
 
   if (!user) {
     return { error: 'Invalid credentials!' };
   }
 
-  const passwordMatch = await bcrypt.compare(password, user.password);
+  const passwordMatch = await bcrypt.compare(password, user.password!);
 
   if (!passwordMatch) {
     return { error: 'Invalid credentials!' };
   }
 
+  const token = await generateAccessToken({ userId: user.id });
+
+  return { token };
+}
+
+async function generateAccessToken({ userId }: { userId: string }) {
   const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-  const token = await new SignJWT({ sub: user.id })
+  const token = await new SignJWT({ sub: userId })
     .setProtectedHeader({
       alg: 'HS256',
       typ: 'JWT',
@@ -80,10 +91,11 @@ async function signIn(input: SignInProps) {
     .setIssuedAt()
     .sign(secret);
 
-  return { token };
+  return token;
 }
 
 export const auth = Object.freeze({
   signUp,
   signIn,
+  generateAccessToken,
 });
