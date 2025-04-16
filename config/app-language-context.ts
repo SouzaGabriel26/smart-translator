@@ -113,6 +113,9 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       leads: 'Ver Leads',
       createNotification: 'Criar Notificação',
     },
+    oauth: {
+      google: 'Entrar com Google',
+    },
   },
   en: {
     title: 'Smart Translator',
@@ -223,6 +226,9 @@ You can toggle it on or off anytime in settings.`,
       cms: 'CMS',
       leads: 'See Leads',
       createNotification: 'Create Notification',
+    },
+    oauth: {
+      google: 'Sign in with Google',
     },
   },
 };

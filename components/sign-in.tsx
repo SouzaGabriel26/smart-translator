@@ -1,5 +1,6 @@
 'use client';
 
+import { getGoogleOAuthUrl } from '@/actions/oauth/googleAuth';
 import { signInAction } from '@/app/(public)/auth/actions';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +22,7 @@ import { type ComponentPropsWithRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
+import { GoogleLogo } from './google-logo';
 import { PasswordInput } from './password-input';
 import {
   Form,
@@ -70,6 +72,13 @@ export function SignInForm({
     route.push('/dashboard');
   }
 
+  async function onGoogleSignIn() {
+    setIsLoading(true);
+    const authUrl = getGoogleOAuthUrl();
+    route.push(authUrl);
+    setIsLoading(false);
+  }
+
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
@@ -81,7 +90,7 @@ export function SignInForm({
             {appLanguageContext.auth.signInDescription}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex flex-col gap-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-6">
@@ -139,6 +148,16 @@ export function SignInForm({
               </div>
             </form>
           </Form>
+
+          <Button
+            disabled={isLoading}
+            onClick={onGoogleSignIn}
+            variant="outline"
+            className="w-full flex items-center gap-2"
+          >
+            <GoogleLogo className="size-6" />
+            {appLanguageContext.oauth.google}
+          </Button>
         </CardContent>
       </Card>
     </div>
