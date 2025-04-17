@@ -13,14 +13,15 @@ enum Roles {
 }
 
 model Users {
-  id        String   @id @default(uuid()) @db.Uuid
-  name      String
-  email     String   @unique
-  password  String?
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  planId    String   @db.Uuid
-  role      Roles    @default(USER)
+  id         String   @id @default(uuid()) @db.Uuid
+  name       String
+  email      String   @unique
+  password   String?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  planId     String   @db.Uuid
+  avatar_url String?  @map("avatar_url")
+  role       Roles    @default(USER)
 
   plan Plans @relation(fields: [planId], references: [id], onDelete: Cascade)
 
