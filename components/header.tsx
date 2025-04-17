@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Suspense } from 'react';
 import { Notification, NotificationSkeleton } from './notification';
 import { ToggleTheme } from './toggle-theme';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import { Button } from './ui/button';
 import { SidebarTrigger } from './ui/sidebar';
 
@@ -34,6 +35,13 @@ export async function Header({ user }: HeaderProps) {
     return `${userPlan.name} Plan: ${userPlan.translationsLimit} translations per day`;
   }
 
+  const userName = user?.name ?? '';
+  const splittedName = userName.split(' ');
+  const nameInitials =
+    splittedName.length > 1
+      ? splittedName[0][0] + splittedName[1][0]
+      : splittedName[0][0];
+
   const formattedPlanLabel = buildPlanLabel();
 
   return (
@@ -51,6 +59,15 @@ export async function Header({ user }: HeaderProps) {
               <Notification />
             </Suspense>
             <ToggleTheme />
+
+            <Avatar>
+              <AvatarImage
+                src={user.avatar_url ?? ''}
+                alt={user.name}
+                className="w-10 h-10 object-cover"
+              />
+              <AvatarFallback>{nameInitials}</AvatarFallback>
+            </Avatar>
           </div>
         </>
       ) : (

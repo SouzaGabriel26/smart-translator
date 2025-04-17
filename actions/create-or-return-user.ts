@@ -5,11 +5,18 @@ type CreateOrReturnUserProps = Omit<SignUpProps, 'password'> & {
 };
 
 export async function createOrReturnUser(input: CreateOrReturnUserProps) {
-  const { email, name } = input;
+  const { email, name, avatar_url } = input;
 
   const userAlreadyExists = await prismaClient.users.findUnique({
     where: { email },
   });
+
+  if (!userAlreadyExists?.avatar_url && avatar_url) {
+    await prismaClient.users.update({
+      where: { email },
+      data: { avatar_url },
+    });
+  }
 
   if (userAlreadyExists) return userAlreadyExists;
 
@@ -22,7 +29,7 @@ export async function createOrReturnUser(input: CreateOrReturnUserProps) {
       email,
       name,
       planId: availablePlan!.id,
-      //TODO: avatar_url,
+      avatar_url,
     },
   });
 
