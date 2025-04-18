@@ -115,6 +115,7 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
     },
     oauth: {
       google: 'Entrar com Google',
+      github: 'Entrar com GitHub',
     },
   },
   en: {
@@ -229,6 +230,7 @@ You can toggle it on or off anytime in settings.`,
     },
     oauth: {
       google: 'Sign in with Google',
+      github: 'Sign in with GitHub',
     },
   },
 };
