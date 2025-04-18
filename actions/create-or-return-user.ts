@@ -11,7 +11,7 @@ export async function createOrReturnUser(input: CreateOrReturnUserProps) {
     where: { email },
   });
 
-  if (!userAlreadyExists?.avatar_url && avatar_url) {
+  if (userAlreadyExists && !userAlreadyExists?.avatar_url && avatar_url) {
     await prismaClient.users.update({
       where: { email },
       data: { avatar_url },

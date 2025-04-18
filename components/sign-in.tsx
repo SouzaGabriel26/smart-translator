@@ -1,5 +1,6 @@
 'use client';
 
+import { getGithubOAuthUrl } from '@/actions/oauth/githubAuth';
 import { getGoogleOAuthUrl } from '@/actions/oauth/googleAuth';
 import { signInAction } from '@/app/(public)/auth/actions';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ import { type ComponentPropsWithRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import type { z } from 'zod';
+import { GithubLogo } from './github-logo';
 import { GoogleLogo } from './google-logo';
 import { PasswordInput } from './password-input';
 import {
@@ -72,9 +74,16 @@ export function SignInForm({
     route.push('/dashboard');
   }
 
-  async function onGoogleSignIn() {
+  function onGoogleSignIn() {
     setIsLoading(true);
     const authUrl = getGoogleOAuthUrl();
+    route.push(authUrl);
+    setIsLoading(false);
+  }
+
+  function onGithubSignIn() {
+    setIsLoading(true);
+    const authUrl = getGithubOAuthUrl();
     route.push(authUrl);
     setIsLoading(false);
   }
@@ -157,6 +166,16 @@ export function SignInForm({
           >
             <GoogleLogo className="size-6" />
             {appLanguageContext.oauth.google}
+          </Button>
+
+          <Button
+            disabled={isLoading}
+            onClick={onGithubSignIn}
+            variant="outline"
+            className="w-full flex items-center gap-2"
+          >
+            <GithubLogo className="size-6 dark:fill-white" />
+            {appLanguageContext.oauth.github}
           </Button>
         </CardContent>
       </Card>
