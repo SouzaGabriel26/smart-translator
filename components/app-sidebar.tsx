@@ -19,10 +19,9 @@ import {
 } from '@/components/ui/sidebar';
 import type { AppLanguageContext } from '@/config/app-language-context';
 import {
-  BarChart,
   BellIcon,
   Globe,
-  Languages,
+  Home,
   Newspaper,
   Table,
   User2Icon,
@@ -30,6 +29,7 @@ import {
 import Link from 'next/link';
 import { CreateNotificationButton } from './create-notification-button';
 import { LinkLoaderIndicator } from './link-loader-indicator';
+import { Separator } from './ui/separator';
 
 type SidebarLanguage = keyof AppLanguageContext['sidebar'];
 
@@ -51,14 +51,8 @@ const sidebarItems: SidebarProps = [
       {
         title: 'home',
         url: '/dashboard',
-        icon: <Languages className="size-6" />,
+        icon: <Home className="size-6" />,
         isEnabled: true,
-      },
-      {
-        title: 'usageAndLimits',
-        url: '#',
-        icon: <BarChart className="size-6" />,
-        isEnabled: false,
       },
     ],
   },
@@ -210,6 +204,7 @@ export function AppSidebar({
                   ))}
                 </SidebarMenu>
               </SidebarGroupContent>
+              <Separator className="mt-4" />
             </SidebarGroup>
           );
         })}
