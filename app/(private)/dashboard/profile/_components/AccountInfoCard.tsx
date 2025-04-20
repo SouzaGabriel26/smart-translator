@@ -28,7 +28,7 @@ export default async function AccountInfoCard({
       : splittedName[0].charAt(0);
 
   return (
-    <Card className="w-full max-w-3xl">
+    <Card className="w-full h-[335px]">
       <CardHeader className="space-y-2">
         <div className="flex flex-col gap-2">
           <span className="text-xl font-medium">
