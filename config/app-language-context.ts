@@ -96,6 +96,8 @@ const languageContexts = {
       subscriptionDescription: 'Seu plano e uso atuais',
       translationStats: 'Estatísticas de Tradução',
       translationStatsDescription: 'Sua atividade de tradução',
+      translationsPerDay: 'Traduções por dia',
+      dailyUsage: 'Uso Diário',
     },
     hardMode: {
       title: 'Modo Difícil',
@@ -218,6 +220,8 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       subscriptionDescription: 'Your current plan and usage',
       translationStats: 'Translation Statistics',
       translationStatsDescription: 'Your translation activity',
+      translationsPerDay: 'Translations per day',
+      dailyUsage: 'Daily Usage',
     },
     hardMode: {
       title: 'Hard Mode',
