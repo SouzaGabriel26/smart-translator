@@ -98,6 +98,8 @@ const languageContexts = {
       translationStatsDescription: 'Sua atividade de tradução',
       translationsPerDay: 'Traduções por dia',
       dailyUsage: 'Uso Diário',
+      statistics: 'Estatísticas da Conta',
+      statisticsDescription: 'Sua atividade de tradução',
     },
     hardMode: {
       title: 'Modo Difícil',
@@ -222,6 +224,8 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       translationStatsDescription: 'Your translation activity',
       translationsPerDay: 'Translations per day',
       dailyUsage: 'Daily Usage',
+      statistics: 'Account Statistics',
+      statisticsDescription: 'Your translation activity',
     },
     hardMode: {
       title: 'Hard Mode',
