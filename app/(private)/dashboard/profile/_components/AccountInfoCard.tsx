@@ -1,4 +1,5 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { getAppLanguageAction } from '@/app/actions';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,18 +9,15 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import type { AppLanguageContext } from '@/config/app-language-context';
+import { getLanguageContext } from '@/config/app-language-context';
 import { AvatarImage } from '@radix-ui/react-avatar';
 import { Settings } from 'lucide-react';
 
-type AccountInfoCardProps = {
-  profileLanguage: AppLanguageContext['profile'];
-};
-
-export default async function AccountInfoCard({
-  profileLanguage,
-}: AccountInfoCardProps) {
+export async function AccountInfoCard() {
   const user = await checkUserAction();
+  const language = await getAppLanguageAction();
+  const { profile: profileLanguage } = getLanguageContext(language);
+
 
   const splittedName = user.name.split(' ');
   const nameInitials =

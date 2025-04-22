@@ -1,15 +1,15 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { getAppLanguageAction } from '@/app/actions';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import type { AppLanguageContext } from '@/config/app-language-context';
+import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 
-type StatisticsCardProps = {
-  profileLanguage: AppLanguageContext['profile'];
-};
-
-export async function StatisticsCard({ profileLanguage }: StatisticsCardProps) {
+export async function StatisticsCard() {
   const user = await checkUserAction();
+
+  const language = await getAppLanguageAction();
+  const { profile: profileLanguage } = getLanguageContext(language);
 
   const translations = await prismaClient.translations.findMany({
     where: { userId: user.id },
