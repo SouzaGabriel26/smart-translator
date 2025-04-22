@@ -19,7 +19,7 @@ export default function AccountInfoCardSkeleton({
   profileLanguage,
 }: AccountInfoCardSkeletonProps) {
   return (
-    <Card className="w-full h-[335px]">
+    <Card className="w-full lg:h-[335px]">
       <CardHeader className="space-y-2">
         <div className="flex flex-col gap-2">
           <span className="text-xl font-medium">
