@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 
-
 export function SubscriptionCardSkeleton() {
   return (
     <Card className="w-full h-[335px]">

@@ -18,7 +18,6 @@ export async function AccountInfoCard() {
   const language = await getAppLanguageAction();
   const { profile: profileLanguage } = getLanguageContext(language);
 
-
   const splittedName = user.name.split(' ');
   const nameInitials =
     splittedName.length > 1
