@@ -78,7 +78,7 @@ export async function StatisticsCard() {
             >
               <div className="text-sm font-medium">{value.languageLabel}</div>
               <div className="mt-2 text-3xl font-bold flex w-full justify-between items-end">
-                {totalTranslations}
+                {value.count}
 
                 <span className="text-muted-foreground text-md">
                   {getTranslationPercentage(value.count)}%
