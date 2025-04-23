@@ -22,9 +22,9 @@ export async function GlobalLayout({ children }: GlobalLayoutProps) {
         userIsAdmin={isLogged.role === 'ADMIN'}
       />
 
-      <SidebarInset className="bg-background h-full">
-        {children}
-      </SidebarInset>
+      <SidebarInset className="bg-background h-full">{children}</SidebarInset>
     </>
-  ) : (<div className="w-full">{children}</div>)
+  ) : (
+    <div className="w-full">{children}</div>
+  );
 }

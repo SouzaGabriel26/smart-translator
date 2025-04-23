@@ -68,9 +68,7 @@ export default function RootLayout({
             attribute="class"
             disableTransitionOnChange
           >
-            <GlobalLayout>
-              {children}
-            </GlobalLayout>
+            <GlobalLayout>{children}</GlobalLayout>
             <Toaster />
             <ChangeLanguageButton />
           </ThemeProvider>
