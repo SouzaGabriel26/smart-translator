@@ -1,24 +1,22 @@
 import { checkUserAction } from '@/actions/auth/check-user';
+import { getAppLanguageAction } from '@/app/actions';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import type { AppLanguageContext } from '@/config/app-language-context';
+import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
 import { SubscriptionDailyUsage } from './SubscriptionDailyUsage';
 
-type SubscriptionCardProps = {
-  profileLanguage: AppLanguageContext['profile'];
-};
-
-export async function SubscriptionCard({
-  profileLanguage,
-}: SubscriptionCardProps) {
+export async function SubscriptionCard() {
   const user = await checkUserAction();
   const plan = await prismaClient.plans.findFirst({
     where: {
       id: user.planId,
     },
   });
+
+  const language = await getAppLanguageAction();
+  const { profile: profileLanguage } = getLanguageContext(language);
 
   return (
     <Card className="w-full h-[335px]">

@@ -1,24 +1,13 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import type { AppLanguageContext } from '@/config/app-language-context';
 
-type StatisticsCardSkeletonProps = {
-  profileLanguage: AppLanguageContext['profile'];
-};
-
-export async function StatisticsCardSkeleton({
-  profileLanguage,
-}: StatisticsCardSkeletonProps) {
+export function StatisticsCardSkeleton() {
   return (
     <Card className="w-full h-[335px]">
       <CardHeader className="space-y-2">
         <div className="flex flex-col gap-2">
-          <span className="text-xl font-medium">
-            {profileLanguage.statistics}
-          </span>
-          <p className="text-sm text-muted-foreground">
-            {profileLanguage.statisticsDescription}
-          </p>
+          <Skeleton className="h-6 w-1/2" />
+          <Skeleton className="h-4 w-3/4" />
         </div>
       </CardHeader>
 
