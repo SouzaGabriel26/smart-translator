@@ -1,13 +1,10 @@
-import { isLoggedIn } from '@/actions/auth/check-user';
-import { AppSidebar } from '@/components/app-sidebar';
 import { ChangeLanguageButton } from '@/components/change-language-button';
 import { ThemeProvider } from '@/components/theme-provider';
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/sonner';
-import { getLanguageContext } from '@/config/app-language-context';
 import type { Metadata } from 'next';
-import { getAppLanguageAction } from './actions';
 import './globals.css';
+import { GlobalLayout } from './layouts/global-layout';
 
 export const metadata: Metadata = {
   title: 'Smart Translator | Translate & Learn with AI',
@@ -57,15 +54,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isLogged = await isLoggedIn();
-  const language = await getAppLanguageAction();
-  const appLanguageContext = getLanguageContext(language);
-
   return (
     <html lang="en" className="h-screen" suppressHydrationWarning>
       <body className="antialiased h-full">
@@ -75,21 +68,7 @@ export default async function RootLayout({
             attribute="class"
             disableTransitionOnChange
           >
-            {isLogged ? (
-              <>
-                <AppSidebar
-                  sidebarLanguage={appLanguageContext.sidebar}
-                  appTitle={appLanguageContext.title}
-                  userIsAdmin={isLogged.role === 'ADMIN'}
-                />
-
-                <SidebarInset className="bg-background h-full">
-                  {children}
-                </SidebarInset>
-              </>
-            ) : (
-              <div className="w-full">{children}</div>
-            )}
+            <GlobalLayout>{children}</GlobalLayout>
             <Toaster />
             <ChangeLanguageButton />
           </ThemeProvider>
