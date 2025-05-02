@@ -124,6 +124,7 @@ Em vez de traduções diretas, você receberá uma breve explicação e frases d
       cms: 'CMS',
       leads: 'Ver Leads',
       createNotification: 'Criar Notificação',
+      history: 'Histórico',
     },
     oauth: {
       google: 'Entrar com Google',
@@ -251,6 +252,7 @@ You can toggle it on or off anytime in settings.`,
       cms: 'CMS',
       leads: 'See Leads',
       createNotification: 'Create Notification',
+      history: 'History',
     },
     oauth: {
       google: 'Sign in with Google',
