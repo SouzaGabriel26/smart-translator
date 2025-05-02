@@ -21,9 +21,9 @@ export function SubscriptionCardSkeleton() {
           </span>
 
           <div className="flex flex-col gap-2">
-            <p className="text-xl font-bold flex items-center gap-2">
+            <span className="text-xl font-bold flex items-center gap-2">
               <Skeleton className="w-7 h-4 bg-white/30 rounded-full text-white text-sm py-0" />
-            </p>
+            </span>
             <Button
               disabled
               variant="outline"
