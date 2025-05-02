@@ -15,7 +15,7 @@ export async function GlobalLayout({ children }: GlobalLayoutProps) {
   const appLanguageContext = getLanguageContext(language);
 
   return isLogged ? (
-    <>
+    <div className="flex w-full">
       <AppSidebar
         sidebarLanguage={appLanguageContext.sidebar}
         appTitle={appLanguageContext.title}
@@ -23,7 +23,7 @@ export async function GlobalLayout({ children }: GlobalLayoutProps) {
       />
 
       <SidebarInset className="bg-background h-full">{children}</SidebarInset>
-    </>
+    </div>
   ) : (
     <div className="w-full">{children}</div>
   );
