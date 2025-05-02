@@ -21,6 +21,7 @@ import type { AppLanguageContext } from '@/config/app-language-context';
 import {
   BellIcon,
   Globe,
+  History,
   Home,
   Newspaper,
   Table,
@@ -63,6 +64,12 @@ const sidebarItems: SidebarProps = [
         title: 'profile',
         url: '/dashboard/profile',
         icon: <User2Icon className="size-6" />,
+        isEnabled: true,
+      },
+      {
+        title: 'history',
+        url: '/dashboard/history',
+        icon: <History className="size-6" />,
         isEnabled: true,
       },
       {

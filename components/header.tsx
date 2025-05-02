@@ -60,14 +60,16 @@ export async function Header({ user }: HeaderProps) {
             </Suspense>
             <ToggleTheme />
 
-            <Avatar>
-              <AvatarImage
-                src={user.avatar_url ?? ''}
-                alt={user.name}
-                className="w-10 h-10 object-cover"
-              />
-              <AvatarFallback>{nameInitials}</AvatarFallback>
-            </Avatar>
+            <Link href="/dashboard/profile" className="rounded-full">
+              <Avatar>
+                <AvatarImage
+                  src={user.avatar_url ?? ''}
+                  alt={user.name}
+                  className="w-10 h-10 object-cover"
+                />
+                <AvatarFallback>{nameInitials}</AvatarFallback>
+              </Avatar>
+            </Link>
           </div>
         </>
       ) : (

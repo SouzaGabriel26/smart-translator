@@ -4,7 +4,7 @@ import { HistoryIcon } from 'lucide-react';
 
 export async function TranslationsHistorySkeleton() {
   return (
-    <div className="space-y-4 p-4 pb-0 border dark:border-muted rounded-md w-full md:h-[750px] flex flex-col">
+    <div className="space-y-4 p-4 pb-0 rounded-md w-full md:h-[750px] flex flex-col">
       <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
         <HistoryIcon className="size-6" />
         Translation History
