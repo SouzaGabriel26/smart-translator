@@ -41,7 +41,7 @@ export function TranslationsHistoryContent({
   }
 
   return (
-    <div className="space-y-4 pb-4 md:pb-0 border dark:border-muted rounded-md p-4 w-full h-[750px] flex flex-col">
+    <div className="space-y-4 pb-4 md:pb-0 rounded-md p-4 w-full flex flex-col">
       <h3 className="mb-3 text-xl font-bold flex items-center gap-2">
         <HistoryIcon className="size-6" />
         {historyLanguage.title} ({translations.length})
