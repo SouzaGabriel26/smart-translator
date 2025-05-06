@@ -1,6 +1,7 @@
 'use client';
 
 import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
+import { CopyToClipboard } from '@/components/CopyToClipboard';
 import { DebouncedInput } from '@/components/debounced-input';
 import type { AppLanguageContext } from '@/config/app-language-context';
 import type { AvailableLanguages } from '@/config/constants';
@@ -126,16 +127,28 @@ export function TranslationsHistoryContent({
                 <div>
                   <ul className="space-y-3 mt-4">
                     {translation.phrases.map((phrase) => (
-                      <li key={phrase.id} className="flex flex-col text-sm">
-                        <span className="font-bold">{phrase.content}</span>
-                        <span
+                      <li
+                        key={phrase.id}
+                        className="flex flex-col text-sm gap-2"
+                      >
+                        <div className="flex gap-2 items-center justify-between sm:justify-start">
+                          <span className="font-bold">{phrase.content}</span>
+                          <CopyToClipboard textToCopy={phrase.content} />
+                        </div>
+
+                        <div
                           className={cn(
-                            'text-sm text-muted-foreground',
+                            'flex gap-2 items-center justify-between sm:justify-start',
                             isHardModeAvailable && 'hidden',
                           )}
                         >
-                          {phrase.translatedContent}
-                        </span>
+                          <span className="text-sm text-muted-foreground">
+                            {phrase.translatedContent}
+                          </span>
+                          <CopyToClipboard
+                            textToCopy={phrase.translatedContent}
+                          />
+                        </div>
                       </li>
                     ))}
                   </ul>
