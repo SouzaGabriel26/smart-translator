@@ -1,5 +1,6 @@
 import { checkUserAction } from '@/actions/auth/check-user';
 import { getAppLanguageAction, getModeAction } from '@/app/actions';
+import { CopyToClipboard } from '@/components/CopyToClipboard';
 import { ToggleHardMode } from '@/components/toggle-hard-mode';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
@@ -118,17 +119,27 @@ export default async function Page() {
                     {latestTranslation.phrases.map((phrase) => (
                       <li
                         key={phrase.id}
-                        className="flex flex-col border dark:border-muted rounded-md p-4"
+                        className="flex flex-col gap-2 border dark:border-muted rounded-md p-4 group"
                       >
-                        <span className="font-bold">{phrase.content}</span>
-                        <span
+                        <div className="flex gap-2 items-center justify-between sm:justify-start">
+                          <span className="font-bold">{phrase.content}</span>
+                          <CopyToClipboard textToCopy={phrase.content} />
+                        </div>
+
+                        <div
                           className={cn(
-                            'text-sm text-muted-foreground',
+                            'flex gap-2 items-center justify-between sm:justify-start',
                             isHardModeAvailable && 'hidden',
                           )}
                         >
-                          {phrase.translatedContent}
-                        </span>
+                          <span className="text-sm text-muted-foreground">
+                            {phrase.translatedContent}
+                          </span>
+
+                          <CopyToClipboard
+                            textToCopy={phrase.translatedContent}
+                          />
+                        </div>
                       </li>
                     ))}
                   </ul>
