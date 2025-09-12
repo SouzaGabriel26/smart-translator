@@ -2,7 +2,7 @@ const memoryCache = new Map<string, Buffer>();
 
 export async function getCachedAudio(
   text: string,
-  voiceId: string
+  voiceId: string,
 ): Promise<Buffer | null> {
   const key = generateCacheKey(text, voiceId);
 
@@ -18,7 +18,7 @@ export async function getCachedAudio(
 export async function setCachedAudio(
   text: string,
   voiceId: string,
-  audioBuffer: Buffer
+  audioBuffer: Buffer,
 ): Promise<void> {
   const key = generateCacheKey(text, voiceId);
   memoryCache.set(key, audioBuffer);
@@ -27,5 +27,5 @@ export async function setCachedAudio(
 }
 
 function generateCacheKey(text: string, voiceId: string): string {
-  return `${voiceId}:${Buffer.from(text).toString("base64")}`;
+  return `${voiceId}:${Buffer.from(text).toString('base64')}`;
 }

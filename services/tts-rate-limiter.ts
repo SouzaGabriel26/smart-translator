@@ -1,5 +1,5 @@
-import { TTS_CONFIG } from "@/config/tts-config";
-import { TTSRateLimitError } from "@/errors/tts-errors";
+import { TTS_CONFIG } from '@/config/tts-config';
+import { TTSRateLimitError } from '@/errors/tts-errors';
 
 const requestTimes: number[] = [];
 const WINDOW_SIZE = 60 * 1000; // 1 minute

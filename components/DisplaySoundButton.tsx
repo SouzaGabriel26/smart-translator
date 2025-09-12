@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { Volume2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
-import { AudioLinesIcon } from "./ui/audio-lines";
-import { Button } from "./ui/button";
+import { Volume2 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'sonner';
+import { AudioLinesIcon } from './ui/audio-lines';
+import { Button } from './ui/button';
 
 type DisplaySoundButtonProps = {
   text: string;
@@ -29,18 +29,18 @@ export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
     setIsLoading(true);
     try {
       const { generateAudioAction } = await import(
-        "@/actions/tts/generate-audio"
+        '@/actions/tts/generate-audio'
       );
       const result = await generateAudioAction({ text });
 
       if (!result.success) {
-        console.error("TTS failed:", result.error);
+        console.error('TTS failed:', result.error);
         toast.error(result.error);
         return;
       }
 
-      const audioBuffer = Buffer.from(result.audioData, "base64");
-      const blob = new Blob([audioBuffer], { type: "audio/mpeg" });
+      const audioBuffer = Buffer.from(result.audioData, 'base64');
+      const blob = new Blob([audioBuffer], { type: 'audio/mpeg' });
 
       if (audioUrlRef.current) {
         URL.revokeObjectURL(audioUrlRef.current);
@@ -52,14 +52,14 @@ export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
       await audioElement.play();
       setIsPlaying(true);
 
-      audioElement.addEventListener("ended", () => {
+      audioElement.addEventListener('ended', () => {
         setIsPlaying(false);
         URL.revokeObjectURL(url);
         audioUrlRef.current = null;
       });
     } catch (error) {
-      console.error("TTS playback failed:", error);
-      toast.error("Failed to play audio. Please try again later.");
+      console.error('TTS playback failed:', error);
+      toast.error('Failed to play audio. Please try again later.');
     } finally {
       setIsLoading(false);
     }
@@ -71,7 +71,7 @@ export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
       size="icon"
       onClick={handlePlay}
       disabled={isLoading}
-      aria-label={isPlaying ? "Playing audio" : "Play audio"}
+      aria-label={isPlaying ? 'Playing audio' : 'Play audio'}
     >
       {isLoading ? (
         <div className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent" />

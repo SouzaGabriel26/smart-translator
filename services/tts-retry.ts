@@ -1,9 +1,9 @@
-import { TTSServiceError } from "@/errors/tts-errors";
+import { TTSServiceError } from '@/errors/tts-errors';
 
 export async function withRetry<T>(
   operation: () => Promise<T>,
   context: string,
-  maxRetries = 3
+  maxRetries = 3,
 ): Promise<T> {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
@@ -12,7 +12,7 @@ export async function withRetry<T>(
       if (attempt === maxRetries) {
         throw new TTSServiceError(
           `TTS operation failed after ${maxRetries} attempts: ${context}`,
-          error as Error
+          error as Error,
         );
       }
 
@@ -20,5 +20,5 @@ export async function withRetry<T>(
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   }
-  throw new Error("Unreachable");
+  throw new Error('Unreachable');
 }

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { findTranslationsAction } from "@/app/(private)/dashboard/actions";
-import { CopyToClipboard } from "@/components/CopyToClipboard";
-import { DisplaySoundButton } from "@/components/DisplaySoundButton";
-import { DebouncedInput } from "@/components/debounced-input";
-import type { AppLanguageContext } from "@/config/app-language-context";
-import type { AvailableLanguages } from "@/config/constants";
-import { cn } from "@/lib/utils";
-import type { TranslationPhrases, Translations } from "@prisma/client";
-import { HistoryIcon, Loader2Icon } from "lucide-react";
-import { useState } from "react";
-import { DeleteConfirmationModal } from "./delete-confirmation-modal";
+import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
+import { CopyToClipboard } from '@/components/CopyToClipboard';
+import { DisplaySoundButton } from '@/components/DisplaySoundButton';
+import { DebouncedInput } from '@/components/debounced-input';
+import type { AppLanguageContext } from '@/config/app-language-context';
+import type { AvailableLanguages } from '@/config/constants';
+import { cn } from '@/lib/utils';
+import type { TranslationPhrases, Translations } from '@prisma/client';
+import { HistoryIcon, Loader2Icon } from 'lucide-react';
+import { useState } from 'react';
+import { DeleteConfirmationModal } from './delete-confirmation-modal';
 
 export type TranslationsWithPhrases = Array<
   Translations & {
@@ -20,7 +20,7 @@ export type TranslationsWithPhrases = Array<
 
 type TranslationsHistoryContentProps = {
   initialTranslations: TranslationsWithPhrases;
-  historyLanguage: AppLanguageContext["dashboard"]["history"];
+  historyLanguage: AppLanguageContext['dashboard']['history'];
   language: AvailableLanguages;
   isHardMode: boolean;
 };
@@ -87,8 +87,8 @@ export function TranslationsHistoryContent({
                 <div className="flex flex-col gap-3">
                   <div
                     className={cn(
-                      "flex font-bold items-center gap-1 text-md",
-                      isHardModeAvailable && "flex-col items-start"
+                      'flex font-bold items-center gap-1 text-md',
+                      isHardModeAvailable && 'flex-col items-start',
                     )}
                   >
                     <div className="flex gap-1 items-center">
@@ -106,7 +106,7 @@ export function TranslationsHistoryContent({
                       ) : (
                         <div className="flex gap-1 items-center">
                           <span className="capitalize">
-                            {"="} {translation.translatedWord}
+                            {'='} {translation.translatedWord}
                           </span>
                           <small>({translation.languageTo})</small>
                         </div>
@@ -116,11 +116,11 @@ export function TranslationsHistoryContent({
 
                   <span className="h-fit text-xs border rounded-full px-2 py-1 w-fit">
                     {translation.createdAt.toLocaleDateString(language, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
                     })}
                   </span>
                 </div>
@@ -140,8 +140,8 @@ export function TranslationsHistoryContent({
 
                         <div
                           className={cn(
-                            "flex gap-2 items-center justify-between sm:justify-start",
-                            isHardModeAvailable && "hidden"
+                            'flex gap-2 items-center justify-between sm:justify-start',
+                            isHardModeAvailable && 'hidden',
                           )}
                         >
                           <span className="text-sm text-muted-foreground">

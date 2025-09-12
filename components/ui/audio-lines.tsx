@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { motion, useAnimation } from "motion/react";
-import type { HTMLAttributes } from "react";
+import { cn } from '@/lib/utils';
+import { motion, useAnimation } from 'motion/react';
+import type { HTMLAttributes } from 'react';
 import {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
-} from "react";
+} from 'react';
 
 export interface AudioLinesIconHandle {
   startAnimation: () => void;
@@ -31,7 +31,7 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
       animated = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const controls = useAnimation();
     const isControlledRef = useRef(false);
@@ -39,7 +39,7 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
     // Auto-start animation when animated prop is true
     useEffect(() => {
       if (animated && !isControlledRef.current) {
-        controls.start("animate");
+        controls.start('animate');
       }
     }, [animated, controls]);
 
@@ -51,41 +51,41 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
         return {
           startAnimation: () => {
             if (animated) {
-              controls.start("animate");
+              controls.start('animate');
             }
           },
           stopAnimation: () => {
             if (animated) {
-              controls.start("normal");
+              controls.start('normal');
             }
           },
         };
       },
-      [animated, controls]
+      [animated, controls],
     );
 
     const handleMouseEnter = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {
         // Only handle hover animation if not in continuous animation mode
         if (!isControlledRef.current && !animated) {
-          controls.start("animate");
+          controls.start('animate');
         } else {
           onMouseEnter?.(e);
         }
       },
-      [controls, onMouseEnter, animated]
+      [controls, onMouseEnter, animated],
     );
 
     const handleMouseLeave = useCallback(
       (e: React.MouseEvent<HTMLDivElement>) => {
         // Only handle hover animation if not in continuous animation mode
         if (!isControlledRef.current && !animated) {
-          controls.start("normal");
+          controls.start('normal');
         } else {
           onMouseLeave?.(e);
         }
       },
-      [controls, onMouseLeave, animated]
+      [controls, onMouseLeave, animated],
     );
 
     return (
@@ -110,9 +110,9 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
           {animated ? (
             <motion.path
               variants={{
-                normal: { d: "M6 6v11" },
+                normal: { d: 'M6 6v11' },
                 animate: {
-                  d: ["M6 6v11", "M6 10v3", "M6 6v11"],
+                  d: ['M6 6v11', 'M6 10v3', 'M6 6v11'],
                   transition: {
                     duration: 1.5,
                     repeat: Infinity,
@@ -128,9 +128,9 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
           {animated ? (
             <motion.path
               variants={{
-                normal: { d: "M10 3v18" },
+                normal: { d: 'M10 3v18' },
                 animate: {
-                  d: ["M10 3v18", "M10 9v5", "M10 3v18"],
+                  d: ['M10 3v18', 'M10 9v5', 'M10 3v18'],
                   transition: {
                     duration: 1,
                     repeat: Infinity,
@@ -146,9 +146,9 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
           {animated ? (
             <motion.path
               variants={{
-                normal: { d: "M14 8v7" },
+                normal: { d: 'M14 8v7' },
                 animate: {
-                  d: ["M14 8v7", "M14 6v11", "M14 8v7"],
+                  d: ['M14 8v7', 'M14 6v11', 'M14 8v7'],
                   transition: {
                     duration: 0.8,
                     repeat: Infinity,
@@ -164,9 +164,9 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
           {animated ? (
             <motion.path
               variants={{
-                normal: { d: "M18 5v13" },
+                normal: { d: 'M18 5v13' },
                 animate: {
-                  d: ["M18 5v13", "M18 7v9", "M18 5v13"],
+                  d: ['M18 5v13', 'M18 7v9', 'M18 5v13'],
                   transition: {
                     duration: 1.5,
                     repeat: Infinity,
@@ -183,9 +183,9 @@ const AudioLinesIcon = forwardRef<AudioLinesIconHandle, AudioLinesIconProps>(
         </svg>
       </div>
     );
-  }
+  },
 );
 
-AudioLinesIcon.displayName = "AudioLinesIcon";
+AudioLinesIcon.displayName = 'AudioLinesIcon';
 
 export { AudioLinesIcon };

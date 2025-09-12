@@ -1,12 +1,12 @@
-import { checkUserAction } from "@/actions/auth/check-user";
-import { getAppLanguageAction, getModeAction } from "@/app/actions";
-import { CopyToClipboard } from "@/components/CopyToClipboard";
-import { DisplaySoundButton } from "@/components/DisplaySoundButton";
-import { ToggleHardMode } from "@/components/toggle-hard-mode";
-import { getLanguageContext } from "@/config/app-language-context";
-import { prismaClient } from "@/lib/prisma-client";
-import { cn } from "@/lib/utils";
-import { TranslationForm } from "./_components/translation-form";
+import { checkUserAction } from '@/actions/auth/check-user';
+import { getAppLanguageAction, getModeAction } from '@/app/actions';
+import { CopyToClipboard } from '@/components/CopyToClipboard';
+import { DisplaySoundButton } from '@/components/DisplaySoundButton';
+import { ToggleHardMode } from '@/components/toggle-hard-mode';
+import { getLanguageContext } from '@/config/app-language-context';
+import { prismaClient } from '@/lib/prisma-client';
+import { cn } from '@/lib/utils';
+import { TranslationForm } from './_components/translation-form';
 
 export default async function Page() {
   const user = await checkUserAction();
@@ -29,26 +29,26 @@ export default async function Page() {
       phrases: true,
     },
     orderBy: {
-      createdAt: "desc",
+      createdAt: 'desc',
     },
   });
 
   const randomWordsInEnglishToTranslate = [
-    "Smart Contract",
-    "Decentralized",
-    "Cryptocurrency",
-    "Smart Translator",
-    "Artificial Intelligence",
-    "Machine Learning",
+    'Smart Contract',
+    'Decentralized',
+    'Cryptocurrency',
+    'Smart Translator',
+    'Artificial Intelligence',
+    'Machine Learning',
   ];
 
   const randomIndex = Math.floor(
-    Math.random() * randomWordsInEnglishToTranslate.length
+    Math.random() * randomWordsInEnglishToTranslate.length,
   );
   const randomLabel = randomWordsInEnglishToTranslate[randomIndex];
 
   const isHardModeAvailable =
-    mode === "hard" && Boolean(latestTranslation?.wordOverview);
+    mode === 'hard' && Boolean(latestTranslation?.wordOverview);
 
   return (
     <div className="flex flex-col px-6 py-6 md:py-12 gap-3 bg-background md:px-20">
@@ -75,8 +75,8 @@ export default async function Page() {
                 <div className="flex flex-col gap-2">
                   <div
                     className={cn(
-                      "flex items-center gap-1",
-                      isHardModeAvailable && ""
+                      'flex items-center gap-1',
+                      isHardModeAvailable && '',
                     )}
                   >
                     <div className="font-bold flex gap-1 items-center">
@@ -88,12 +88,12 @@ export default async function Page() {
                     <div className="flex gap-1">
                       {isHardModeAvailable ? (
                         <span className="text-sm">
-                          {"= "} {latestTranslation.wordOverview}
+                          {'= '} {latestTranslation.wordOverview}
                         </span>
                       ) : (
                         <div className="font-bold flex gap-1 items-center">
                           <span className="capitalize">
-                            {"= "} {latestTranslation.translatedWord}
+                            {'= '} {latestTranslation.translatedWord}
                           </span>
                           <small>({latestTranslation.languageTo})</small>
                         </div>
@@ -105,11 +105,11 @@ export default async function Page() {
 
                   <span className="text-sm text-muted-foreground">
                     {latestTranslation.createdAt.toLocaleDateString(language, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
                     })}
                   </span>
                 </div>
@@ -130,8 +130,8 @@ export default async function Page() {
 
                         <div
                           className={cn(
-                            "flex gap-2 items-center justify-between sm:justify-start",
-                            isHardModeAvailable && "hidden"
+                            'flex gap-2 items-center justify-between sm:justify-start',
+                            isHardModeAvailable && 'hidden',
                           )}
                         >
                           <span className="text-sm text-muted-foreground">

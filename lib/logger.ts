@@ -6,7 +6,7 @@ export function logInfo(message: string, meta?: Record<string, unknown>) {
 export function logError(
   message: string,
   error?: Error,
-  meta?: Record<string, unknown>
+  meta?: Record<string, unknown>,
 ) {
   console.error(`[ERROR] ${message}`, error, meta);
   // TODO: In production, send to error tracking service

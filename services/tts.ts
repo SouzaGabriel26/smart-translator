@@ -1,10 +1,10 @@
-import { TTS_CONFIG } from "@/config/tts-config";
-import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
-import type { TextToSpeechConvertRequestOutputFormat } from "@elevenlabs/elevenlabs-js/api";
-import "dotenv/config";
+import { TTS_CONFIG } from '@/config/tts-config';
+import { ElevenLabsClient } from '@elevenlabs/elevenlabs-js';
+import type { TextToSpeechConvertRequestOutputFormat } from '@elevenlabs/elevenlabs-js/api';
+import 'dotenv/config';
 
 if (!process.env.ELEVENLABS_API_KEY) {
-  throw new Error("ELEVENLABS_API_KEY is not set");
+  throw new Error('ELEVENLABS_API_KEY is not set');
 }
 
 const elevenlabs = new ElevenLabsClient({
@@ -13,7 +13,7 @@ const elevenlabs = new ElevenLabsClient({
 
 async function convertTextToSpeech(
   text: string,
-  voiceId?: string
+  voiceId?: string,
 ): Promise<Buffer> {
   const audioStream = await elevenlabs.textToSpeech.convert(
     voiceId || TTS_CONFIG.ELEVENLABS.VOICE_ID,
@@ -22,7 +22,7 @@ async function convertTextToSpeech(
       modelId: TTS_CONFIG.ELEVENLABS.MODEL_ID,
       outputFormat: TTS_CONFIG.ELEVENLABS
         .OUTPUT_FORMAT as TextToSpeechConvertRequestOutputFormat,
-    }
+    },
   );
 
   const reader = audioStream.getReader();
