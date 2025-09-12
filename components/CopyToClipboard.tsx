@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { CheckSquare, Copy } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Button } from './ui/button';
 
 type CopytoClipboardProps = {
   textToCopy: string;
@@ -40,7 +41,9 @@ export function CopyToClipboard({
   }, []);
 
   return (
-    <button
+    <Button
+      variant="ghost"
+      size="icon"
       aria-label={isCopied ? 'Copied!' : 'Copy to clipboard'}
       onClick={handleCopy}
       disabled={isCopied}
@@ -52,6 +55,6 @@ export function CopyToClipboard({
       ) : (
         <Copy className="text-muted-foreground size-4" />
       )}
-    </button>
+    </Button>
   );
 }

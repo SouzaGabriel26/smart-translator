@@ -2,6 +2,7 @@
 
 import { findTranslationsAction } from '@/app/(private)/dashboard/actions';
 import { CopyToClipboard } from '@/components/CopyToClipboard';
+import { DisplaySoundButton } from '@/components/DisplaySoundButton';
 import { DebouncedInput } from '@/components/debounced-input';
 import type { AppLanguageContext } from '@/config/app-language-context';
 import type { AvailableLanguages } from '@/config/constants';
@@ -134,6 +135,7 @@ export function TranslationsHistoryContent({
                         <div className="flex gap-2 items-center justify-between sm:justify-start">
                           <span className="font-bold">{phrase.content}</span>
                           <CopyToClipboard textToCopy={phrase.content} />
+                          <DisplaySoundButton text={phrase.content} />
                         </div>
 
                         <div
@@ -148,6 +150,7 @@ export function TranslationsHistoryContent({
                           <CopyToClipboard
                             textToCopy={phrase.translatedContent}
                           />
+                          <DisplaySoundButton text={phrase.translatedContent} />
                         </div>
                       </li>
                     ))}
