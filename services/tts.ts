@@ -1,4 +1,6 @@
+import { TTS_CONFIG } from "@/config/tts-config";
 import { ElevenLabsClient } from "@elevenlabs/elevenlabs-js";
+import type { TextToSpeechConvertRequestOutputFormat } from "@elevenlabs/elevenlabs-js/api";
 import "dotenv/config";
 
 if (!process.env.ELEVENLABS_API_KEY) {
@@ -9,14 +11,19 @@ const elevenlabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY,
 });
 
-const VOICE_ID = process.env.ELEVENLABS_VOICE_ID || "JBFqnCBsd6RMkjVDRZzb";
-
-async function convertTextToSpeech(text: string): Promise<Buffer> {
-  const audioStream = await elevenlabs.textToSpeech.convert(VOICE_ID, {
-    text,
-    modelId: "eleven_multilingual_v2",
-    outputFormat: "mp3_44100_128",
-  });
+async function convertTextToSpeech(
+  text: string,
+  voiceId?: string
+): Promise<Buffer> {
+  const audioStream = await elevenlabs.textToSpeech.convert(
+    voiceId || TTS_CONFIG.ELEVENLABS.VOICE_ID,
+    {
+      text,
+      modelId: TTS_CONFIG.ELEVENLABS.MODEL_ID,
+      outputFormat: TTS_CONFIG.ELEVENLABS
+        .OUTPUT_FORMAT as TextToSpeechConvertRequestOutputFormat,
+    }
+  );
 
   const reader = audioStream.getReader();
   const chunks: Uint8Array[] = [];
