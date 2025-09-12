@@ -31,7 +31,8 @@
         "noAccumulatingSpread": "off"
       },
       "style": {
-        "noNonNullAssertion": "off"
+        "noNonNullAssertion": "off",
+        "useNumberNamespace": "off"
       },
       "complexity": {
         "useLiteralKeys": "off"
