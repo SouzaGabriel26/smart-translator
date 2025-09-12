@@ -85,7 +85,6 @@ export default async function Page() {
                       </span>
                       <small>({latestTranslation.languageFrom})</small>
                     </div>
-
                     <div className="flex gap-1">
                       {isHardModeAvailable ? (
                         <span className="text-sm">
@@ -100,6 +99,8 @@ export default async function Page() {
                         </div>
                       )}
                     </div>
+
+                    <DisplaySoundButton text={latestTranslation.targetWord} />
                   </div>
 
                   <span className="text-sm text-muted-foreground">
@@ -140,6 +141,7 @@ export default async function Page() {
                           <CopyToClipboard
                             textToCopy={phrase.translatedContent}
                           />
+                          <DisplaySoundButton text={phrase.translatedContent} />
                         </div>
                       </li>
                     ))}

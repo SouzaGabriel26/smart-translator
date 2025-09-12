@@ -1,7 +1,7 @@
 "use client";
 
 import { Volume2 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { AudioLinesIcon } from "./ui/audio-lines";
 import { Button } from "./ui/button";
@@ -13,6 +13,15 @@ type DisplaySoundButtonProps = {
 export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const audioUrlRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+      }
+    };
+  }, []);
 
   async function handlePlay() {
     if (isLoading || isPlaying) return;
@@ -32,7 +41,13 @@ export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
 
       const audioBuffer = Buffer.from(result.audioData, "base64");
       const blob = new Blob([audioBuffer], { type: "audio/mpeg" });
+
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+      }
+
       const url = URL.createObjectURL(blob);
+      audioUrlRef.current = url;
       const audioElement = new Audio(url);
       await audioElement.play();
       setIsPlaying(true);
@@ -40,6 +55,7 @@ export function DisplaySoundButton({ text }: DisplaySoundButtonProps) {
       audioElement.addEventListener("ended", () => {
         setIsPlaying(false);
         URL.revokeObjectURL(url);
+        audioUrlRef.current = null;
       });
     } catch (error) {
       console.error("TTS playback failed:", error);
