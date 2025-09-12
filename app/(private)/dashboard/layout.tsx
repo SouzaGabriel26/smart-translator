@@ -3,6 +3,8 @@ import { Header } from '@/components/header';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 import type { ReactNode } from 'react';
 
+import 'dotenv/config';
+
 type Props = {
   children: ReactNode;
 };

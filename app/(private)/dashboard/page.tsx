@@ -1,6 +1,7 @@
 import { checkUserAction } from '@/actions/auth/check-user';
 import { getAppLanguageAction, getModeAction } from '@/app/actions';
 import { CopyToClipboard } from '@/components/CopyToClipboard';
+import { DisplaySoundButton } from '@/components/DisplaySoundButton';
 import { ToggleHardMode } from '@/components/toggle-hard-mode';
 import { getLanguageContext } from '@/config/app-language-context';
 import { prismaClient } from '@/lib/prisma-client';
@@ -84,7 +85,6 @@ export default async function Page() {
                       </span>
                       <small>({latestTranslation.languageFrom})</small>
                     </div>
-
                     <div className="flex gap-1">
                       {isHardModeAvailable ? (
                         <span className="text-sm">
@@ -99,6 +99,8 @@ export default async function Page() {
                         </div>
                       )}
                     </div>
+
+                    <DisplaySoundButton text={latestTranslation.targetWord} />
                   </div>
 
                   <span className="text-sm text-muted-foreground">
@@ -111,7 +113,6 @@ export default async function Page() {
                     })}
                   </span>
                 </div>
-
                 <div>
                   <span>{dashboardLanguage.latest.exampleUsage}</span>
 
@@ -124,6 +125,7 @@ export default async function Page() {
                         <div className="flex gap-2 items-center justify-between sm:justify-start">
                           <span className="font-bold">{phrase.content}</span>
                           <CopyToClipboard textToCopy={phrase.content} />
+                          <DisplaySoundButton text={phrase.content} />
                         </div>
 
                         <div
@@ -139,6 +141,7 @@ export default async function Page() {
                           <CopyToClipboard
                             textToCopy={phrase.translatedContent}
                           />
+                          <DisplaySoundButton text={phrase.translatedContent} />
                         </div>
                       </li>
                     ))}
