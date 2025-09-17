@@ -2,6 +2,12 @@
 
 Welcome to **Smart Translator**! This is a Next.js project where I integrate **Google Gemini AI** to build a system. I'm also documenting the development process through a series of YouTube videos. 🎥🔥
 
+## Overview
+https://github.com/user-attachments/assets/60b95ab4-efb6-428b-ab5a-90b4c86e0f78
+
+**[Project Overview](https://youtu.be/yTt6vir5L7o)**
+
+
 ## 📺 YouTube Video Series
 Follow my progress and learn along with me!
 
